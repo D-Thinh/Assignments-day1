@@ -1,0 +1,650 @@
+<!doctype html>
+<html lang="vi">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Assignments-Day_1</title>
+        <link rel="stylesheet" href="./assets/style.css" />
+    </head>
+    <body>
+        <!-- header -->
+        <header class="header">
+            <div class="container">
+                <h1 class="header--title">
+                    ES2025 JavaScript: Patterns và Libraries Hot Nhất Cho
+                    Developer Việt 2026
+                </h1>
+                <section class="header--user">
+                    <div class="user--info">
+                        <img
+                            src="https://files.f8.edu.vn/f8-prod/public-images/699181d60839d.png"
+                            alt=""
+                            class="user--avata"
+                        />
+                        <div class="user--info__body">
+                            <b class="user__name"
+                                >Ếch Trendy
+                                <svg
+                                    data-prefix="fas"
+                                    data-icon="circle-check"
+                                    class="svg-inline--fa fa-circle-check UserName-module__icon___w3fJm"
+                                    role="img"
+                                    viewBox="0 0 512 512"
+                                    aria-hidden="true"
+                                    style="font-size: 1.2rem"
+                                >
+                                    <path
+                                        fill="currentColor"
+                                        d="M256 512a256 256 0 1 1 0-512 256 256 0 1 1 0 512zM374 145.7c-10.7-7.8-25.7-5.4-33.5 5.3L221.1 315.2 169 263.1c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l72 72c5 5 11.8 7.5 18.8 7s13.4-4.1 17.5-9.8L379.3 179.2c7.8-10.7 5.4-25.7-5.3-33.5z"
+                                    ></path>
+                                </svg>
+                            </b>
+                            <p class="user__online">
+                                17 ngày trước · 6 phút đọc
+                            </p>
+                        </div>
+                    </div>
+                    <div class="user--action">
+                        <i class="fa-regular fa-bookmark"></i>
+                    </div>
+                </section>
+            </div>
+        </header>
+        <!-- main -->
+        <main>
+            <div class="container">
+                <h2 id="ES2025">ES2025 ra mắt - cái gì thật sự vào spec?</h2>
+                <p>
+                    Tháng 6/2025, TC39 chính thức công bố ECMAScript 2025
+                    (ES16). Nếu bạn hay follow Twitter/X dev community, chắc
+                    nghe nhiều về pipeline operator hay Temporal API - nhưng cả
+                    hai vẫn chưa vào spec. Đừng để bị nhầm.
+                </p>
+                <p>
+                    Cái <strong>thật sự</strong> vào ES2025 gồm 6 nhóm tính
+                    năng:
+                </p>
+                <ul>
+                    <li>
+                        <p>
+                            <strong> Iterator Helpers</strong> - global
+                            <code>Iterator</code> object với <code>map</code>,
+                            <code>filter</code>, <code>take</code>,
+                            <code>drop</code>
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            <strong>Set Methods </strong>- <code>union()</code>,
+                            <code>intersection()</code>,
+                            <code>difference()</code>,
+                            <code>symmetricDifference()</code>
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            <strong>Promise.try()</strong> - bắt cả sync lẫn
+                            async errors trong một chain
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            <strong>RegExp improvements</strong> - flag
+                            <code>/v</code>, <code>RegExp.escape()</code>,
+                            duplicate named groups
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            <strong>Import Attributes </strong>-
+                            <code>
+                                <strong>Import Attributes </strong>- import data
+                                from "./data.json" with { type: "json" }
+                                <strong>Import Attributes </strong>-
+                            </code>
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            <strong>Float16Array</strong> - typed array 16-bit
+                            cho memory-sensitive workloads
+                        </p>
+                    </li>
+                </ul>
+
+                <figure>
+                    <img
+                        src="https://files.f8.edu.vn/f8-prod/blog_posts/13485/section_0_260323080636_69c0921c0cf292.71514803.png"
+                        alt=""
+                    />
+                    <em
+                        >ES2025 tập trung vào iterator, set, và async - không
+                        phải pipeline operator như nhiều bài viết nhầm</em
+                    >
+                </figure>
+                <p>
+                    Node.js 22+ và các browser Chrome/Firefox/Safari release sau
+                    tháng 6/2025 đã support native. Không cần polyfill cho
+                    production nếu bạn target môi trường đủ mới.
+                </p>
+                <p>
+                    Pipeline operator <code>(|>)</code> và Temporal API? Vẫn
+                    đang ở Stage 2-3. Dùng Luxon hoặc date-fns cho date/time là
+                    lựa chọn thực tế nhất hiện tại.
+                </p>
+
+                <span> </span>
+                <h2 id="Iterator-method">
+                    Iterator Helpers và Set Methods - dùng thật trong dự án thế
+                    nào?
+                </h2>
+                <p>
+                    Hai tính năng này mình thấy practical nhất trong ES2025 cho
+                    daily work.
+                </p>
+                <p>
+                    <strong>Iterator Helpers</strong> giải quyết bài toán bạn
+                    từng phải import lodash chỉ để
+                    <code>map + filter + slice</code> một mảng lớn. Bây giờ
+                    không cần nữa:
+                </p>
+                <pre>
+// Trước ES2025 - load cả mảng vào memory
+const result = apiData
+  .filter(item => item.active)
+  .map(item => item.name)
+  .slice(0, 100);
+
+// ES2025 - lazy evaluation, chỉ xử lý đến khi đủ 100 item
+const result = Iterator.from(apiData)
+  .filter(item => item.active)
+  .map(item => item.name)
+  .take(100)
+  .toArray();
+                </pre>
+                <p>
+                    Khác biệt quan trọng: <code>Iterator.from()</code>
+                    <strong>lazy</strong> - với mảng 10.000 item nhưng chỉ cần
+                    100 kết quả đầu, nó không xử lý 9.900 item còn lại. Lodash
+                    chain cũng làm được điều này, nhưng giờ là native.
+                </p>
+                <figure>
+                    <img
+                        src="https://files.f8.edu.vn/f8-prod/blog_posts/13485/section_1_260323080703_69c092375aabc3.16191064.png"
+                        alt=""
+                    />
+                    <em
+                        >Lazy evaluation: chỉ xử lý đúng số item cần thiết, tiết
+                        kiệm CPU và memory đáng kể</em
+                    >
+                </figure>
+                <p>
+                    <strong>Set Methods</strong> thì đặc biệt hữu ích cho
+                    permission systems hoặc dedup realtime data:
+                </p>
+                <pre>
+const userRoles = new Set(['admin', 'editor']);
+const requiredRoles = new Set(['editor', 'viewer']);
+
+// Kiểm tra overlap
+const hasAccess = !userRoles.intersection(requiredRoles).size === 0;
+
+// Chat app: merge messages từ 2 nguồn, không trùng
+const allMessages = socketMessages.union(cachedMessages);
+
+// Diff để biết message mới
+const newMessages = socketMessages.difference(cachedMessages);</pre
+                >
+
+                <p>
+                    Trước đây bạn phải tự viết<code>
+                        [...setA].filter(x => setB.has(x))</code
+                    >. Dài, khó đọc, dễ bug. Set methods native clean hơn nhiều
+                    và chain được với nhau.
+                </p>
+                <span></span>
+                <h2 id="promise-async">
+                    Promise.try() và async/await patterns nâng cao
+                </h2>
+                <p>Đây là tính năng mình mong nhất trong ES2025. Vấn đề cũ:</p>
+                <pre>
+// Bug tiềm ẩn: nếu getUser() throw sync, lỗi không bị catch!
+async function loadProfile(id) {
+  return getUser(id) // sync function, throw không bị catch bởi .catch()
+    .then(user => fetchDetails(user));
+}</pre
+                >
+                <p><code>Promise.try()</code> fix đúng điểm này:</p>
+                <pre>
+                    // Promise.try wrap cả sync throw vào promise chain
+Promise.try(() => getUser(id))
+  .then(user => fetchDetails(user))
+  .catch(err => handleError(err)); // bắt được cả sync lẫn async error
+                </pre>
+                <strong
+                    >Pattern mạnh hơn: kết hợp với async generators cho
+                    streaming data</strong
+                >
+                <pre>
+async function* streamDashboardData(endpoint) {
+  const response = await Promise.try(() => fetch(endpoint));
+  const reader = response.body.getReader();
+  
+  while (true) {
+    const { done, value } = await reader.read();
+    if (done) break;
+    
+    // Dùng Iterator Helpers để transform ngay trên stream
+    yield* Iterator.from([value])
+      .map(chunk => JSON.parse(new TextDecoder().decode(chunk)))
+      .filter(data => data.type === 'update');
+  }
+}
+
+// Consume trong component
+for await (const update of streamDashboardData('/api/stream')) {
+  updateUI(update);
+}</pre
+                >
+                <figure>
+                    <img
+                        src="https://files.f8.edu.vn/f8-prod/blog_posts/13485/section_2_260323080728_69c09250954f10.74211997.png"
+                        alt=""
+                    />
+                    <em
+                        >Promise.try + async generator = xử lý stream data không
+                        bị miss error ở bất kỳ điểm nào</em
+                    >
+                </figure>
+                <p>
+                    <strong>Top-level await</strong> (ES2022 nhưng hay dùng
+                    chung với ES2025 patterns) cũng clean hơn khi kết hợp Set
+                    ops:
+                </p>
+                <pre>
+// module.js - init một lần, share across module
+const initialPermissions = new Set(await fetchUserPermissions());
+const cachedPermissions = new Set(JSON.parse(localStorage.getItem('perms') ?? '[]'));
+
+// Merge, loại bỏ duplicate
+export const permissions = initialPermissions.union(cachedPermissions);</pre
+                >
+                <p>
+                    Nếu bạn muốn nền tảng JavaScript vững để apply những
+                    patterns này ngay, khóa
+                    <a class="rft__link"> JavaScript Pro</a> cover sâu về
+                    async/await, closures, và cách JS engine thực sự hoạt động -
+                    đủ để đọc ES2025 spec mà hiểu rõ tại sao.
+                </p>
+                <span></span>
+                <h2 id="RxJS-vs-Zustand">
+                    RxJS vs Zustand - chọn gì cho realtime web app?
+                </h2>
+                <p>
+                    Mình sẽ không nói "cái nào tốt hơn" vì câu trả lời phụ thuộc
+                    vào loại app bạn đang build.
+                </p>
+                <p>
+                    <strrong>RxJS</strrong>
+                    <a class="rft__link">(RxJS docs)</a>là reactive programming
+                    library với Observable - phù hợp khi data flow của bạn phức
+                    tạp, nhiều nguồn, cần backpressure hay timing control:
+                </p>
+                <pre>
+import { fromEvent, Subject } from 'rxjs';
+import { debounceTime, scan, filter } from 'rxjs/operators';
+
+const socket = new WebSocket('wss://api.example.com/live');
+
+// Stream WebSocket messages, debounce 300ms, accumulate
+const liveData$ = fromEvent(socket, 'message').pipe(
+  debounceTime(300),
+  filter(event => event.data !== 'ping'),
+  scan((acc, event) => [...acc.slice(-99), JSON.parse(event.data)], []),
+);
+
+liveData$.subscribe(messages => updateDashboard(messages));</pre
+                >
+                <p>
+                    <strong>Zustand</strong> (Zustand GitHub) đi theo hướng
+                    ngược lại - minimal, hooks-based, không boilerplate:
+                </p>
+                <pre>
+import { create } from 'zustand';
+
+const useChatStore = create((set, get) => ({
+  messages: [],
+  connected: false,
+  
+  // ES2025 Promise.try trong action
+  connectSocket: async (url) => {
+    await Promise.try(async () => {
+      const ws = new WebSocket(url);
+      set({ connected: true });
+      
+      ws.onmessage = (e) => set(state => ({
+        messages: [...state.messages, JSON.parse(e.data)]
+      }));
+    });
+  },
+}));
+
+// Trong component
+function ChatApp() {
+  const { messages, connectSocket } = useChatStore();
+  // ...
+}</pre
+                >
+                <figure>
+                    <img
+                        src="https://files.f8.edu.vn/f8-prod/blog_posts/13485/section_3_260323080755_69c0926b837010.27943991.png"
+                        alt=""
+                    />
+                    <em
+                        >RxJS cho stream phức tạp, Zustand cho React app state -
+                        chọn đúng tool cho đúng bài toán</em
+                    >
+                    <p>Bảng so sánh thực tế:</p>
+                </figure>
+                <table>
+                    <tr>
+                        <th>Tiêu chí</th>
+                        <th>RxJS v8.x</th>
+                        <th>Zustand v5.x</th>
+                    </tr>
+                    <tr>
+                        <td>Bundle size</td>
+                        <td>~50KB</td>
+                        <td><2KB</td>
+                    </tr>
+                    <tr>
+                        <td>Learning curve</td>
+                        <td>Cao (marble diagrams)</td>
+                        <td>Thấp</td>
+                    </tr>
+                    <tr>
+                        <td>Phù hợp cho</td>
+                        <td>Multiplayer, live feed, complex streams</td>
+                        <td>React SPA, UI state</td>
+                    </tr>
+                    <tr>
+                        <td>ES2025 synergy</td>
+                        <td><code>Iterator.from(observable)</code></td>
+                        <td><code>Promise.try</code> trong actions</td>
+                    </tr>
+                    <tr>
+                        <td>TypeScript</td>
+                        <td>Tốt</td>
+                        <td>Rất tốt (generics cải thiện v5+)</td>
+                    </tr>
+                </table>
+                <p>
+                    Cho hầu hết React app Việt Nam (dashboard, e-commerce, admin
+                    panel) - Zustand là đủ và ít đau đầu hơn. RxJS chỉ worth it
+                    khi bạn xây multiplayer game, collaborative editor, hoặc
+                    financial live feed cần control timing cực chính xác.
+                </p>
+                <p>
+                    Nếu bạn đang build với ReactJS và chưa rõ cách quản lý state
+                    từ cơ bản, khóa
+                    <a class="rft__link">Xây Dựng Website với ReactJS</a> sẽ
+                    giúp bạn hiểu đúng từ component state đến context trước khi
+                    nhảy vào Zustand.
+                </p>
+                <span></span>
+                <h2 id="dashboard-ES2025">
+                    Xây realtime dashboard với ES2025 + Zustand: ví dụ thực tế
+                </h2>
+                <p>
+                    Mình sẽ ghép tất cả những gì đã nói vào một mini case study:
+                    realtime stock price dashboard nhận data qua WebSocket.
+                </p>
+                <p>
+                    Download file demo đầy đủ tại đây:
+                    <a class="rft__link">Tải file demo Realtime Dashboard</a>
+                </p>
+                <strong>Kiến trúc:</strong>
+
+                <pre><code>WebSocket server
+    ↓
+Zustand store (ES2025 Promise.try + Set dedup)
+    ↓
+Iterator Helpers (filter/transform)
+    ↓
+React components (subscribe minimal)</code></pre>
+                <strong>Store với ES2025 patterns:</strong>
+                <pre>
+import { create } from 'zustand';
+
+const useStockStore = create((set, get) => ({
+  prices: new Map(), // symbol -> latest price
+  symbols: new Set(), // active symbols
+  
+  subscribeToSymbols: async (newSymbols) => {
+    const current = get().symbols;
+    // Set union - không duplicate
+    const updated = current.union(new Set(newSymbols));
+    set({ symbols: updated });
+    
+    // Promise.try bắt cả sync error từ WebSocket init
+    await Promise.try(async () => {
+      const ws = new WebSocket(`wss://api/stocks?symbols=${[...updated].join(',')}`);
+      
+      ws.onmessage = (e) => {
+        const { symbol, price } = JSON.parse(e.data);
+        set(state => ({
+          prices: new Map(state.prices).set(symbol, price)
+        }));
+      };
+    });
+  },
+  
+  // Iterator Helpers: lấy top 10 cổ phiếu tăng nhiều nhất
+  getTopGainers: (baseline) => {
+    return Iterator.from(get().prices.entries())
+      .filter(([, price]) => price > (baseline.get(symbol) ?? 0))
+      .map(([symbol, price]) => ({ symbol, price }))
+      .take(10)
+      .toArray();
+  },
+}));</pre
+                >
+                <figure>
+                    <img
+                        src="https://files.f8.edu.vn/f8-prod/blog_posts/13485/section_4_260323080825_69c0928991e952.37228671.png"
+                        alt=""
+                    />
+                    <em
+                        >Zustand store kết hợp ES2025 Set union và Iterator
+                        Helpers - ít code hơn, dễ đọc hơn</em
+                    >
+                </figure>
+                <p>Pattern này cho phép bạn:</p>
+                <ul>
+                    <li>
+                        Không duplicate symbol khi user thêm subscription nhiều
+                        lần (Set.union)
+                    </li>
+                    <li>
+                        Không bị missed error khi WebSocket init fail sync
+                        (Promise.try)
+                    </li>
+                    <li>
+                        Chỉ xử lý đúng 10 item cần thiết từ hàng nghìn price
+                        entries (Iterator.take)
+                    </li>
+                </ul>
+                <p>Bạn đã có đủ building blocks. Bước tiếp:</p>
+                <ol>
+                    <li>
+                        Cài Node.js 22+ hoặc bật Chrome mới nhất để test native
+                        (không cần polyfill)
+                    </li>
+                    <li>
+                        Thêm Zustand vào project React hiện tại, migrate một
+                        slice state nhỏ trước
+                    </li>
+                    <li>
+                        Thử Iterator.from() thay lodash chain trong một data
+                        transformation function
+                    </li>
+                </ol>
+                <p>
+                    Gặp vướng mắc ở phần nào, drop comment xuống dưới - mình đọc
+                    hết.
+                </p>
+                <div class="Reaction--wrapper">
+                    <svg
+                        data-prefix="far"
+                        data-icon="heart"
+                        class="svg-inline--fa fa-heart"
+                        role="img"
+                        viewBox="0 0 512 512"
+                        aria-hidden="true"
+                    >
+                        <path
+                            fill="currentColor"
+                            d="M378.9 80c-27.3 0-53 13.1-69 35.2l-34.4 47.6c-4.5 6.2-11.7 9.9-19.4 9.9s-14.9-3.7-19.4-9.9l-34.4-47.6c-16-22.1-41.7-35.2-69-35.2-47 0-85.1 38.1-85.1 85.1 0 49.9 32 98.4 68.1 142.3 41.1 50 91.4 94 125.9 120.3 3.2 2.4 7.9 4.2 14 4.2s10.8-1.8 14-4.2c34.5-26.3 84.8-70.4 125.9-120.3 36.2-43.9 68.1-92.4 68.1-142.3 0-47-38.1-85.1-85.1-85.1zM271 87.1c25-34.6 65.2-55.1 107.9-55.1 73.5 0 133.1 59.6 133.1 133.1 0 68.6-42.9 128.9-79.1 172.8-44.1 53.6-97.3 100.1-133.8 127.9-12.3 9.4-27.5 14.1-43.1 14.1s-30.8-4.7-43.1-14.1C176.4 438 123.2 391.5 79.1 338 42.9 294.1 0 233.7 0 165.1 0 91.6 59.6 32 133.1 32 175.8 32 216 52.5 241 87.1l15 20.7 15-20.7z"
+                        ></path>
+                    </svg>
+                    <p>1</p>
+                    <svg
+                        data-prefix="far"
+                        data-icon="comment"
+                        class="svg-inline--fa fa-comment"
+                        role="img"
+                        viewBox="0 0 512 512"
+                        aria-hidden="true"
+                    >
+                        <path
+                            fill="currentColor"
+                            d="M51.9 384.9C19.3 344.6 0 294.4 0 240 0 107.5 114.6 0 256 0S512 107.5 512 240 397.4 480 256 480c-36.5 0-71.2-7.2-102.6-20L37 509.9c-3.7 1.6-7.5 2.1-11.5 2.1-14.1 0-25.5-11.4-25.5-25.5 0-4.3 1.1-8.5 3.1-12.2l48.8-89.4zm37.3-30.2c12.2 15.1 14.1 36.1 4.8 53.2l-18 33.1 58.5-25.1c11.8-5.1 25.2-5.2 37.1-.3 25.7 10.5 54.2 16.4 84.3 16.4 117.8 0 208-88.8 208-192S373.8 48 256 48 48 136.8 48 240c0 42.8 15.1 82.4 41.2 114.7z"
+                        ></path>
+                    </svg>
+                    0
+                </div>
+                <div class="language--list">
+                    <button>Javascript</button>
+                    <button>RxJS</button>
+                    <button>ES2025</button>
+                    <button>Zustand</button>
+                    <button>async/await</button>
+                </div>
+                <h2>Bài đăng cùng tác giả</h2>
+                <ul class="post">
+                    <li>
+                        <a href="#!">
+                            Thiết Kế Web 2026: AI Cá Nhân Hóa & 3D Tương Tác
+                            Thực Chiến</a
+                        >
+                    </li>
+                    <li>
+                        <a href="#!">
+                            AI Code Thay Developer? Sự Thật Từ Copilot Đến
+                            Chatbot
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#!">
+                            Google Core Feb 2026: Discover Ưu Tiên Site Việt Thế
+                            Nào?
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#!">
+                            PWA 2026: App Web Nhanh Như Native, Chi Phí Chỉ 1/3
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#!">
+                            Motion UI giữ chân user: CSS/GSAP thực chiến 2026
+                        </a>
+                    </li>
+                </ul>
+                <span></span>
+                <h2>Bài viết nổi bật khác</h2>
+                <!-- item 1 -->
+                <div class="post__list">
+                    <section class="post__item">
+                        <img
+                            src="https://files.f8.edu.vn/f8-prod/blog_posts/65/6139fe28a9844.png"
+                            alt=""
+                            class="item--bck"
+                        />
+                        <div class="item--content">
+                            <h3 class="tiem__heading">
+                                Tổng hợp các sản phẩm của học viên tại F8
+                            </h3>
+                            <div class="post__user">
+                                <img
+                                    src="https://files.f8.edu.vn/f8-prod/avatars/699286a5e7330.png"
+                                    alt=""
+                                    class="post__user--avt"
+                                />
+                                <p class="post__user--name">Sơn Đặng</p>
+                                <p class="post__user--htr">6 phút đọc</p>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+                <!-- item 2 -->
+                <div class="post__list">
+                    <section class="post__item">
+                        <img
+                            src="https://files.f8.edu.vn/f8-prod/blog_posts/51/6139c6453456e.png"
+                            alt=""
+                            class="item--bck"
+                        />
+                        <div class="item--content">
+                            <h3 class="tiem__heading">
+                                Tổng hợp các sản phẩm của học viên tại F8
+                            </h3>
+                            <div class="post__user">
+                                <img
+                                    src="https://files.f8.edu.vn/f8-prod/avatars/699286a5e7330.png"
+                                    alt=""
+                                    class="post__user--avt"
+                                />
+                                <p class="post__user--name">Sơn Đặng</p>
+                                <p class="post__user--htr">6 phút đọc</p>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+                <!-- item 3 -->
+                <div class="post__list">
+                    <section class="post__item">
+                        <img
+                            src="https://files.f8.edu.vn/f8-prod/blog_posts/279/6153f692d366e.jpg"
+                            alt=""
+                            class="item--bck"
+                        />
+                        <div class="item--content">
+                            <h3 class="tiem__heading">
+                                Tổng hợp các sản phẩm của học viên tại F8
+                            </h3>
+                            <div class="post__user">
+                                <img
+                                    src="https://files.f8.edu.vn/f8-prod/avatars/699286a5e7330.png"
+                                    alt=""
+                                    class="post__user--avt"
+                                />
+                                <p class="post__user--name">Sơn Đặng</p>
+                                <p class="post__user--htr">6 phút đọc</p>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+                <h4>Xem các bài viết theo chủ đề</h4>
+                <div class="language__list">
+                    <button>Front-end/Mobile apps</button>
+                    <button>Back-end / Devops</button>
+                    <button>AI / LLM</button>
+                    <button>Tester / Testing</button>
+                    <button>UI / UX / Design</button>
+                    <button>Others</button>
+                </div>
+            </div>
+        </main>
+    </body>
+</html>
