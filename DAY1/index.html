@@ -5,6 +5,13 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Assignments-Day_1</title>
         <link rel="stylesheet" href="./assets/style.css" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.1/themes/prism-tomorrow.min.css"
+            integrity="sha512-Ydx4xhVUEzfpavnYDXHwN1fkG9FcJmVCJ3BYlDY611m1n1emYncjP/omLvyXfNcgUemohwbhuQHxammyfdH0mg=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"
+        />
     </head>
     <body>
         <!-- header -->
@@ -22,7 +29,7 @@
                             class="user--avata"
                         />
                         <div class="user--info__body">
-                            <b class="user__name"
+                            <strong class="user__name"
                                 >Ếch Trendy
                                 <svg
                                     data-prefix="fas"
@@ -38,7 +45,7 @@
                                         d="M256 512a256 256 0 1 1 0-512 256 256 0 1 1 0 512zM374 145.7c-10.7-7.8-25.7-5.4-33.5 5.3L221.1 315.2 169 263.1c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l72 72c5 5 11.8 7.5 18.8 7s13.4-4.1 17.5-9.8L379.3 179.2c7.8-10.7 5.4-25.7-5.3-33.5z"
                                     ></path>
                                 </svg>
-                            </b>
+                            </strong>
                             <p class="user__online">
                                 17 ngày trước · 6 phút đọc
                             </p>
@@ -66,49 +73,35 @@
                 </p>
                 <ul>
                     <li>
-                        <p>
-                            <strong> Iterator Helpers</strong> - global
-                            <code>Iterator</code> object với <code>map</code>,
-                            <code>filter</code>, <code>take</code>,
-                            <code>drop</code>
-                        </p>
+                        <strong> Iterator Helpers</strong> - global
+                        <code>Iterator</code> object với <code>map</code>,
+                        <code>filter</code>, <code>take</code>,
+                        <code>drop</code>
                     </li>
                     <li>
-                        <p>
-                            <strong>Set Methods </strong>- <code>union()</code>,
-                            <code>intersection()</code>,
-                            <code>difference()</code>,
-                            <code>symmetricDifference()</code>
-                        </p>
+                        <strong>Set Methods </strong>- <code>union()</code>,
+                        <code>intersection()</code>, <code>difference()</code>,
+                        <code>symmetricDifference()</code>
                     </li>
                     <li>
-                        <p>
-                            <strong>Promise.try()</strong> - bắt cả sync lẫn
-                            async errors trong một chain
-                        </p>
+                        <strong>Promise.try()</strong> - bắt cả sync lẫn async
+                        errors trong một chain
                     </li>
                     <li>
-                        <p>
-                            <strong>RegExp improvements</strong> - flag
-                            <code>/v</code>, <code>RegExp.escape()</code>,
-                            duplicate named groups
-                        </p>
+                        <strong>RegExp improvements</strong> - flag
+                        <code>/v</code>, <code>RegExp.escape()</code>, duplicate
+                        named groups
                     </li>
                     <li>
-                        <p>
-                            <strong>Import Attributes </strong>-
-                            <code>
-                                <strong>Import Attributes </strong>- import data
-                                from "./data.json" with { type: "json" }
-                                <strong>Import Attributes </strong>-
-                            </code>
-                        </p>
+                        <strong>Import Attributes</strong> -
+                        <code
+                            >import data from "./data.json" with { type: "json"
+                            }</code
+                        >
                     </li>
                     <li>
-                        <p>
-                            <strong>Float16Array</strong> - typed array 16-bit
-                            cho memory-sensitive workloads
-                        </p>
+                        <strong>Float16Array</strong> - typed array 16-bit cho
+                        memory-sensitive workloads
                     </li>
                 </ul>
 
@@ -133,7 +126,7 @@
                     lựa chọn thực tế nhất hiện tại.
                 </p>
 
-                <span> </span>
+                <span class="line"> </span>
                 <h2 id="Iterator-method">
                     Iterator Helpers và Set Methods - dùng thật trong dự án thế
                     nào?
@@ -149,6 +142,7 @@
                     không cần nữa:
                 </p>
                 <pre>
+<code class="language-js">
 // Trước ES2025 - load cả mảng vào memory
 const result = apiData
   .filter(item => item.active)
@@ -160,7 +154,7 @@ const result = Iterator.from(apiData)
   .filter(item => item.active)
   .map(item => item.name)
   .take(100)
-  .toArray();
+  .toArray();</code>
                 </pre>
                 <p>
                     Khác biệt quan trọng: <code>Iterator.from()</code>
@@ -182,7 +176,7 @@ const result = Iterator.from(apiData)
                     <strong>Set Methods</strong> thì đặc biệt hữu ích cho
                     permission systems hoặc dedup realtime data:
                 </p>
-                <pre>
+                <pre><code class="language-js">
 const userRoles = new Set(['admin', 'editor']);
 const requiredRoles = new Set(['editor', 'viewer']);
 
@@ -193,8 +187,7 @@ const hasAccess = !userRoles.intersection(requiredRoles).size === 0;
 const allMessages = socketMessages.union(cachedMessages);
 
 // Diff để biết message mới
-const newMessages = socketMessages.difference(cachedMessages);</pre
-                >
+const newMessages = socketMessages.difference(cachedMessages);</code></pre>
 
                 <p>
                     Trước đây bạn phải tự viết<code>
@@ -202,18 +195,17 @@ const newMessages = socketMessages.difference(cachedMessages);</pre
                     >. Dài, khó đọc, dễ bug. Set methods native clean hơn nhiều
                     và chain được với nhau.
                 </p>
-                <span></span>
+                <spa class="line"></spa>
                 <h2 id="promise-async">
                     Promise.try() và async/await patterns nâng cao
                 </h2>
                 <p>Đây là tính năng mình mong nhất trong ES2025. Vấn đề cũ:</p>
-                <pre>
+                <pre><code class="language-js">
 // Bug tiềm ẩn: nếu getUser() throw sync, lỗi không bị catch!
 async function loadProfile(id) {
   return getUser(id) // sync function, throw không bị catch bởi .catch()
     .then(user => fetchDetails(user));
-}</pre
-                >
+}</code></pre>
                 <p><code>Promise.try()</code> fix đúng điểm này:</p>
                 <pre>
                     // Promise.try wrap cả sync throw vào promise chain
@@ -225,7 +217,7 @@ Promise.try(() => getUser(id))
                     >Pattern mạnh hơn: kết hợp với async generators cho
                     streaming data</strong
                 >
-                <pre>
+                <pre><code class="language-js">
 async function* streamDashboardData(endpoint) {
   const response = await Promise.try(() => fetch(endpoint));
   const reader = response.body.getReader();
@@ -244,8 +236,7 @@ async function* streamDashboardData(endpoint) {
 // Consume trong component
 for await (const update of streamDashboardData('/api/stream')) {
   updateUI(update);
-}</pre
-                >
+}</code></pre>
                 <figure>
                     <img
                         src="https://files.f8.edu.vn/f8-prod/blog_posts/13485/section_2_260323080728_69c09250954f10.74211997.png"
@@ -261,14 +252,13 @@ for await (const update of streamDashboardData('/api/stream')) {
                     chung với ES2025 patterns) cũng clean hơn khi kết hợp Set
                     ops:
                 </p>
-                <pre>
+                <pre><code class="language-js">
 // module.js - init một lần, share across module
 const initialPermissions = new Set(await fetchUserPermissions());
 const cachedPermissions = new Set(JSON.parse(localStorage.getItem('perms') ?? '[]'));
 
 // Merge, loại bỏ duplicate
-export const permissions = initialPermissions.union(cachedPermissions);</pre
-                >
+export const permissions = initialPermissions.union(cachedPermissions);</code></pre>
                 <p>
                     Nếu bạn muốn nền tảng JavaScript vững để apply những
                     patterns này ngay, khóa
@@ -276,7 +266,7 @@ export const permissions = initialPermissions.union(cachedPermissions);</pre
                     async/await, closures, và cách JS engine thực sự hoạt động -
                     đủ để đọc ES2025 spec mà hiểu rõ tại sao.
                 </p>
-                <span></span>
+                <spa class="line"></spa>
                 <h2 id="RxJS-vs-Zustand">
                     RxJS vs Zustand - chọn gì cho realtime web app?
                 </h2>
@@ -285,12 +275,12 @@ export const permissions = initialPermissions.union(cachedPermissions);</pre
                     vào loại app bạn đang build.
                 </p>
                 <p>
-                    <strrong>RxJS</strrong>
+                    <strong>RxJS</strong>
                     <a class="rft__link">(RxJS docs)</a>là reactive programming
                     library với Observable - phù hợp khi data flow của bạn phức
                     tạp, nhiều nguồn, cần backpressure hay timing control:
                 </p>
-                <pre>
+                <pre><code class="language-js">
 import { fromEvent, Subject } from 'rxjs';
 import { debounceTime, scan, filter } from 'rxjs/operators';
 
@@ -303,13 +293,12 @@ const liveData$ = fromEvent(socket, 'message').pipe(
   scan((acc, event) => [...acc.slice(-99), JSON.parse(event.data)], []),
 );
 
-liveData$.subscribe(messages => updateDashboard(messages));</pre
-                >
+liveData$.subscribe(messages => updateDashboard(messages));</code></pre>
                 <p>
                     <strong>Zustand</strong> (Zustand GitHub) đi theo hướng
                     ngược lại - minimal, hooks-based, không boilerplate:
                 </p>
-                <pre>
+                <pre><code class="language-js">
 import { create } from 'zustand';
 
 const useChatStore = create((set, get) => ({
@@ -333,8 +322,7 @@ const useChatStore = create((set, get) => ({
 function ChatApp() {
   const { messages, connectSocket } = useChatStore();
   // ...
-}</pre
-                >
+}</code></pre>
                 <figure>
                     <img
                         src="https://files.f8.edu.vn/f8-prod/blog_posts/13485/section_3_260323080755_69c0926b837010.27943991.png"
@@ -391,7 +379,7 @@ function ChatApp() {
                     giúp bạn hiểu đúng từ component state đến context trước khi
                     nhảy vào Zustand.
                 </p>
-                <span></span>
+                <spa class="line"></spa>
                 <h2 id="dashboard-ES2025">
                     Xây realtime dashboard với ES2025 + Zustand: ví dụ thực tế
                 </h2>
@@ -413,7 +401,7 @@ Iterator Helpers (filter/transform)
     ↓
 React components (subscribe minimal)</code></pre>
                 <strong>Store với ES2025 patterns:</strong>
-                <pre>
+                <pre><code class="language-js">
 import { create } from 'zustand';
 
 const useStockStore = create((set, get) => ({
@@ -447,8 +435,7 @@ const useStockStore = create((set, get) => ({
       .take(10)
       .toArray();
   },
-}));</pre
-                >
+}));</code></pre>
                 <figure>
                     <img
                         src="https://files.f8.edu.vn/f8-prod/blog_posts/13485/section_4_260323080825_69c0928991e952.37228671.png"
@@ -561,7 +548,7 @@ const useStockStore = create((set, get) => ({
                         </a>
                     </li>
                 </ul>
-                <span></span>
+                <spa class="line"></spa>
                 <h2>Bài viết nổi bật khác</h2>
                 <!-- item 1 -->
                 <div class="post__list">
@@ -635,7 +622,7 @@ const useStockStore = create((set, get) => ({
                         </div>
                     </section>
                 </div>
-                <h4>Xem các bài viết theo chủ đề</h4>
+                <h3>Xem các bài viết theo chủ đề</h3>
                 <div class="language__list">
                     <button>Front-end/Mobile apps</button>
                     <button>Back-end / Devops</button>
@@ -646,5 +633,11 @@ const useStockStore = create((set, get) => ({
                 </div>
             </div>
         </main>
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.1/prism.min.js"
+            integrity="sha512-H+Bt3vVkFRMaLeW2nF2AGIWxJkR3muQHrYSIoxc0g4AmvYkI4vyw/muT63wLpLFw8bPUDodDQYSVfr8hmVQkbg=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"
+        ></script>
     </body>
 </html>
