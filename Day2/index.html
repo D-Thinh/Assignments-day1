@@ -1,0 +1,635 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>MergeSociety</title>
+
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/themes/prism-coy.min.css"
+            integrity="sha512-mJRIBpE8wJg9Lqxd5KBA52I/PV0ShLb0BfjcjvfgvBIF5uIPWD93vEmCoVVpuCCLNnuogwfJpaYJmnDethMm7Q=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"
+        />
+        <link rel="stylesheet" href="./style.css" />
+    </head>
+    <body>
+        <div class="container">
+            <header class="header">
+                <h1>Style a Blog Post with CSS: beginner-friendly tutorial</h1>
+            </header>
+            <main>
+                <div class="top--desc">
+                    <a href="#!">Written by Massa Medi </a>
+                    <p>| January 5, 2025</p>
+                </div>
+                <p>
+                    Styling a blog post is a fundamental skill for web
+                    developers. In this tutorial, we'll guide you through the
+                    process of creating a simple blog post using HTML and CSS.
+                    You'll learn how to apply font families, text colors, and
+                    adjust line height and spacing to enhance readability.
+                </p>
+                <p>
+                    By the end of this tutorial, you'll have a well-styled blog
+                    post that you can use as a template for your own blog or
+                    website.
+                </p>
+                <h2>Setting Up Your Workspace</h2>
+                <h3>Installing a Text Editor</h3>
+                <p>
+                    For this tutorial, we'll be using Visual Studio Code (VS
+                    Code), a free and popular code editor. Here's how you can
+                    install it:
+                </p>
+                <ol>
+                    <li>
+                        Go to the Visual Studio Code website and click the
+                        "Download" button.
+                    </li>
+                    <li>
+                        Choose the version for your operating system (Windows,
+                        Mac, or Linux) and follow the installation instructions.
+                    </li>
+                </ol>
+                <p>
+                    Visual Studio Code is a powerful text editor that provides
+                    features like syntax highlighting, code completion, and
+                    integrated debugging, which will make your coding experience
+                    much more efficient.
+                </p>
+                <h2>Creating Your Project Folder</h2>
+                <p>
+                    Next, let's create a dedicated folder to keep all your blog
+                    post files organized:
+                </p>
+                <ol>
+                    <li>Open your file explorer (Windows) or Finder (Mac).</li>
+                    <li>
+                        Navigate to your Documents folder (or any other location
+                        you prefer).
+                    </li>
+                    <li>
+                        Right-click in an empty space and select "New > Folder".
+                    </li>
+                    <li>Name the folder "my-blog-post" and press Enter.</li>
+                </ol>
+                <p>
+                    Having a separate folder for your blog post project will
+                    help you stay organized and make it easier to manage your
+                    files.
+                </p>
+                <h2>Opening Your Project in VS Code</h2>
+                <p>Now, let's open your project folder in VS Code:</p>
+                <ol>
+                    <li>Open VS Code.</li>
+                    <li>
+                        Click on "File" in the top menu, then select "Open
+                        Folder" (Windows) or "Open..." (Mac).
+                    </li>
+                    <li>
+                        Find and select your "my-blog-post" folder, then click
+                        "Open".
+                    </li>
+                </ol>
+                <p>
+                    This will load your project folder in VS Code, allowing you
+                    to work on your blog post files.
+                </p>
+                <h2>Creating Your Project Files</h2>
+                <p>
+                    Within your "my-blog-post" folder, we need to create two
+                    files: index.html and styles.css.
+                </p>
+                <ol>
+                    <li>
+                        In the VS Code file explorer, click the "New File" icon
+                        (it looks like a page with a + sign).
+                    </li>
+                    <li>
+                        Name the file "index.html" and press Enter. This will be
+                        your main HTML file.
+                    </li>
+                    <li>
+                        Click the "New File" icon again and name the file
+                        "styles.css". This will be your CSS file.
+                    </li>
+                </ol>
+                <p>
+                    The index.html file will contain the structure and content
+                    of your blog post, while the styles.css file will hold the
+                    styling rules.
+                </p>
+                <h2>Building the HTML Structure</h2>
+                <h3>Step 1: Open Your HTML File</h3>
+                <p>
+                    In the VS Code file explorer, double-click the index.html
+                    file to open it in the editor.
+                </p>
+                <h3>Step 2: Add the Basic HTML Structure</h3>
+                <p>
+                    Copy and paste the following code into your index.html file:
+                </p>
+                <pre><code class="language-html">&#x3C;!DOCTYPE html&#x3E;
+&#x3C;html lang=&#x22;en&#x22;&#x3E;
+&#x3C;head&#x3E;
+    &#x3C;meta charset=&#x22;UTF-8&#x22;&#x3E;
+    &#x3C;meta name=&#x22;viewport&#x22; content=&#x22;width=device-width, initial-scale=1.0&#x22;&#x3E;
+    &#x3C;title&#x3E;My Blog Post&#x3C;/title&#x3E;
+    &#x3C;link rel=&#x22;stylesheet&#x22; href=&#x22;styles.css&#x22;&#x3E;
+&#x3C;/head&#x3E;
+&#x3C;body&#x3E;
+    &#x3C;!-- We&#x27;ll add content here in the next step --&#x3E;
+&#x3C;/body&#x3E;
+&#x3C;/html&#x3E;</code></pre>
+                <p>
+                    This CSS code resets the default styles and sets some basic
+                    styles for the page:
+                </p>
+                <ol>
+                    <li>
+                        <strong>* { ... }</strong> is a universal selector that
+                        targets all elements on the page.
+                    </li>
+                    <li>
+                        <strong>margin</strong> and <strong>padding</strong> are
+                        set to 0 to remove the default margins and padding.
+                    </li>
+                    <li>
+                        <strong>box-sizing: border-box;</strong> ensures that
+                        the width and height of an element include the padding
+                        and border.
+                    </li>
+                    <li>
+                        <strong>font-family, line-height,</strong> and
+                        <strong>color</strong> are set for the body element,
+                        which will apply these styles to the entire page.
+                    </li>
+                    <li>
+                        <strong>max-width</strong> and
+                        <strong>margin: 0 auto;</strong> center the content
+                        horizontally on the page.
+                    </li>
+                    <li>
+                        <strong>padding</strong> adds some space around the
+                        content.
+                    </li>
+                </ol>
+                <h3>Step 3: Style the Header Section</h3>
+                <p>Add the following CSS rules to your styles.css file:</p>
+                <pre><code class="language-css">header {
+    text-align: center;
+    padding: 40px 20px;
+    background-color: #f5f5f5;
+    border-radius: 8px;
+    margin-bottom: 30px;
+}
+
+header h1 {
+    font-size: 2.5rem;
+    color: #2c3e50;
+    margin-bottom: 10px;
+}
+
+header .subtitle {
+    font-size: 1.2rem;
+    color: #7f8c8d; 
+    margin-bottom: 15px;
+}</code></pre>
+                <p>
+                    These styles will make your header section look more
+                    polished and professional:
+                </p>
+                <ol>
+                    <li>
+                        <strong>text-align: center;</strong> centers the content
+                        within the header.
+                    </li>
+                    <li>
+                        <strong>padding</strong> adds some spacing around the
+                        content.
+                    </li>
+                    <li>
+                        <strong>background-color</strong> and<strong>
+                            border-radius </strong
+                        >give the header a subtle background and rounded
+                        corners.
+                    </li>
+                    <li>
+                        <strong>margin-bottom</strong> adds some spacing below
+                        the header.
+                    </li>
+                    <li>
+                        <strong>h1</strong> and
+                        <strong>.subtitle</strong> styles target the specific
+                        elements within the header.
+                    </li>
+                </ol>
+                <h3>Step 4: Style the Blog Post Content</h3>
+                <p>Add the following CSS rules to your styles.css file:</p>
+                <pre><code class="language-css">article {
+    margin-bottom: 50px;
+}
+
+article section {
+    margin-bottom: 30px;
+}
+
+article h2 {
+    font-size: 1.8rem;
+    color: #2c3e50;
+    margin-bottom: 10px;
+}
+
+article p {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+article ul {
+    margin-bottom: 20px;
+}
+
+article li {
+    font-size: 1.2rem;
+    color: #666;
+    margin-bottom: 10px;
+}</code></pre>
+            </main>
+            <p>
+                These styles will make your blog post content more readable and
+                visually appealing:
+            </p>
+            <ol>
+                <li>
+                    <strong>article</strong> styles target the entire blog post
+                    content.
+                </li>
+                <li>
+                    <strong>margin-bottom</strong> adds some spacing below the
+                    blog post.
+                </li>
+                <li>
+                    <strong>section</strong> styles target the individual
+                    sections within the blog post.
+                </li>
+                <li><strong>h2</strong> styles the section headings.</li>
+                <li>
+                    <strong>p</strong> styles the paragraph content, setting the
+                    font size, line height, and color.
+                </li>
+                <li>
+                    <strong>ul</strong> and <strong>li</strong> styles target
+                    the list items, setting the font size and color.
+                </li>
+            </ol>
+            <h3>Step 5: Style the Footer</h3>
+            <p>Add the following CSS rules to your styles.css file:</p>
+            <pre><code class="language-css">footer {
+    margin-top: 50px;
+    padding: 30px 20px;
+    background-color: #2c3e50;
+    color: white;
+    border-radius: 8px;
+    text-align: center;
+}
+
+footer p {
+    margin-bottom: 10px;
+}</code></pre>
+            <p>
+                These styles will make your footer section stand out at the
+                bottom of the page:
+            </p>
+            <ol>
+                <li>
+                    <strong>margin-top</strong> adds some spacing above the
+                    footer.
+                </li>
+                <li>
+                    <strong>padding</strong> adds space around the footer
+                    content.
+                </li>
+                <li>
+                    <strong>background-color</strong> and
+                    <strong>color</strong> give the footer a dark blue
+                    background and white text.
+                </li>
+                <li>
+                    <strong>border-radius</strong> rounds the corners of the
+                    footer.
+                </li>
+                <li>
+                    <strong>text-align: center;</strong> centers the content
+                    within the footer.
+                </li>
+                <li>
+                    <strong>footer p</strong> styles the footer content, setting
+                    the margin.
+                </li>
+            </ol>
+            <h2>Understanding the CSS</h2>
+            <p>Let's quickly review the CSS concepts we've used so far:</p>
+            <ol>
+                <li><strong>margin</strong> creates space outside elements.</li>
+                <li><strong>padding</strong> creates space inside elements.</li>
+                <li>
+                    <strong>box-sizing: border-box;</strong> ensures that the
+                    width and height of an element include the padding and
+                    border.
+                </li>
+                <li>
+                    <strong>border-radius</strong> rounds the corners of
+                    elements.
+                </li>
+                <li>
+                    <strong>line-height</strong> sets the vertical spacing
+                    between lines of text.
+                </li>
+                <li><strong>font-size</strong> sets the size of the text.</li>
+                <li>
+                    <strong>color</strong> sets the text color of an element.
+                </li>
+                <li>
+                    <strong>background-color</strong> sets the background color
+                    of an element.
+                </li>
+            </ol>
+            <h2>Testing Your Responsive Design</h2>
+            <p>
+                To ensure your blog post looks great on different devices,
+                follow these steps:
+            </p>
+            <ol>
+                <li>
+                    Open your `index.html` file in a web browser (e.g., Google
+                    Chrome).
+                </li>
+                <li>
+                    Press F12 (or right-click and select "Inspect") to open the
+                    browser's Developer Tools.
+                </li>
+                <li>
+                    Click the "Toggle device toolbar" icon (it looks like a
+                    phone/tablet).
+                </li>
+                <li>
+                    Try different device sizes to see how your site responds and
+                    adjust your CSS accordingly.
+                </li>
+            </ol>
+            <p>
+                This will allow you to test your blog post on various screen
+                sizes and make any necessary adjustments to the CSS to ensure it
+                looks great on both desktop and mobile devices.
+            </p>
+            <h2>Final Code</h2>
+            <p>Here is the final code for your blog post:</p>
+            <p>index.html</p>
+            <pre><code class="language-html">&#x3C;!DOCTYPE html&#x3E;
+&#x3C;html lang=&#x22;en&#x22;&#x3E;
+&#x3C;head&#x3E;
+    &#x3C;meta charset=&#x22;UTF-8&#x22;&#x3E;
+    &#x3C;meta name=&#x22;viewport&#x22; content=&#x22;width=device-width, initial-scale=1.0&#x22;&#x3E;
+    &#x3C;title&#x3E;My Blog Post&#x3C;/title&#x3E;
+    &#x3C;link rel=&#x22;stylesheet&#x22; href=&#x22;styles.css&#x22;&#x3E;
+&#x3C;/head&#x3E;
+&#x3C;body&#x3E;
+    &#x3C;header&#x3E;
+        &#x3C;h1&#x3E;My First Blog Post&#x3C;/h1&#x3E;
+        &#x3C;p class=&#x22;subtitle&#x22;&#x3E;Published on October 1, 2023&#x3C;/p&#x3E;
+    &#x3C;/header&#x3E;
+
+    &#x3C;article&#x3E;
+        &#x3C;section&#x3E;
+            &#x3C;h2&#x3E;Introduction&#x3C;/h2&#x3E;
+            &#x3C;p&#x3E;
+                Welcome to my first blog post. In this post, I&#x27;ll be discussing the
+                importance of web development and how to get started.
+            &#x3C;/p&#x3E;
+        &#x3C;/section&#x3E;
+        &#x3C;section&#x3E;
+            &#x3C;h2&#x3E;Why Web Development?&#x3C;/h2&#x3E;
+            &#x3C;p&#x3E;
+                Web development is a crucial skill in today&#x27;s digital world. It
+                allows you to create interactive and engaging websites that can
+                reach a global audience.
+            &#x3C;/p&#x3E;
+        &#x3C;/section&#x3E;
+        &#x3C;section&#x3E;
+            &#x3C;h2&#x3E;Getting Started with Web Development&#x3C;/h2&#x3E;
+            &#x3C;p&#x3E;
+                To get started with web development, you&#x27;ll need to learn HTML, CSS,
+                and JavaScript. These are the fundamental technologies used to build
+                web pages.
+            &#x3C;/p&#x3E;
+            &#x3C;ul&#x3E;
+                &#x3C;li&#x3E;HTML: Structure of the web page&#x3C;/li&#x3E;
+                &#x3C;li&#x3E;CSS: Styling and layout of the web page&#x3C;/li&#x3E;
+                &#x3C;li&#x3E;JavaScript: Interactivity and dynamic content&#x3C;/li&#x3E;
+            &#x3C;/ul&#x3E;
+        &#x3C;/section&#x3E;
+        &#x3C;section&#x3E;
+            &#x3C;h2&#x3E;Conclusion&#x3C;/h2&#x3E;
+            &#x3C;p&#x3E;
+                Web development is a rewarding field with endless possibilities. I
+                hope this post has inspired you to start learning and building your
+                own web projects.
+            &#x3C;/p&#x3E;
+        &#x3C;/section&#x3E;
+    &#x3C;/article&#x3E;
+
+    &#x3C;footer&#x3E;
+        &#x3C;p&#x3E;Author: Your Name&#x3C;/p&#x3E;
+        &#x3C;p&#x3E;Email: your.email@example.com&#x3C;/p&#x3E;
+    &#x3C;/footer&#x3E;
+&#x3C;/body&#x3E;
+&#x3C;/html&#x3E;</code></pre>
+            <p>styles.css</p>
+            <pre><code class="language-css">/* Reset default styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Header styles */
+header {
+    text-align: center;
+    padding: 40px 20px;
+    background-color: #f5f5f5;
+    border-radius: 8px;
+    margin-bottom: 30px;
+}
+
+header h1 {
+    font-size: 2.5rem;
+    color: #2c3e50;
+    margin-bottom: 10px;
+}
+
+header .subtitle {
+    font-size: 1.2rem;
+    color: #7f8c8d; 
+    margin-bottom: 15px;
+}
+
+/* Blog post content styles */
+article {
+    margin-bottom: 50px;
+}
+
+article section {
+    margin-bottom: 30px;
+}
+
+article h2 {
+    font-size: 1.8rem;
+    color: #2c3e50;
+    margin-bottom: 10px;
+}
+
+article p {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+article ul {
+    margin-bottom: 20px;
+}
+
+article li {
+    font-size: 1.2rem;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+/* Footer styles */
+footer {
+    margin-top: 50px;
+    padding: 30px 20px;
+    background-color: #2c3e50;
+    color: white;
+    border-radius: 8px;
+    text-align: center;
+}
+
+footer p {
+    margin-bottom: 10px;
+}</code></pre>
+            <h2>Conclusion</h2>
+            <p>
+                Congratulations! You've now created a simple blog post using
+                HTML and CSS. This tutorial has provided you with a solid
+                foundation to build upon. Remember, this is just the beginning -
+                you can continue to customize and expand your blog post as you
+                learn more.
+            </p>
+            <p>
+                Feel free to experiment with different styles, add more
+                sections, and make your blog post truly unique. Happy coding!
+            </p>
+            <h3>Recommended</h3>
+            <div class="footer_exam">
+                <h2>CSS-Only Projects</h2>
+                <div class="project--list">
+                    <section class="project--item">
+                        <div class="project--body">
+                            <h3 class="project--title">
+                                Build a Simple Personal Portfolio Layout
+                            </h3>
+                            <p class="project--date">January 15, 2025</p>
+                            <p class="project--desc">
+                                Learn how to style a personal portfolio using
+                                basic CSS properties like background colors,
+                                fonts, and spacing. Focus on layout fundamentals
+                                such as margins, padding, and text alignment.
+                            </p>
+                            <button class="btn">Start Tutorial</button>
+                        </div>
+                    </section>
+                    <section class="project--item">
+                        <div class="project--body">
+                            <h3 class="project--title">
+                                Create a Responsive Navigation Menu
+                            </h3>
+                            <p class="project--date">January 17, 2025</p>
+                            <p class="project--desc">
+                                Build a responsive navigation menu that works
+                                across devices using media queries. This project
+                                focuses on layout design and adapting styles for
+                                smaller screens.
+                            </p>
+                            <button class="btn">Start Tutorial</button>
+                        </div>
+                    </section>
+                    <section class="project--item">
+                        <div class="project--body">
+                            <h3 class="project--title">
+                                Design an Advanced Pricing Table
+                            </h3>
+                            <p class="project--date">January 16, 2025</p>
+                            <p class="project--desc">
+                                Create a fully responsive pricing table with CSS
+                                grid. Learn to use grid properties to structure
+                                rows and columns, adding hover effects for
+                                interaction.
+                            </p>
+                            <button class="btn">Start Tutorial</button>
+                        </div>
+                    </section>
+                    <section class="project--item">
+                        <div class="project--body">
+                            <h3 class="project--title">
+                                Build a Parallax Scrolling Effect
+                            </h3>
+                            <p class="project--date">January 3, 2025</p>
+                            <p class="project--desc">
+                                Learn how to create a parallax scrolling effect
+                                using CSS. This project covers how to manipulate
+                                background images and layers for a visually
+                                engaging web experience.
+                            </p>
+                            <button class="btn">Start Tutorial</button>
+                        </div>
+                    </section>
+                    <section class="project--item">
+                        <div class="project--body">
+                            <h3 class="project--title">
+                                Create a CSS Animation for Button Hover Effects
+                            </h3>
+                            <p class="project--date">January 15, 2025</p>
+                            <p class="project--desc">
+                                Explore the power of CSS animations by designing
+                                interactive button hover effects. This project
+                                focuses on keyframes, transitions, and animation
+                                timing functions.
+                            </p>
+                            <button class="btn">Start Tutorial</button>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/prism.min.js"
+            integrity="sha512-xQgsp+zSrzG4GofAYZbZ2FoEazT92XVX59Vb/mqFv2m3rlwd0YwWAZs7ZRqR4vAyPdpD9mQGKirbgUPV1v/sCw=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"
+        ></script>
+    </body>
+</html>
