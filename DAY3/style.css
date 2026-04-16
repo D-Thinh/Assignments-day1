@@ -1,0 +1,158 @@
+.site-header li,
+.site-header a {
+    color: #1d4ed8;
+}
+
+.main-nav > ul > li > a {
+    background: #f1f5f9;
+}
+
+h2 {
+    + p {
+        color: #64748b;
+        ~ p {
+            color: #0f172a;
+        }
+    }
+}
+
+body {
+    background-color: #fff;
+}
+.site-main {
+    & h1 {
+        color: #0f172a;
+    }
+    .featured {
+        background-color: #fefce8;
+        &:hover {
+            background-color: #f8fafc;
+        }
+        &:hover h1 {
+            color: #2563eb;
+        }
+    }
+}
+
+.site-main {
+    a {
+        color: #2563eb;
+        &:visited {
+            color: #9333ea;
+        }
+        &:hover {
+            color: #1e40af;
+        }
+        &:active {
+            color: #1e3a8a;
+        }
+    }
+}
+.btn-primary {
+    background-color: #2563eb;
+    color: white;
+}
+button,
+.btn,
+.btn-primary {
+    &:hover {
+        background-color: #3b82f6;
+    }
+    &:active {
+        background-color: #1d4ed8;
+    }
+}
+button[disabled] {
+    background-color: #94a3b8;
+    color: #cbd5e1;
+}
+input:focus {
+    background-color: #eff6ff;
+}
+
+.comparison-table {
+    tr[data-priority="high"] {
+        background-color: #f10000;
+    }
+}
+tbody {
+    tr:nth-child(odd) {
+        background-color: #f8fafc;
+    }
+    tr:nth-child(2n) {
+        background-color: #fff;
+    }
+    tr:last-child {
+        background-color: #dbeafe;
+    }
+}
+thead {
+    th {
+        background-color: #0f172a;
+        color: #fff;
+    }
+}
+
+.steps {
+    li:first-child {
+        color: #16a34a;
+    }
+    li:last-child {
+        color: #dc2626;
+    }
+    li:nth-child(3) {
+        background-color: #fef3c7;
+    }
+    &::marker {
+        color: #001a53;
+    }
+    li::marker {
+        color: #2563eb;
+    }
+}
+.widget:not(.widget:last-child) {
+    background-color: #fff;
+}
+.post-content .lead {
+    &::first-line {
+        color: #0f172a;
+    }
+    &::first-letter {
+        color: #2563eb;
+    }
+}
+.post-content::selection {
+    color: #0f172a;
+    background-color: #bfdbfe;
+}
+.quote {
+    &::before {
+        content: '"';
+        color: #cbd5e1;
+    }
+}
+.badge {
+    &::before {
+        content: "";
+        display: inline-block;
+        width: 12px;
+        height: 12px;
+        border-radius: 6px;
+        background-color: #ef4444;
+    }
+}
+input[required] {
+    background-color: #fffbeb;
+}
+a[href^="https:/"] {
+    color: #2563eb;
+}
+a[download] {
+    color: #ea580c;
+}
+button[class*="btn"] {
+    background-color: #136ee6;
+}
+[lang^="vi"] {
+    color: #0f172a;
+}
