@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Day 4</title>
+        <link rel="stylesheet" href="style.css" />
+    </head>
+    <body>
+        <main>
+            <div class="container">
+                <!-- CHỌN GIAO DIỆN (THEME) -->
+                <h1 class="title">Trung tâm cấuh hình giao diện (Demo)</h1>
+                <div class="form--control">
+                    <h2 class="control--title" for="">Chọn giao diện</h2>
+                    <div class="form--body" action="">
+                        <label for="light">
+                            <input
+                                id="light"
+                                type="radio"
+                                name="theme"
+                                checked
+                            />
+                            <span class="theme--title__light">Light</span>
+                        </label>
+                        <label class="btn theme--btn__dark" for="dark">
+                            <input id="dark" type="radio" name="theme" />
+                            <span>Dark</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- CHỌN MÀU CHỦ ĐẠO (COLOR) -->
+                <div class="form--control">
+                    <label class="control--title" for="">
+                        Chọn màu sắc chủ đạo (Color)
+                    </label>
+                    <div class="form--body" action="">
+                        <label class="btn color--btn__red" for="red">
+                            <input id="red" type="radio" name="color" checked />
+                            <span>Red</span>
+                        </label>
+                        <label class="btn color--btn__blue" for="blue">
+                            <input id="blue" type="radio" name="color" />
+                            <span>Blue</span>
+                        </label>
+                        <label class="btn color--btn__green" for="green">
+                            <input id="green" type="radio" name="color" />
+                            <span>Green</span>
+                        </label>
+                    </div>
+                </div>
+                <!-- CHỌN NGÔN NGỮ (LANGUAGE) -->
+                <div class="form--control">
+                    <label class="control--title" for="">
+                        Chọn ngôn ngữ (Language)
+                    </label>
+                    <div class="form--body" action="">
+                        <label class="btn language--btn__vi" for="vi">
+                            <input
+                                id="vi"
+                                type="radio"
+                                name="language"
+                                checked
+                            />
+                            <span>VI</span>
+                        </label>
+                        <label class="btn language--btn__en" for="en">
+                            <input id="en" type="radio" name="language" />
+                            <span>EN</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- TÙY CHỌN BỔ SUNG (OPTIONS) -->
+                <div class="form--control">
+                    <label class="control--title" for="">
+                        Tùy chọn bổ sung (Options - checkbox):
+                    </label>
+                    <div class="form--body" action="">
+                        <label class="btn options--btn__advand" for="advand">
+                            <input id="advand" type="checkbox" name="options" />
+                            <span>Hiển thị mô tả nâng cao</span>
+                        </label>
+                        <label class="btn options--btn__eco" for="eco">
+                            <input id="eco" type="checkbox" name="options" />
+                            <span>Bật chế độ Eco</span>
+                        </label>
+                        <label
+                            class="btn options--btn__important"
+                            for="important"
+                        >
+                            <input
+                                id="important"
+                                type="checkbox"
+                                name="options"
+                            />
+                            <span>Hiển thị cảnh báo quan trọng</span>
+                        </label>
+                    </div>
+                </div>
+                <!-- Content controller -->
+                <div class="form--content">
+                    <p class="theme--content p--theme p--light">
+                        Theme Light: Giao diện sáng, chữ đen
+                    </p>
+                    <p class="theme--content p--theme p--dark">
+                        Theme Dark: Giao diện tối, chữ sáng
+                    </p>
+                    <p class="theme--content p--color p--red">
+                        Màu red: được nhấn mạnh khi chọn red
+                    </p>
+                    <p class="theme--content p--color p--blue">
+                        Màu Blue: được nhấn mạnh khi chọn Blue
+                    </p>
+                    <p class="theme--content p--color p--green">
+                        Màu Green: được nhấn mạnh khi chọn Green
+                    </p>
+                    <p class="theme--content p--language p--vi">
+                        [VI] Xin chào! Khi bạn chọn VI, dòng này rõ hơn.
+                    </p>
+                    <p class="theme--content p--language p--en">
+                        [EN] Hello, world! Khi chọn EN, dòng này rõ hơn.
+                    </p>
+                    <p class="theme--content p--options p--andv">
+                        Mô tả nâng cao: giải thích kỹ hơn về cách các lựa chọn
+                        đang ảnh hưởng giao diện.
+                    </p>
+                    <p class="theme--content p--options p--eco">
+                        Chế độ Eco: mô phỏng trạng thái tiết kiệm tài nguyên cho
+                        giao diện.
+                    </p>
+                    <p class="theme--content p--options p--impr">
+                        Cảnh báo quan trọng: khu vực dùng để nhấn mạnh thông tin
+                        hệ thống.
+                    </p>
+                </div>
+            </div>
+        </main>
+    </body>
+</html>

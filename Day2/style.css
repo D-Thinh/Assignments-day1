@@ -1,100 +1,186 @@
 * {
     box-sizing: border-box;
-}
-html {
-    /* font-size: 62.5%; */
-}
-body {
-    background-color: #0a0a0a;
-    color: #fff;
-}
-.container {
-    width: 790px;
-    max-width: calc(100% - 48px);
-    display: block;
-    margin: auto;
-    background-color: var(--bg-color-dark, #121212);
-    padding: 36px 18px;
-}
-.top--desc {
-    display: flex;
-    align-items: center;
-}
-.top--desc a {
-    color: #58a6ff;
-    text-decoration: none;
-    font-size: 12px;
-}
-.top--desc p {
-    margin-left: 12px;
-    color: #aaa;
-}
-ol {
-    list-style-type: none;
-}
-ol li {
-    line-height: 24px;
-    margin-top: 4px;
-}
-pre {
-    border-radius: 16px;
-    height: 120%;
-    padding: 16px;
-    background-color: #1e1e1e;
-}
-pre code {
-    /* margin: 16px;
-    border-radius: 16px; */
-}
-strong {
-    color: #ff6303;
+    margin: 0;
+    padding: 0;
 }
 
-.footer_exam h2 {
-    font-size: 36px;
-    text-align: center;
+body {
+    background-color: #0a0a0a;
+    color: #f2f2f2;
+    padding-top: 90px;
 }
-.project--list {
+
+.main-heard {
+    background-color: #0a0a0a;
+    box-sizing: border-box;
+
+    top: 0;
+    width: 100%;
+    padding: 18px 0;
+    position: fixed;
+    border-bottom: 1px solid #fff;
+    z-index: 1000;
+}
+a {
+    text-decoration: none;
+}
+.container {
+    width: 80%;
+    max-width: 1200px;
+    padding: 1rem 2rem;
+    margin: auto;
     display: flex;
+    align-items: center;
     flex-wrap: wrap;
-    gap: 36px;
+    justify-content: space-between;
 }
-.project--item {
-    width: 358px;
-    /* height: 488px; */
-    background-color: #1a1a1a;
-    border-radius: 16px;
-}
-.project--body {
+.logo-selection {
     display: flex;
-    gap: 14px;
-    flex-direction: column;
-    margin: 22px 22px;
+    align-items: center;
+    gap: 15px;
 }
-.project--body .project--title {
-    font-weight: 700;
-    font-size: 27px;
-    margin: 36px 0px 18px 0px;
+.logo-text {
+    color: #ededed;
+    font-size: 1.25rem;
 }
-.project--body .project--date {
-    font-size: 19px;
-    margin-top: 0px;
+
+.nav-link {
+    display: flex;
+    gap: 1rem;
+    list-style-type: none;
+}
+
+.nav-link a {
+    text-decoration: none;
+    color: #e6e2e6;
+    font-weight: 8500;
+    font-size: 1rem;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.nav-link a:hover {
+    color: #ff6303;
+}
+/* =======================dropdown=================== */
+.dropdown-menu {
+    background-color: #191e24;
+    display: flex;
+    justify-content: center;
+}
+
+.Learn {
+    position: relative;
+    color: #f2f2f2;
+    font-size: 1rem;
+    cursor: pointer;
+    font-weight: 600;
+    padding: 10px 15px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.dropdowwn {
+    margin: 0;
+    padding: 12px 20px;
+    background-color: #201f1f;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    list-style-type: none;
+    min-width: 180px;
+    display: none;
+}
+.dropdowwn li a {
+    font-size: 15.75px;
+    text-decoration: none;
+    color: #f2f2f2;
+    display: grid;
+    grid-auto-flow: column;
+}
+.dropdowwn li a:hover {
+    border-radius: 30px;
+    background-color: rgba(65, 64, 64, 0.233);
+    padding: 3px 5px;
+}
+
+.Learn:hover .dropdowwn {
+    display: block;
+}
+/* =================Lesson-wrapper ======================*/
+
+.lesson-wrapper {
+    display: flex;
+    justify-content: space-between;
+    padding: 2rem 1rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.lesson-sidebar {
+    width: 300px;
+    min-width: 250px;
+}
+h1 {
+    margin-top: 36px;
     margin-bottom: 18px;
-    line-height: 16px;
+}
+
+/* =============Project============== */
+.project-info {
+    font-size: 1.5rem;
+}
+.project-title {
+    font-size: 12.15px;
+    color: #58a6ff;
+}
+
+.project-date {
+    font-size: 16.2px;
     color: #aaa;
 }
-.project--body .project--desc {
-    font-size: 19px;
-    margin-top: 0px;
+
+p {
+    font-size: 19.8px;
     margin-bottom: 18px;
-    line-height: 34px;
+    line-height: 33.66px;
 }
-.btn {
-    background-color: #ff6303;
+
+h1 {
+    font-size: 36px;
+}
+h2 {
+    margin-top: 36px;
+    font-size: 27px;
+    margin-bottom: 18px;
+}
+h3 {
+    font-size: 22.5px;
+    margin-top: 36px;
+    margin-bottom: 18px;
+}
+ol {
+    margin-bottom: 18px;
+    padding-left: 40px;
+}
+ol li {
+    list-style-type: none;
+    font-size: 19.8px;
+    line-height: 33.66px;
+    margin-bottom: 9px;
+}
+ul {
+    padding-left: 40px;
+}
+ul li {
+    list-style-type: none;
+    font-size: 19.8px;
+    line-height: 30.66px;
+}
+
+.lesson-container code {
     font-size: 18px;
-    width: 140px;
-    height: 50px;
-    border-radius: 8px;
-    color: #fff;
-    border: none;
+    color: #ff6303;
+    font-family: monospace;
+    font-size: 1rem;
+}
+
+.code-toolbar {
+    background-color: #f8f8ff;
 }
