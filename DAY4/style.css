@@ -17,12 +17,20 @@ main {
 .container {
     width: 1110px;
     display: block;
+    padding: 0px 24px 32px 24px;
+    border-radius: 32px;
     margin: auto;
+    overflow: hidden;
+    box-shadow:
+        rgba(17, 17, 26, 0.1) 0px 8px 24px,
+        rgba(17, 17, 26, 0.1) 0px 16px 56px,
+        rgba(17, 17, 26, 0.1) 0px 24px 80px;
 }
 .title {
     font-size: 3.2rem;
+    margin: 0px -24px;
     margin-bottom: 32px;
-    padding: 8px 0px;
+    padding: 8px 0px 0px 24px;
     color: #fff;
     background-color: #e58626;
 }
