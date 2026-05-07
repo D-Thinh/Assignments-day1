@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Projects</title>
+        <!-- Style -->
+        <link rel="stylesheet" href="../css/reset.css" />
+        <link rel="stylesheet" href="../css/common.css" />
+        <link rel="stylesheet" href="../css/project.css" />
+
+        <!-- Icon -->
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/@mdi/font@7.4.47/css/materialdesignicons.min.css"
+        />
+    </head>
+    <body>
+        <!-- Header -->
+        <header class="header">
+            <div class="container">
+                <nav class="navbar">
+                    <img
+                        src="/DAY6/my-portfolio/images/avt-icon.png"
+                        alt=""
+                        class="logo--avt"
+                    />
+                    <!-- TODO: css nâng cao, update icon sau -->
+                    <ul>
+                        <li>
+                            <i class="mdi mdi-home"></i>
+                            <a href="../index.html">Home </a>
+                        </li>
+                        <li>
+                            <i class="mdi mdi-account"></i>
+                            <a href="/DAY6/my-portfolio/pages/about.html"
+                                >About
+                            </a>
+                        </li>
+                        <li>
+                            <i class="mdi-lightbulb-on-outline"></i>
+                            <a href="/DAY6/my-portfolio/pages/skills.html"
+                                >Skills
+                            </a>
+                        </li>
+                        <li>
+                            <i class="mdi mdi-folder-eye"></i>
+                            <a href="/DAY6/my-portfolio/pages/projects.html"
+                                >Projects
+                            </a>
+                        </li>
+                        <li>
+                            <i class="mdi mdi-file-arrow-left-right"></i>
+                            <a href="/DAY6/my-portfolio/pages/blog.html"
+                                >Blog
+                            </a>
+                        </li>
+                        <li>
+                            <i class="mdi mdi-email-open-multiple-outline"></i>
+                            <a href="/DAY6/my-portfolio/pages/contact.html"
+                                >Contact
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+
+        <!-- Main -->
+        <main class="main">
+            <section class="projects-section">
+                <h2>Featured Projects</h2>
+                <!-- Phân loại: Web & Backend Systems -->
+                <div class="project-category">
+                    <h3>Web & Backend Development</h3>
+                    <div class="projects-list">
+                        <!-- Dự án 1: Trading System (Ví dụ) -->
+                        <article class="project-card">
+                            <div class="project-media">
+                                <video
+                                    controls
+                                    poster="https://via.placeholder.com/800x450"
+                                    width="100%"
+                                >
+                                    <source
+                                        src="trading-demo.mp4"
+                                        type="video/mp4"
+                                    />
+                                    Your browser does not support the video tag.
+                                </video>
+                            </div>
+                            <!-- project-body -->
+                            <div class="project-body">
+                                <h4 class="project-name">
+                                    <strong
+                                        >Forex Trading Management System</strong
+                                    >
+                                </h4>
+                                <div class="project-description">
+                                    <p>
+                                        Hệ thống quản lý giao dịch ngoại hối tập
+                                        trung vào việc xử lý các lệnh OCO
+                                        (One-Cancels-the-Other) và tính toán lỗ
+                                        lãi chưa thực hiện (Unrealized PnL) theo
+                                        thời gian thực.
+                                    </p>
+                                    <p>
+                                        Backend được xây dựng để xử lý hàng
+                                        nghìn request mỗi giây, đảm bảo tính
+                                        nhất quán của dữ liệu tài chính và cấu
+                                        hình phiên giao dịch linh hoạt.
+                                    </p>
+                                </div>
+
+                                <div class="project-tech">
+                                    <strong>Tech Stack:</strong>
+                                    <code>Java</code> <code>Spring Boot</code>
+                                    <code>MySQL</code> <code>Redis</code>
+                                    <code>Kafka</code>
+                                </div>
+
+                                <div class="project-features">
+                                    <strong>Key Features:</strong>
+                                    <ul>
+                                        <li>
+                                            <mark
+                                                >Real-time PnL Calculation</mark
+                                            >
+                                            dựa trên luồng dữ liệu thị trường
+                                            trực tiếp.
+                                        </li>
+                                        <li>
+                                            Hệ thống xử lý lệnh OCO tự động hủy
+                                            lệnh đối ứng khi một lệnh khớp.
+                                        </li>
+                                        <li>
+                                            Phân quyền quản trị và báo cáo giao
+                                            dịch chi tiết.
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <div class="project-links">
+                                    <a
+                                        href="https://demo-trading.com"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        class="btn"
+                                        >Live Demo</a
+                                    >
+                                    <a
+                                        href="https://github.com/thinhquach/trading-system"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        class="btn btn-outline"
+                                        >Source Code</a
+                                    >
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </section>
+        </main>
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="list--media">
+                <a href="https://www.facebook.com/" target="_blank">
+                    <i class="mdi mdi-facebook"></i
+                ></a>
+                <a href="https://www.instagram.com/" target="_blank">
+                    <i class="mdi mdi-instagram"></i
+                ></a>
+                <a href="https://github.com/" target="_blank">
+                    <i class="mdi mdi-github"></i
+                ></a>
+                <a href="https://www.linkedin.com/" target="_blank">
+                    <i class="mdi mdi-linkedin"></i
+                ></a>
+            </div>
+            <span></span>
+            <p>&copy; 2026 Thịnh Quách. All rights reserved.</p>
+        </footer>
+    </body>
+</html>
