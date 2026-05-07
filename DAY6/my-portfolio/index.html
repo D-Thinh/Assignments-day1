@@ -13,6 +13,7 @@
             rel="stylesheet"
             href="https://cdn.jsdelivr.net/npm/@mdi/font@7.4.47/css/materialdesignicons.min.css"
         />
+        <!--avt:  https://i.pravatar.cc/216 -->
     </head>
     <body>
         <!-- Header -->
@@ -20,39 +21,238 @@
             <div class="container">
                 <nav class="navbar">
                     <img src="./images/avt-icon.png" alt="" class="logo--avt" />
+                    <!-- TODO: css nâng cao, update icon sau -->
                     <ul>
                         <li>
                             <i class="mdi mdi-home"></i>
-                            <a href="">Home</a>
+                            <a href="#!">Home</a>
                         </li>
                         <li>
                             <i class="mdi mdi-account"></i>
-                            <a href="">About</a>
+                            <a href="#!">About</a>
                         </li>
                         <li>
                             <i class="mdi-lightbulb-on-outline"></i>
-                            <a href="">Skills</a>
+                            <a href="#!">Skills</a>
                         </li>
                         <li>
                             <i class="mdi mdi-folder-eye"></i>
-                            <a href="">Projects</a>
+                            <a href="#!">Projects</a>
                         </li>
                         <li>
                             <i class="mdi mdi-file-arrow-left-right"></i>
-                            <a href="">Blog</a>
+                            <a href="#!">Blog</a>
                         </li>
                         <li>
                             <i class="mdi mdi-email-open-multiple-outline"></i>
-                            <a href="">Contact</a>
+                            <a href="#!">Contact</a>
                         </li>
                     </ul>
                 </nav>
             </div>
         </header>
         <!-- Main -->
-        <main class="main"></main>
+        <main class="main">
+            <!-- Hero -->
+            <div class="hero">
+                <div class="container">
+                    <strong class="hero--title">Quach Phan Đuc Thinh</strong>
+                    <em class="hero--desc"
+                        >About 3 years of experience in the software industry,
+                        especially on application software and backend web
+                        development.
+                    </em>
+                    <div class="hero--action">
+                        <a
+                            href="/DAY6/my-portfolio/pages/projects.html"
+                            class="btn"
+                            >Xem dự án
+                        </a>
+                        <a class="btn" href="./files/cv.pdf" download="url"
+                            >Tải CV
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <!-- About -->
+                <section class="about">
+                    <img src="https://i.pravatar.cc/216" alt="" class="avata" />
+                    <div class="about--preview">
+                        <strong>Lorem ipsum dolor sit amet consectetur </strong>
+                        <p>
+                            Pisicing elit. Corporis dignissimos eveniet porro
+                            vel inventore quod
+                            <em>temporibus possimus asperiores</em>
+                            expedita eos.
+                        </p>
+                        <p>
+                            Lorem ipsum dolor sit
+                            <mark>
+                                Lorem ipsum dolor sit amet consectetur
+                                adipisicing elit Lorem ipsum dolor sit </mark
+                            >. Quae, odio?
+                        </p>
+                        <p>Lorem ipsum dolor sit amet.</p>
+                        <a class="about--more" href="pages/about.html"
+                            >Đọc thêm
+                        </a>
+                    </div>
+                </section>
+                <!-- Skills  -->
+                <section class="skills">
+                    <div class="skill--list">
+                        <div class="skill--item">
+                            <img
+                                src="./images/skill-html.png"
+                                alt=""
+                                class="icon"
+                            />
+                            <div class="skill--content">
+                                <p class="skill--title">Proficient in HTML5</p>
+                                <p class="skill--desc">
+                                    Expert in crafting clean, valid HTML5 code
+                                    using semantic elements to ensure robust web
+                                    structures.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="skill--item">
+                            <img
+                                src="./images/skill-k8s.png"
+                                alt=""
+                                class="icon"
+                            />
+                            <div class="skill--content">
+                                <p class="skill--title">
+                                    Expert in Kubernetes Orchestration
+                                </p>
+                                <p class="skill--desc">
+                                    Proficient in automating deployment,
+                                    scaling, and management of containerized
+                                    applications.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="skill--item">
+                            <img
+                                src="./images/skill-spring.png"
+                                alt=""
+                                class="icon"
+                            />
+                            <div class="skill--content">
+                                <p class="skill--title">
+                                    Specialist in Spring Boot and Microservices
+                                    Backend Development
+                                </p>
+                                <p class="skill--desc">
+                                    Highly skilled in building scalable,
+                                    production-ready REST APIs and microservices
+                                    using the Spring ecosystem.
+                                </p>
+                            </div>
+                        </div>
+                        <a href="pages/skills.html" class="skill--more"
+                            >Xem tất cả kỹ năng
+                        </a>
+                    </div>
+                    <img src="./images/skills.jpg" alt="" />
+                </section>
+                <!-- Projects -->
+                <section class="projects">
+                    <h2>Featured projects</h2>
+                    <div class="project--list">
+                        <!-- project 1 -->
+                        <div class="project--item">
+                            <div class="project--media">
+                                <img src="./images/project1.jpg" alt="" />
+                            </div>
+                            <div class="project--content">
+                                <h3 class="project--title">
+                                    Global E-commerce Solution
+                                </h3>
+                                <p class="project--desc">
+                                    Developed a high-traffic online marketplace
+                                    supporting real-time inventory updates.
+                                </p>
+                                <code>React</code> <code>Node.js</code>
+                                <code>MongoDB</code> <code>AWS</code>
+                                <a
+                                    href="./pages/projects.html"
+                                    class="btn-details"
+                                    >View Details</a
+                                >
+                            </div>
+                        </div>
+                        <!-- project 2 -->
+                        <div class="project--item">
+                            <div class="project--media">
+                                <img src="./images/project2.jpg" alt="" />
+                            </div>
+                            <div class="project--content">
+                                <h3 class="project--title">
+                                    Trading Dashboard v2.0
+                                </h3>
+                                <p class="project--desc">
+                                    A real-time financial dashboard visualizing
+                                    market trends with WebSocket integration and
+                                    custom technical indicators.
+                                </p>
+                                <code>Spring Boot</code> <code>TypeScript</code>
+                                <code>D3.js</code> <code>Redis</code>
+                                <a
+                                    href="./pages/projects.html"
+                                    class="btn-details"
+                                    >View Details</a
+                                >
+                            </div>
+                        </div>
+                        <!-- project 3 -->
+                        <div class="project--item">
+                            <div class="project--media">
+                                <img src="./images/project3.jpg" alt="" />
+                            </div>
+                            <div class="project--content">
+                                <h3 class="project--title">
+                                    Automated CI/CD Pipeline
+                                </h3>
+                                <p class="project--desc">
+                                    Streamlined deployment workflows for
+                                    microservices, reducing production release
+                                    time by 40% using container orchestration.
+                                </p>
+                                <code>Docker</code> <code>Kubernetes</code>
+                                <code>Jenkins</code> <code>Terraform</code>
+                                <a
+                                    href="./pages/projects.html"
+                                    class="btn-details"
+                                    >View Details</a
+                                >
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
 
         <!-- Footer -->
-        <footer class="footer"></footer>
+        <footer class="footer">
+            <div class="list--media">
+                <a href="https://www.facebook.com/" target="_blank">
+                    <i class="mdi mdi-facebook"></i
+                ></a>
+                <a href="https://www.instagram.com/" target="_blank">
+                    <i class="mdi mdi-instagram"></i
+                ></a>
+                <a href="https://github.com/" target="_blank">
+                    <i class="mdi mdi-github"></i
+                ></a>
+                <a href="https://www.linkedin.com/" target="_blank">
+                    <i class="mdi mdi-linkedin"></i
+                ></a>
+            </div>
+            <span></span>
+            <p>&copy; 2026 Thịnh Quách. All rights reserved.</p>
+        </footer>
     </body>
 </html>
