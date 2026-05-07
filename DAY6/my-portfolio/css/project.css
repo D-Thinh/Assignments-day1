@@ -1,0 +1,41 @@
+ul {
+    list-style: circle;
+}
+.projects-section {
+    margin-top: 70px;
+}
+h3 {
+    color: #000958;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 34px;
+}
+.thumbnail {
+    width: 770px;
+    height: 500px;
+    object-fit: cover;
+}
+.project--item {
+    margin-top: 55px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    p {
+        width: 80%;
+        margin-top: 18px;
+        font-size: 1.8rem;
+    }
+    .project--feat {
+        li {
+            font-size: 1.8rem;
+            line-height: 24px;
+        }
+    }
+}
+.project--title {
+    display: block;
+    margin-bottom: 18px;
+    color: #000958;
+    font-size: 2.2rem;
+}

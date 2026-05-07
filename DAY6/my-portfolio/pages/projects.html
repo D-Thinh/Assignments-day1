@@ -68,99 +68,309 @@
 
         <!-- Main -->
         <main class="main">
-            <section class="projects-section">
-                <h2>Featured Projects</h2>
-                <!-- Phân loại: Web & Backend Systems -->
-                <div class="project-category">
-                    <h3>Web & Backend Development</h3>
-                    <div class="projects-list">
-                        <!-- Dự án 1: Trading System (Ví dụ) -->
-                        <article class="project-card">
-                            <div class="project-media">
-                                <video
-                                    controls
-                                    poster="https://via.placeholder.com/800x450"
-                                    width="100%"
-                                >
-                                    <source
-                                        src="trading-demo.mp4"
-                                        type="video/mp4"
-                                    />
-                                    Your browser does not support the video tag.
-                                </video>
-                            </div>
-                            <!-- project-body -->
-                            <div class="project-body">
-                                <h4 class="project-name">
-                                    <strong
-                                        >Forex Trading Management System</strong
-                                    >
-                                </h4>
-                                <div class="project-description">
-                                    <p>
-                                        Hệ thống quản lý giao dịch ngoại hối tập
-                                        trung vào việc xử lý các lệnh OCO
-                                        (One-Cancels-the-Other) và tính toán lỗ
-                                        lãi chưa thực hiện (Unrealized PnL) theo
-                                        thời gian thực.
-                                    </p>
-                                    <p>
-                                        Backend được xây dựng để xử lý hàng
-                                        nghìn request mỗi giây, đảm bảo tính
-                                        nhất quán của dữ liệu tài chính và cấu
-                                        hình phiên giao dịch linh hoạt.
-                                    </p>
-                                </div>
+            <div class="container">
+                <!-- project item -category 1 -->
+                <section class="projects-section">
+                    <h2 class="project--category">Web Development</h2>
 
-                                <div class="project-tech">
-                                    <strong>Tech Stack:</strong>
-                                    <code>Java</code> <code>Spring Boot</code>
-                                    <code>MySQL</code> <code>Redis</code>
-                                    <code>Kafka</code>
-                                </div>
+                    <!-- project item 1 -->
+                    <article class="project--item">
+                        <strong class="project--title"
+                            >E-Learning & Video Streaming Platform</strong
+                        >
 
-                                <div class="project-features">
-                                    <strong>Key Features:</strong>
-                                    <ul>
-                                        <li>
-                                            <mark
-                                                >Real-time PnL Calculation</mark
-                                            >
-                                            dựa trên luồng dữ liệu thị trường
-                                            trực tiếp.
-                                        </li>
-                                        <li>
-                                            Hệ thống xử lý lệnh OCO tự động hủy
-                                            lệnh đối ứng khi một lệnh khớp.
-                                        </li>
-                                        <li>
-                                            Phân quyền quản trị và báo cáo giao
-                                            dịch chi tiết.
-                                        </li>
-                                    </ul>
-                                </div>
+                        <img
+                            class="thumbnail"
+                            src="../images/project1.jpg"
+                            alt="Giao diện hệ thống E-Learning"
+                        />
 
-                                <div class="project-links">
-                                    <a
-                                        href="https://demo-trading.com"
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        class="btn"
-                                        >Live Demo</a
-                                    >
-                                    <a
-                                        href="https://github.com/thinhquach/trading-system"
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        class="btn btn-outline"
-                                        >Source Code</a
-                                    >
-                                </div>
-                            </div>
-                        </article>
-                    </div>
-                </div>
-            </section>
+                        <p>
+                            Dự án là nền tảng giáo dục trực tuyến hỗ trợ hàng
+                            ngàn học viên tham gia học tập cùng lúc. Hệ thống
+                            được xây dựng để cung cấp trải nghiệm xem video bài
+                            giảng mượt mà, quản lý lộ trình học tập cá nhân hóa
+                            và tổ chức các bài kiểm tra trắc nghiệm định kỳ.
+                        </p>
+
+                        <p>
+                            Giải pháp tập trung vào việc tối ưu hóa băng thông
+                            truyền tải video và hệ thống lưu trữ tài liệu học
+                            tập. Ngoài ra, dự án còn tích hợp hệ thống báo cáo
+                            tiến độ học tập chi tiết cho cả giảng viên và học
+                            viên theo thời gian thực.
+                        </p>
+
+                        <p>
+                            <strong>Công nghệ:</strong>
+                            <code>Java</code>, <code>Spring Boot</code>,
+                            <code>PostgreSQL</code>, <code>AWS S3</code>,
+                            <code>HLS Streaming</code>
+                        </p>
+
+                        <p><strong>Tính năng chính:</strong></p>
+                        <ul class="project--feat">
+                            <li>
+                                Truyền tải video bằng
+                                <mark>giao thức HLS</mark> giúp tự động điều
+                                chỉnh chất lượng theo tốc độ mạng.
+                            </li>
+                            <li>
+                                Hệ thống <mark>phân quyền linh hoạt</mark> giữa
+                                Admin, Giảng viên và Học viên.
+                            </li>
+                            <li>
+                                Theo dõi <mark>tiến độ học tập</mark> và cấp
+                                chứng chỉ tự động sau khi hoàn thành khóa học.
+                            </li>
+                            <li>
+                                Tích hợp diễn đàn thảo luận dưới mỗi bài giảng
+                                để tăng tương tác.
+                            </li>
+                        </ul>
+
+                        <p><strong>Video Demo:</strong></p>
+                        <video
+                            controls
+                            poster="../videos/poster_prj1.png"
+                            preload="auto"
+                        >
+                            <source
+                                src="../videos/project_1.mp4"
+                                type="video/mp4"
+                            />
+                        </video>
+
+                        <p>
+                            <a
+                                href="https://demo-elearning.vn"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                >Xem Demo</a
+                            >
+                            |
+                            <a
+                                href="https://github.com/"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                >GitHub Source</a
+                            >
+                        </p>
+                    </article>
+
+                    <!-- project item 2 -->
+                    <article class="project--item">
+                        <strong class="project--title">
+                            TikTok Clone API</strong
+                        >
+
+                        <img
+                            class="thumbnail"
+                            src="../images/project2.jpg"
+                            alt="Mô phỏng giao diện TikTok"
+                        />
+
+                        <p>
+                            Dự án xây dựng hệ thống API cho mạng xã hội video
+                            ngắn, tập trung vào khả năng mở rộng và xử lý dữ
+                            liệu truyền thông lớn.
+                        </p>
+                        <p>
+                            Hệ thống hỗ trợ đầy đủ các tương tác mạng xã hội cơ
+                            bản và thuật toán gợi ý video đơn giản dựa trên hành
+                            vi người dùng.
+                        </p>
+
+                        <p>
+                            <strong>Công nghệ:</strong>
+                            <code>Node.js</code>, <code>Express</code>,
+                            <code>MongoDB</code>, <code>Docker</code>,
+                            <code>JWT</code>
+                        </p>
+
+                        <p><strong>Tính năng chính:</strong></p>
+                        <ul>
+                            <li>
+                                Cơ chế <mark>Stream video phân đoạn</mark> giảm
+                                độ trễ khi xem.
+                            </li>
+                            <li>
+                                Hệ thống <mark>phân quyền (RBAC)</mark> bảo mật
+                                thông tin người dùng.
+                            </li>
+                            <li>
+                                Tương tác Real-time (Tim, Bình luận) qua Socket.
+                            </li>
+                        </ul>
+
+                        <p><strong>Review trên YouTube:</strong></p>
+                        <iframe
+                            width="560"
+                            height="315"
+                            src="https://www.youtube.com/embed/Avcl80NJVM8?si=g8B6bwIwojSkbaFd"
+                            title="YouTube video player"
+                            frameborder="0"
+                            allow="
+                                accelerometer;
+                                autoplay;
+                                clipboard-write;
+                                encrypted-media;
+                                gyroscope;
+                                picture-in-picture;
+                                web-share;
+                            "
+                            referrerpolicy="strict-origin-when-cross-origin"
+                            allowfullscreen
+                        ></iframe>
+                    </article>
+                </section>
+
+                <!-- project item -category 2 -->
+                <section class="projects-section">
+                    <h2 class="project--category">Infrastructure & DevOps</h2>
+
+                    <!-- project item 3 -->
+                    <article class="project--item">
+                        <strong class="project--title"
+                            >DevOps Automation & Monitoring Kit</strong
+                        >
+                        <img
+                            class="thumbnail"
+                            src="../images/project3.jpg"
+                            alt="Hệ thống giám sát hạ tầng"
+                        />
+                        <p>
+                            Đây là bộ giải pháp tự động hóa quy trình triển khai
+                            (CI/CD) dành cho hệ thống Microservices. Dự án giúp
+                            rút ngắn thời gian đẩy code từ môi trường phát triển
+                            lên Production, đồng thời giảm thiểu sai sót do thao
+                            tác thủ công.
+                        </p>
+                        <p>
+                            Giải pháp tích hợp hệ thống giám sát và cảnh báo tự
+                            động khi tài nguyên hệ thống (CPU, RAM) vượt ngưỡng
+                            cho phép, giúp các kỹ sư xử lý sự cố kịp thời.
+                        </p>
+                        <p>
+                            <strong>Công nghệ:</strong>
+                            <code>Kubernetes</code>, <code>Docker</code>,
+                            <code>Helm</code>, <code>Prometheus</code>,
+                            <code>Grafana</code>
+                        </p>
+                        <p><strong>Tính năng chính:</strong></p>
+                        <ul class="project--feat">
+                            <li>
+                                Tự động <mark>Auto-scaling</mark> số lượng pod
+                                dựa trên lưu lượng truy cập thực tế.
+                            </li>
+                            <li>
+                                Thiết lập <mark>CI/CD Pipeline</mark> giúp kiểm
+                                thử và đóng gói ứng dụng tự động.
+                            </li>
+                            <li>
+                                Hệ thống <mark>Dashboard trực quan</mark> theo
+                                dõi tình trạng sức khỏe của server.
+                            </li>
+                            <li>
+                                Cấu hình bảo mật Secrets và ConfigMaps tập trung
+                                cho Cluster.
+                            </li>
+                        </ul>
+                        <p><strong>Video Demo:</strong></p>
+                        <iframe
+                            width="560"
+                            height="315"
+                            src="https://www.youtube.com/embed/ok-plXXHlWw?si=om0iYTMBRBwsSVtO"
+                            title="YouTube video player"
+                            frameborder="0"
+                            allow="
+                                accelerometer;
+                                autoplay;
+                                clipboard-write;
+                                encrypted-media;
+                                gyroscope;
+                                picture-in-picture;
+                                web-share;
+                            "
+                            referrerpolicy="strict-origin-when-cross-origin"
+                            allowfullscreen
+                        ></iframe>
+                        <p>
+                            <a
+                                href="https://github.com/"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                >GitHub Source</a
+                            >
+                        </p>
+                    </article>
+                    <!-- project item 4 -->
+                    <article class="project--item">
+                        <strong class="project--title"
+                            >Smart Finance Manager</strong
+                        >
+                        <img
+                            class="thumbnail"
+                            src="../images/project4.jpg"
+                            alt="Giao diện ứng dụng quản lý tài chính"
+                        />
+                        <p>
+                            Ứng dụng giúp cá nhân quản lý chi tiêu hàng ngày,
+                            lập kế hoạch tiết kiệm và theo dõi các khoản đầu tư
+                            một cách khoa học. Ứng dụng hỗ trợ đồng bộ dữ liệu
+                            đa nền tảng.
+                        </p>
+                        <p>
+                            Trọng tâm của dự án là việc xử lý dữ liệu offline và
+                            đồng bộ hóa thông minh khi có kết nối internet, đảm
+                            bảo trải nghiệm người dùng không bị gián đoạn.
+                        </p>
+                        <p>
+                            <strong>Công nghệ:</strong>
+                            <code>React Native</code>, <code>SQLite</code>,
+                            <code>Firebase</code>, <code>Node.js</code>
+                        </p>
+                        <p><strong>Tính năng chính:</strong></p>
+                        <ul class="project--feat">
+                            <li>
+                                Biểu đồ <mark>trực quan hóa chi tiêu</mark> giúp
+                                phân tích thói quen tài chính.
+                            </li>
+                            <li>
+                                Chế độ <mark>Offline First</mark> cho phép nhập
+                                liệu ngay cả khi không có mạng.
+                            </li>
+                            <li>
+                                Tự động <mark>quét hóa đơn</mark> nhận diện
+                                thông tin chi phí bằng OCR đơn giản.
+                            </li>
+                            <li>
+                                Bảo mật ứng dụng bằng
+                                <mark>Biometrics</mark> (Vân tay/FaceID).
+                            </li>
+                        </ul>
+                        <p><strong>Review trên YouTube:</strong></p>
+                        <iframe
+                            width="560"
+                            height="315"
+                            src="https://www.youtube.com/embed/CsCgX0Cm44g?si=H2oMOatjGEp1Uiyp"
+                            title="YouTube video player"
+                            frameborder="0"
+                            allow="
+                                accelerometer;
+                                autoplay;
+                                clipboard-write;
+                                encrypted-media;
+                                gyroscope;
+                                picture-in-picture;
+                                web-share;
+                            "
+                            referrerpolicy="strict-origin-when-cross-origin"
+                            allowfullscreen
+                        ></iframe>
+                    </article>
+                </section>
+            </div>
         </main>
         <!-- Footer -->
         <footer class="footer">

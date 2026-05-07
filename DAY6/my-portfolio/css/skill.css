@@ -1,0 +1,122 @@
+.skills-section {
+    margin-top: 135px;
+}
+.skill--list {
+    padding: 76px 120px;
+    width: 1170px;
+    height: 601px;
+    border-radius: 100.5px;
+    background-color: #e2eddf;
+    display: flex;
+    flex-wrap: wrap;
+}
+h3 {
+    margin-bottom: 8px;
+    margin-left: 12px;
+    margin-right: 24px;
+    font-size: 26px;
+}
+.skill-card {
+    width: 286px;
+    .skill-header {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        img {
+            margin-bottom: 18px;
+            width: 56px;
+            height: 56px;
+            object-fit: cover;
+            border-radius: 20px;
+        }
+
+        .skill-level {
+            margin-bottom: 12px;
+        }
+    }
+    .skill-desc {
+        text-align: center;
+        margin-top: 18px;
+        width: 80%;
+        margin: auto;
+    }
+}
+.advanced {
+    color: green;
+}
+.beginner {
+    color: rgb(176, 20, 98);
+}
+.Intermediate {
+    color: blue;
+}
+.tools-section {
+    margin-top: 70px;
+}
+.tool--list {
+    width: 1170px;
+    height: 201px;
+    border-radius: 100.5px;
+    background-color: #e2eddf;
+    display: flex;
+    padding: 60px;
+}
+.tool-group {
+    width: 370px;
+    text-align: center;
+    h3 {
+        margin-bottom: 24px;
+        font-family: Poppins;
+        font-size: 22px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 22px;
+    }
+}
+.certifications-section {
+    margin-top: 70px;
+}
+.cert-list {
+    width: 68%;
+    height: 201px;
+    border-radius: 100.5px;
+    background-color: #e2eddf;
+    display: flex;
+    justify-content: space-between;
+    padding: 60px;
+}
+.cert-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 18px;
+    .cert-issuer {
+        margin-top: 12px;
+    }
+}
+.cert-item a {
+    font-size: 1.8rem;
+    display: block;
+    text-decoration: underline;
+    color: #ff5d31;
+    font-weight: 400;
+    line-height: 12px;
+    text-align: center;
+}
+.learning-section {
+    margin-top: 70px;
+}
+
+/* learning section */
+.learning-card {
+    h3 {
+        margin-top: 24px;
+    }
+    p {
+        margin-top: 18px;
+        font-size: 1.6rem;
+        font-weight: 500;
+        line-height: 24px;
+    }
+}
