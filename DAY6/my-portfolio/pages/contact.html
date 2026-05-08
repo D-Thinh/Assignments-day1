@@ -66,7 +66,277 @@
             </div>
         </header>
 
-        <main class="main"></main>
+        <main class="main">
+            <div class="container">
+                <form action="#" method="POST">
+                    <label for="name">
+                        Họ tên:
+                        <input
+                            required
+                            id="name"
+                            name="fullName"
+                            type="text"
+                            placeholder="Nhập họ tên"
+                            required
+                        />
+                    </label>
+                    <label for="email">
+                        Email:
+                        <input
+                            required
+                            id="email"
+                            name="email"
+                            type="email"
+                            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                            placeholder="Địa chỉ email"
+                        />
+                    </label>
+                    <label for="phone">
+                        Số điện thoại:
+                        <input
+                            required
+                            id="phone"
+                            name="phone"
+                            type="tel"
+                            placeholder="Nhập 10 hoặc 11 chữ số"
+                            pattern="[0-9]{10,11}"
+                        />
+                    </label>
+                    <!-- Chủ đề -->
+                    <div class="form-group">
+                        <label for="subject">Chủ đề:</label>
+                        <select id="subject" name="subject" required>
+                            <option value="">-- Chọn chủ đề --</option>
+                            <option value="du-an">Hỏi về dự án</option>
+                            <option value="hop-tac">Hợp tác</option>
+                            <option value="tuyen-dung">Tuyển dụng</option>
+                            <option value="khac">Khác</option>
+                        </select>
+                    </div>
+                    <!-- Mức độ ưu tiên -->
+                    <div class="form-group">
+                        <p>Mức độ ưu tiên:</p>
+
+                        <label for="low">
+                            <input
+                                type="radio"
+                                id="low"
+                                name="priority"
+                                value="low"
+                                checked
+                                required
+                            />Thấp</label
+                        >
+
+                        <label for="medium"
+                            ><input
+                                type="radio"
+                                id="medium"
+                                name="priority"
+                                value="medium"
+                                required
+                            />Trung bình</label
+                        >
+
+                        <label for="high"
+                            ><input
+                                type="radio"
+                                id="high"
+                                name="priority"
+                                value="high"
+                                required
+                            />Cao</label
+                        >
+                    </div>
+                    <!-- Dịch vụ quan tâm: -->
+                    <div class="form-group">
+                        <p>Dịch vụ quan tâm:</p>
+
+                        <label for="web">
+                            <input
+                                name="service"
+                                id="web"
+                                type="checkbox"
+                                value="web"
+                            />Web Development
+                        </label>
+                        <label for="mobile">
+                            <input
+                                name="service"
+                                id="mobile"
+                                type="checkbox"
+                                value="mobile"
+                            />Mobile App
+                        </label>
+                        <label for="uiux">
+                            <input
+                                name="service"
+                                id="uiux"
+                                type="checkbox"
+                                value="uiux"
+                            />UI/UX Design
+                        </label>
+                        <label for="consulting">
+                            <input
+                                name="service"
+                                id="consulting"
+                                type="checkbox"
+                                value="consulting"
+                            />Consulting
+                        </label>
+                    </div>
+                    <!-- Tin nhắn -->
+                    <div class="form-group">
+                        <label for="message">
+                            Tin nhắn:
+                            <textarea
+                                id="message"
+                                name="message"
+                                rows="6"
+                                minlength="10"
+                                required
+                                placeholder="Nhập tin nhắn của bạn..."
+                            ></textarea>
+                        </label>
+                        <small>Tối thiểu 10 ký tự.</small>
+                    </div>
+                    <!-- Rate -->
+                    <div class="form-group">
+                        <label for="rating"
+                            >Đánh giá website này: 1-5 sao</label
+                        >
+                        <div class="range-container">
+                            <input
+                                type="range"
+                                id="rating"
+                                name="rating"
+                                min="1"
+                                max="5"
+                                step="1"
+                                value="5"
+                                oninput="
+                                    this.nextElementSibling.value = this.value
+                                "
+                            />
+                            <output>5</output> <span>sao</span>
+                        </div>
+                    </div>
+                    <!-- File -->
+                    <div class="form-group">
+                        <label for="document">
+                            Đính kèm CV hoặc tài liệu (nếu có)
+                            <input id="document" type="file" />
+                        </label>
+                    </div>
+
+                    <!-- Điều khoản -->
+                    <div class="form-group">
+                        <label for="clause">
+                            <input
+                                id="clause"
+                                type="checkbox"
+                                value="isClause"
+                                required
+                            />
+                            Tôi đồng ý với
+                            <a
+                                target="_blank"
+                                href="https://f8.edu.vn/assignment-classes/112"
+                                >Chính sách bảo mật</a
+                            >
+                        </label>
+                    </div>
+                    <button>Xong</button>
+                </form>
+                <section class="contact--info">
+                    <h2>Phần Thông tin liên hệ:</h2>
+                    <address class="author-contact">
+                        Bạn có thể liên hệ với mình qua: <br />
+                        Email:
+                        <a href="mailto:thinhquach@example.com">
+                            thinhquach@example.com
+                        </a>
+                        <br />
+                        STD: <a href="tel:+84123456789">+84 123 456 789</a>
+                        <br />
+                        Địa chỉ: Quận 1, TP. Hồ Chí Minh
+                    </address>
+                    <!-- Mạng xã hội -->
+                    <div class="social-contact">
+                        <p>Theo dõi mình tại:</p>
+                        <a
+                            href="https://facebook.com"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            title="Facebook"
+                        >
+                            <i class="mdi mdi-facebook"></i>
+                        </a>
+                        <a
+                            href="https://github.com"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            title="Github"
+                        >
+                            <i class="mdi mdi-github"></i>
+                        </a>
+                        <a
+                            href="https://linkedin.com"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            title="LinkedIn"
+                        >
+                            <i class="mdi mdi-linkedin"></i>
+                        </a>
+                    </div>
+                </section>
+                <section class="contact--location">
+                    <h2>!Location</h2>
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15677.189568574098!2d106.70750709451964!3d10.788519497196457!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752f385570472f%3A0x1787491df0ed8d6a!2sIndependence%20Palace!5e0!3m2!1sen!2s!4v1778221787889!5m2!1sen!2s"
+                        width="600"
+                        height="450"
+                        style="border: 0"
+                        allowfullscreen=""
+                        loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"
+                    ></iframe>
+                </section>
+                <section class="working-hours">
+                    <h3>Giờ làm việc & Tư vấn</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Thứ</th>
+                                <th>Giờ làm việc</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Thứ 2 - Thứ 6</td>
+                                <td>
+                                    <time datetime="08:00">08:00 AM</time> -
+                                    <time datetime="18:00">06:00 PM</time>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Thứ 7</td>
+                                <td>
+                                    <time datetime="08:00">08:00 AM</time> -
+                                    <time datetime="12:00">12:00 PM</time>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Chủ nhật</td>
+                                <td>
+                                    <em>Nghỉ (Chỉ hỗ trợ dự án khẩn cấp)</em>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+            </div>
+        </main>
         <!-- Footer -->
         <footer class="footer">
             <div class="list--media">
