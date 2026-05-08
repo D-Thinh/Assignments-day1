@@ -65,46 +65,53 @@
                 </nav>
             </div>
         </header>
-
+        <!-- Main -->
         <main class="main">
             <div class="container">
                 <form action="#" method="POST">
-                    <label for="name">
-                        Họ tên:
-                        <input
-                            required
-                            id="name"
-                            name="fullName"
-                            type="text"
-                            placeholder="Nhập họ tên"
-                            required
-                        />
-                    </label>
-                    <label for="email">
-                        Email:
-                        <input
-                            required
-                            id="email"
-                            name="email"
-                            type="email"
-                            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
-                            placeholder="Địa chỉ email"
-                        />
-                    </label>
-                    <label for="phone">
-                        Số điện thoại:
-                        <input
-                            required
-                            id="phone"
-                            name="phone"
-                            type="tel"
-                            placeholder="Nhập 10 hoặc 11 chữ số"
-                            pattern="[0-9]{10,11}"
-                        />
-                    </label>
+                    <!-- About info -->
+                    <div class="form-group about--basic">
+                        <label for="name">
+                            Họ tên:
+                            <input
+                                required
+                                id="name"
+                                name="fullName"
+                                type="text"
+                                placeholder="Nhập họ tên"
+                                required
+                            />
+                        </label>
+
+                        <label for="email">
+                            Email:
+                            <input
+                                required
+                                id="email"
+                                name="email"
+                                type="email"
+                                pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                                placeholder="Địa chỉ email"
+                            />
+                        </label>
+
+                        <label for="phone">
+                            Số điện thoại:
+                            <input
+                                required
+                                id="phone"
+                                name="phone"
+                                type="tel"
+                                placeholder="Nhập 10 hoặc 11 chữ số"
+                                pattern="[0-9]{10,11}"
+                            />
+                        </label>
+                    </div>
                     <!-- Chủ đề -->
                     <div class="form-group">
-                        <label for="subject">Chủ đề:</label>
+                        <label class="form-group__title" for="subject"
+                            >Chủ đề:</label
+                        >
                         <select id="subject" name="subject" required>
                             <option value="">-- Chọn chủ đề --</option>
                             <option value="du-an">Hỏi về dự án</option>
@@ -115,7 +122,7 @@
                     </div>
                     <!-- Mức độ ưu tiên -->
                     <div class="form-group">
-                        <p>Mức độ ưu tiên:</p>
+                        <p class="form-group__title">Mức độ ưu tiên:</p>
 
                         <label for="low">
                             <input
@@ -149,8 +156,8 @@
                         >
                     </div>
                     <!-- Dịch vụ quan tâm: -->
-                    <div class="form-group">
-                        <p>Dịch vụ quan tâm:</p>
+                    <div class="form-group focus">
+                        <p class="form-group__title">Dịch vụ quan tâm:</p>
 
                         <label for="web">
                             <input
@@ -187,7 +194,7 @@
                     </div>
                     <!-- Tin nhắn -->
                     <div class="form-group">
-                        <label for="message">
+                        <label class="message--form" for="message">
                             Tin nhắn:
                             <textarea
                                 id="message"
@@ -201,8 +208,13 @@
                         <small>Tối thiểu 10 ký tự.</small>
                     </div>
                     <!-- Rate -->
+                    <!-- 
+                        oninput: kích hoạt realtime khi kéo (khác onchange chỉ kích hoạt khi blur)
+                        this.nextElementSibling -> trỏ đến <output> ngay sau, đồng bộ giá trị hiển thị
+                        Lưu ý: value="5" ở input và >5< ở <output> phải khớp nhau, đổi 1 bên nhớ đổi cả 2
+                    -->
                     <div class="form-group">
-                        <label for="rating"
+                        <label class="form-group__title" for="rating"
                             >Đánh giá website này: 1-5 sao</label
                         >
                         <div class="range-container">
@@ -225,7 +237,11 @@
                     <div class="form-group">
                         <label for="document">
                             Đính kèm CV hoặc tài liệu (nếu có)
-                            <input id="document" type="file" />
+                            <input
+                                id="document"
+                                type="file"
+                                accept=".pdf,.doc,.docx"
+                            />
                         </label>
                     </div>
 
@@ -246,7 +262,8 @@
                             >
                         </label>
                     </div>
-                    <button>Xong</button>
+                    <button>Gửi tin nhắn</button>
+                    <button type="reset">Xóa form</button>
                 </form>
                 <section class="contact--info">
                     <h2>Phần Thông tin liên hệ:</h2>
@@ -291,7 +308,7 @@
                     </div>
                 </section>
                 <section class="contact--location">
-                    <h2>!Location</h2>
+                    <h2>Location</h2>
                     <iframe
                         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15677.189568574098!2d106.70750709451964!3d10.788519497196457!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752f385570472f%3A0x1787491df0ed8d6a!2sIndependence%20Palace!5e0!3m2!1sen!2s!4v1778221787889!5m2!1sen!2s"
                         width="600"
