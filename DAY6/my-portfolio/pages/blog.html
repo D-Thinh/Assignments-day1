@@ -66,7 +66,334 @@
             </div>
         </header>
 
-        <main class="main"></main>
+        <main class="main">
+            <div class="container">
+                <h1 class="header">
+                    JavaScript Vẫn Số 1 Lập Trình Web 2026: Hệ Sinh Thái Đồ Sộ
+                    Cho Full-Stack Dev Việt
+                </h1>
+                <p class="header--date">
+                    Đăng ngày<time datetime="2026-05-01">10 ngày trước</time>.
+                </p>
+                <div class="account--post">
+                    <img class="img-avt" src="../images/avatar-1.png" alt="" />
+                    <p class="username">Ếch Trendy</p>
+                </div>
+
+                <nav class="toc">
+                    <h3>Mục lục nội dung</h3>
+                    <ul>
+                        <li><a href="#ly-do-js-thong-tri">Tại sao JavaScript vẫn thống trị?</a></li>
+                        <li><a href="#he-sinh-thai-2026">Hệ sinh thái JS 2026</a></li>
+                        <li><a href="#workflow-beginner">Workflow cho beginner Việt</a></li>
+                        <li><a href="#lo-trinh-tiep-theo">Lộ trình lên full-stack</a></li>
+                        <li><a href="#tltk">Tài liệu tham khảo</a></li>
+                    </ul>
+                </nav>
+                <h2 id="ly-do-js-thong-tri" class="category">
+                    Tại sao JavaScript vẫn thống trị web dev năm 2026?
+                </h2>
+                <p>
+                    Mình nhớ hồi 2020 còn nghe mấy anh senior nói "JavaScript
+                    sắp bị thay thế rồi". Năm 2026, ngôn ngữ đó vẫn đứng số 1.
+                    Không phải vì thiếu đối thủ - mà vì nó giải quyết được vấn
+                    đề mà không ngôn ngữ nào làm tốt hơn:
+                    <strong>chạy ở mọi nơi với một codebase duy nhất.</strong>
+                </p>
+                <p>
+                    <em>heo khảo sát Stack Overflow 2025</em>, JavaScript chiếm
+                    66% (<a
+                        target="_blank"
+                        href="https://enstacked.com/stack-overflow-developer-survey-insights/"
+                        >Stack Overflow Developer Survey 2025</a
+                    >) trong số các ngôn ngữ được dùng nhiều nhất toàn cầu. Con
+                    số này đã duy trì vị trí top từ hơn 10 năm liên tiếp.
+                </p>
+                <figure>
+                    <img src="../images/blog1.png" alt="JavaScript " />
+                    <figcaption>
+                        Một ngôn ngữ, chạy khắp nơi - <kbd>browser</kbd>, server, <kbd>edge</kbd>,
+                        mobile
+                    </figcaption>
+                </figure>
+                <p>
+                    Lý do cốt lõi? <strong>Full-stack unity</strong>. Bạn học JS
+                    một lần, dùng được cho:
+                </p>
+                <ul>
+                    <li>
+                        Frontend: <code>React</code>, <code>Vue</code>,
+                        <code>Svelte</code> để build UI
+                    </li>
+                    <li>
+                        Backend: <code>Node.js</code>, <code>Express</code> để
+                        làm API
+                    </li>
+                    <li>Mobile: <code>React Native</code> cho iOS/Android</li>
+                    <li>
+                        Edge/Serverless: <code>Vercel</code>,
+                        <code>Netlify</code> functions
+                    </li>
+                </ul>
+                <p>
+                    Với developer Việt mới vào nghề, điều này cực kỳ quan trọng.
+                    Thay vì học Python cho backend rồi JavaScript cho frontend -
+                    hai hệ sinh thái, hai tư duy hoàn toàn khác - bạn chỉ cần
+                    làm chủ một ngôn ngữ. Tiết kiệm thời gian, tăng tốc độ kiếm
+                    việc.
+                </p>
+                <p>
+                    Thị trường lao động xác nhận điều này. Hiện tại có khoảng
+                    500-800 tin tuyển dụng JavaScript mỗi tháng tại Việt Nam,
+                    mức lương junior dao động 15-22 triệu VND. Không phải ngẫu
+                    nhiên.
+                </p>
+                <h2  id="he-sinh-thai-2026" class="category">
+                    Hệ sinh thái JS 2026: Chọn gì trong ma trận thư viện?
+                </h2>
+                <p>
+                    Npm hiện có hàng triệu package. Đây vừa là sức mạnh, vừa là
+                    cơn ác mộng với người mới. Mình sẽ giúp bạn thoát khỏi
+                    "analysis paralysis" bằng cách nhìn thẳng vào thực tế.
+                </p>
+                <strong>Frontend - 3 lựa chọn thực tế:</strong>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Framework</th>
+                            <th>Điểm mạnh</th>
+                            <th>Phù hợp khi nào</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>React + Next.js</td>
+                            <td>Ecosystem khổng lồ, RSC, SEO</td>
+                            <td>Job market VN, mọi loại dự án</td>
+                        </tr>
+                        <tr>
+                            <td>Vue + Nuxt</td>
+                            <td>Học nhanh, cú pháp rõ ràng</td>
+                            <td>Beginner, startup nhỏ</td>
+                        </tr>
+                        <tr>
+                            <td>Svelte/SolidJS</td>
+                            <td>Hiệu năng cực cao, bundle nhỏ</td>
+                            <td>Performance-critical app</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p>
+                    React vẫn là lựa chọn số 1 cho thị trường việc làm Việt Nam.
+                    <strong>React Server Components (RSC)</strong> - tính năng
+                    định hình 2025-2026 - cho phép component render trực tiếp
+                    trên server, giảm bundle size gửi về client, tăng tốc
+                    initial load đáng kể. Nếu bạn đang học React, RSC là thứ bắt
+                    buộc phải hiểu.
+                </p>
+                <figure>
+                    <img src="../images/blog2.png" alt="JavaScript " />
+                    <figcaption>
+                        Một ngôn ngữ, chạy khắp nơi - browser, server, edge,
+                        mobile
+                    </figcaption>
+                </figure>
+                <strong>Backend - Đừng overthink:</strong>
+                <p>
+                    Node.js + Express vẫn là combo cơ bản nhất. Nhưng 2026 có
+                    thêm:
+                </p>
+                <ul>
+                    <li>
+                        Bun: Runtime mới, nhanh hơn Node.js đáng kể trong
+                        benchmark, có built-in test runner và bundler
+                    </li>
+                    <li>
+                        Deno: Security-first, TypeScript native, nhưng ecosystem
+                        nhỏ hơn
+                    </li>
+                </ul>
+                <p>
+                    Bắt đầu với Node.js. Khi nào cần tốc độ, thử <kbd>Bun</kbd>. Chưa cần
+                    lo về Deno.
+                </p>
+                <strong>TypeScript - Không còn optional nữa:</strong>
+                <p>
+                    TypeScript tăng trưởng ổn định mỗi năm và giờ là chuẩn trong
+                    hầu hết React/Next.js project. Mình khuyên: học JS thuần
+                    vững trước, rồi chuyển sang TS sau 2-3 tháng. Đừng học cả
+                    hai cùng lúc khi mới bắt đầu.
+                </p>
+                <h2 id="workflow-beginner" class="category">
+                    ES2025 patterns thực tế: Cái gì thật sự hữu ích?
+                </h2>
+                <p>
+                    Mỗi năm TC39 ship thêm features mới vào ECMAScript. Không
+                    phải cái nào cũng đáng học ngay. Mình lọc ra 3 thứ thật sự
+                    ảnh hưởng đến cách bạn viết code hàng ngày.
+                </p>
+                <ol>
+                    <li>
+                        Iterator helpers - Xử lý data gọn hơn
+                        <!-- JavaScript  code -->
+                        <pre><code>// Trước ES2025: phải convert sang array rồi mới dùng được
+const result = [...someIterable].filter(x => x > 0).map(x => x * 2);
+
+// ES2025: Iterator helpers, xử lý lazy, tiết kiệm memory
+const result = someIterable
+  .filter(x => x > 0) // không tạo array trung gian
+  .map(x => x * 2)
+  .take(10); // chỉ lấy 10 phần tử đầu</code></pre>
+                        <p>
+                            Khi làm việc với dataset lớn (ví dụ: danh sách sản
+                            phẩm từ API), lazy evaluation giúp app không bị tốn
+                            memory không cần thiết.
+                        </p>
+                    </li>
+                    <li>
+                        Promise.try() - Wrapper gọn cho sync/async mixed code
+                        <p>
+  Khi chạy lệnh <code>console.log(nextWeek.toString())</code>, 
+  máy tính sẽ trả về giá trị: <samp>"2026-02-14T10:30:00"</samp>.
+</p>
+                        <!-- JS code -->
+                        <pre><code>// Trước: phải wrap bằng try-catch lồng nhau, ugly
+function riskySync() { throw new Error('Lỗi đồng bộ'); }
+
+// ES2025: Promise.try tự handle cả sync error và async rejection
+Promise.try(() => riskySync())
+  .then(result => console.log(result))
+  .catch(err => console.error('Bắt được:', err.message));</code></pre>
+                        <figure>
+                            <img src="../images/blog3.png" alt="JavaScript " />
+                            <figcaption>
+                                Async/await gọn hơn, ít boilerplate hơn - xu
+                                hướng ES2025
+                            </figcaption>
+                        </figure>
+                    </li>
+                    <li>
+                        <mark>Temporal</mark> API - Tạm biệt Date() hell
+                        <p>
+                            <mark>Date</mark> object của JS nổi tiếng là... rắc rối. Temporal
+                            API (đang được rollout trong các runtime 2026) fix
+                            gần như mọi thứ:
+                            <pre><code>// Temporal: immutable, timezone-aware, rõ ràng
+const now = Temporal.Now.plainDateTimeISO();
+const nextWeek = now.add({ days: 7 });
+console.log(nextWeek.toString()); // '2026-02-14T10:30:00'
+// Không còn getMonth() trả về 0-indexed gây bug nữa</code></pre>
+<p>
+  Nếu hàm thất bại, màn hình console sẽ hiển thị: 
+  <samp>Uncaught Error: Lỗi đồng bộ</samp>.
+</p>
+<p>Ba tính năng này không phải học thuộc lòng ngay. Nhưng biết chúng tồn tại và khi nào dùng - đó là dấu hiệu của developer hiểu JS ở level sâu hơn.</p>
+                        </p>
+                    </li>
+                </ol>
+                <h2 id="lo-trinh-tiep-theo" class="category">
+                    Build app web từ zero: Workflow 4 tuần cho beginner Việt
+                </h2>
+                <p>Bắt đầu từ framework ngay là sai lầm phổ biến nhất. Mình thấy nhiều bạn mới học React chưa được 2 tuần mà chưa hiểu DOM là gì. Kết quả? Copy-paste code mà không biết tại sao nó chạy.</p>
+                <strong>Tuần 1-2: Setup + Todo App cơ bản</strong>
+                <p>Cài <kbd>VS Code</kbd> + <kbd>extension Live Server</kbd>. Tạo 3 file:<mark> index.html, style.css, app.js.</mark> Build todo app đơn giản - không cần fancy, cần hiểu DOM manipulation.</p>
+                <pre><code>// Temporal: immutable, timezone-aware, rõ ràng
+const now = Temporal.Now.plainDateTimeISO();
+const nextWeek = now.add({ days: 7 });
+console.log(nextWeek.toString()); // '2026-02-14T10:30:00'
+// Không còn getMonth() trả về 0-indexed gây bug nữa</code></pre>
+<p>
+  Sau khi fetch thành công, biến <code>data</code> sẽ chứa:
+  <samp>{ "id": 1, "title": "Học JavaScript tại F8" }</samp>
+</p>
+                <p>File demo đầy đủ có style và interactive:<blockquote cite="https://fullstack.edu.vn">
+    "Việc tự tay xây dựng một ứng dụng Todo đơn giản bằng JavaScript thuần là bước đệm quan trọng nhất để hiểu về DOM và luồng dữ liệu trước khi chạm tay vào các Framework hiện đại."
+</blockquote>
+<p>
+    — Tham khảo thực hành: 
+    <cite>
+        <a 
+            href="https://files.f8.edu.vn/f8-prod/blog_posts/13679/todo-app-demo.html" 
+            target="_blank" 
+            rel="noopener noreferrer"
+        >
+            Tải demo Todo App (HTML)
+        </a>
+    </cite>
+</p></p>
+                <strong>Tuần 3: Fetch API + xử lý async</strong>
+                <p>Gọi API thật từ JSONPlaceholder hoặc một public API bất kỳ. Học <mark>fetch(), async/await</mark>, xử lý loading state và error. Đây là skill dùng mọi ngày dù bạn dùng framework nào.</p>
+                <strong>Tuần 4: Deploy + bước tiếp</strong>
+                <p>Deploy lên Netlify miễn phí (kéo thả folder là xong). Sau đó bắt đầu học React. Lúc này bạn đã hiểu tại sao React giải quyết được vấn đề gì - không còn học mù nữa.</p>
+               <section class="quote-section">
+    <blockquote cite="https://enstacked.com/stack-overflow-developer-survey-insights/">
+        "JavaScript tiếp tục giữ vững vị trí là ngôn ngữ lập trình phổ biến nhất thế giới trong năm thứ 13 liên tiếp, với hơn 66% phản hồi từ các lập trình viên chuyên nghiệp trên toàn cầu."
+    </blockquote>
+    <p>— Nguồn: <cite><a href="https://enstacked.com/stack-overflow-developer-survey-insights/" target="_blank" rel="noopener noreferrer">Stack Overflow Developer Survey 2025</a></cite></p>
+    </section>
+                <h2 id="lo-trinh-tiep-theo" class="category">
+                        Lộ trình tiếp theo: Từ JS thuần lên full-stack
+                    </h2>
+                <p>Bạn đã build được<samp> app với JS</samp> thuần. Bước tiếp theo không phải học thêm thư viện ngẫu nhiên - mà là đi theo một hướng rõ ràng.</p>
+                <strong>Con đường được recommend nhất ở Việt Nam 2026:</strong>
+                <code><mark>JS thuần → TypeScript cơ bản → React + Next.js → Node.js/Express → Deploy</mark></code>
+                <p>Tại sao thứ tự này? TypeScript sau JS thuần vì bạn cần hiểu JS hoạt động thế nào trước khi thêm type system vào. React sau TypeScript vì Next.js 14+ đã dùng TS làm default. Node.js sau React vì khi đó bạn đã quen tư duy async, event-driven - backend JS không còn xa lạ.</p>
+                <figure>
+                    <img src="../images/blog5.png" alt="JavaScript " />
+                    <figcaption>
+                        Đi đúng thứ tự, không nhảy cóc - tiết kiệm 3-6 tháng backtrack
+                    </figcaption>
+                </figure>
+                <strong>Thực tế thị trường Việt Nam:</strong>
+                <p>Phần lớn doanh nghiệp tech Việt dùng JavaScript full-stack cho các dự án SaaS và e-commerce. Điều này có nghĩa là CV của bạn cần thể hiện được ít nhất: React cho frontend, Node.js/Express cho một REST API cơ bản, và đã deploy project thật lên production.</p>
+                <p>Không cần biết hết. Cần biết đủ để làm việc và học thêm trong quá trình làm.</p>
+                <p>Nếu muốn đi sâu hơn vào phần React, khóa <a target="_blank" href="https://files.f8.edu.vn/f8-prod/blog_posts/13679/todo-app-demo.html">Xây Dựng Website với ReactJS</a> trên F8 cover từ cơ bản đến nâng cao và miễn phí. Sau đó khóa Node & ExpressJS để hoàn thiện phần backend.</p>
+                <h2 id="tltk">Tài liệu tham khảo</h2>
+                <ul>
+                    <li>
+                        <cite>Báo cáo xu hướng công nghệ 2025:</cite> 
+                        <a href="https://enstacked.com/stack-overflow-developer-survey-insights/" target="_blank" rel="noopener noreferrer">
+                            Stack Overflow Developer Survey Insights
+                        </a>
+                    </li>
+                    <li>
+                        <cite>Tài liệu kỹ thuật ECMAScript:</cite> 
+                        <a href="https://tc39.es/" target="_blank" rel="noopener noreferrer">
+                            TC39 Proposals & ES2025 Updates
+                        </a>
+                    </li>
+                    <li>
+                        <cite>Khóa học nền tảng cho Full-stack:</cite> 
+                        <a href="https://fullstack.edu.vn/courses/javascript-co-ban" target="_blank" rel="noopener noreferrer">
+                            Lập Trình JavaScript Cơ Bản - F8
+                        </a>
+                    </li>
+                </ul>
+                <div class="author-card">
+
+            <div class="author-detail">
+                <!-- Tên tác giả -->
+                 <div class="account--post">
+                    <img class="img-avt" src="../images/avatar-1.png" alt="" />
+                    <p class="username">Thinh Quach</p>
+                </div>
+                
+                <!-- Mô tả ngắn -->
+                <p class="author-bio">
+                    Project Manager & Software Engineer đam mê chinh phục hệ sinh thái JavaScript. 
+                    Hiện đang chia sẻ hành trình học Full-stack và lộ trình nghề nghiệp cho cộng đồng Dev Việt.
+                </p>
+
+                <!-- Thông tin liên hệ dùng thẻ address -->
+                <address class="author-contact">
+                    Bạn có thể liên hệ với mình qua: <br />
+                    Email: <a href="mailto:thinhquach@example.com">thinhquach@example.com</a> <br />
+                    Địa chỉ: Quận 1, TP. Hồ Chí Minh
+                </address>
+        </div>
+    </div>
+            </div>
+        </main>
         <!-- Footer -->
         <footer class="footer">
             <div class="list--media">
