@@ -2,7 +2,7 @@ main a {
     color: blue;
     text-decoration: underline;
 }
-main .container {
+.container {
     margin-top: 70px;
 }
 .about--basic {
