@@ -1,0 +1,82 @@
+@import "material-icons/iconfont/material-icons.css";
+* {
+    box-sizing: border-box;
+}
+html {
+    font-size: 62.5%;
+}
+body {
+    font-size: 1.6rem;
+    font-family: "Roboto", sans-serif;
+}
+.container {
+    padding: 20px;
+    margin: auto;
+    width: 1440px;
+    height: 1039px;
+    max-width: calc(100% - 48px);
+}
+/* css layout */
+.list--card {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    .card--item {
+        padding: 30px;
+        flex: 0 0 calc((100% - 40px) / 3);
+        border-radius: 8px;
+        border: 3px solid #e0e0e0;
+        .card--row {
+            display: flex;
+        }
+    }
+}
+.card--item:hover {
+    border: 3px solid var(--border_color, #ff6b6b);
+}
+.card--row {
+    .mdi {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        font-size: 32px;
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-image: linear-gradient(
+            to right,
+            var(--border_color, #ff6b6b),
+            var(--to_color, #f59e9e)
+        );
+        /* box-shadow: #ff6b6b88 0px 30px 90px; */
+        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    }
+    .card-title {
+        font-size: 20px;
+        font-weight: 600;
+        color: #333333;
+        line-height: 1.3;
+        /* margin-top: 20px; */
+        margin-bottom: 15px;
+        margin-left: 10px;
+    }
+}
+.card--desc {
+    font-size: 15px;
+    font-weight: 400;
+    color: #666666;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    margin-top: 10px;
+}
+.card--more {
+    font-size: 15px;
+    font-weight: 500;
+    color: #2196f3;
+    text-decoration: none;
+
+    &:hover {
+        text-decoration: underline;
+    }
+}
