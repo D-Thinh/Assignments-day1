@@ -8,6 +8,7 @@ html {
 body {
     font-size: 1.6rem;
     font-family: "Roboto", sans-serif;
+    background-color: #ebf5fe;
 }
 .container {
     padding: 20px;
@@ -26,12 +27,14 @@ body {
         flex: 0 0 calc((100% - 40px) / 3);
         border-radius: 8px;
         border: 3px solid #e0e0e0;
+        background-color: #fff;
         .card--row {
             display: flex;
         }
     }
 }
 .card--item:hover {
+    transition: border-color 0.5s;
     border: 3px solid var(--border_color, #ff6b6b);
 }
 .card--row {
@@ -49,7 +52,6 @@ body {
             var(--border_color, #ff6b6b),
             var(--to_color, #f59e9e)
         );
-        /* box-shadow: #ff6b6b88 0px 30px 90px; */
         box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
     }
     .card-title {
@@ -57,7 +59,6 @@ body {
         font-weight: 600;
         color: #333333;
         line-height: 1.3;
-        /* margin-top: 20px; */
         margin-bottom: 15px;
         margin-left: 10px;
     }
@@ -73,9 +74,8 @@ body {
 .card--more {
     font-size: 15px;
     font-weight: 500;
-    color: #2196f3;
+    color: #2196f3 !important;
     text-decoration: none;
-
     &:hover {
         text-decoration: underline;
     }
