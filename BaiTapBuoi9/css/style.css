@@ -79,4 +79,52 @@ body {
     &:hover {
         text-decoration: underline;
     }
+    margin-left: 50%;
+    margin-top: 50%;
+    transform: translate(-50% -50%);
+}
+
+.input-container {
+    margin-left: 100px;
+    margin-top: 16px;
+    position: relative;
+    display: inline-block;
+    .animation-input {
+        width: 80px;
+        padding: 10px 15px;
+        font-size: 1rem;
+        border-radius: 12px;
+        outline: none;
+        border: 1px solid #000;
+        background: transparent;
+        transition: width 1s;
+        position: relative;
+        &:focus {
+            width: 150px;
+        }
+    }
+    &::before {
+        content: "Enter...";
+        position: absolute;
+
+        left: 14px;
+        transform: translateY(12px);
+        visibility: hidden;
+        font-size: 1rem;
+        z-index: 1;
+        transition: transform 0.5s;
+    }
+    &:focus-within::before {
+        transform: translateY(-3px);
+        font-size: 0.8rem;
+        background-color: #fff;
+        visibility: inherit;
+        color: #000;
+    }
+}
+.animation-input:focus {
+    width: 150px;
+}
+.animation-input:focus::placeholder {
+    color: transparent;
 }
