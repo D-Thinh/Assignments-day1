@@ -1,0 +1,19 @@
+@import "material-icons/iconfont/material-icons.css";
+* {
+    box-sizing: border-box;
+}
+html {
+    font-size: 62.5%;
+}
+body {
+    font-size: 1.6rem;
+    font-family: "Roboto", sans-serif;
+}
+.container {
+    padding: 20px;
+    padding-top: 75px;
+    margin: auto;
+    width: 1440px;
+    height: 1039px;
+    max-width: calc(100% - 48px);
+}
