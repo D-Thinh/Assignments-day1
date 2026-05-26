@@ -3,7 +3,149 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Document</title>
+        <title>Day 11</title>
+        <!-- reset css -->
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/reseter.css/1.1.0/reseter.min.css"
+        />
+        <!-- css -->
+        <link rel="stylesheet" href="./css/style.css" />
+        <!-- responsive -->
+        <link rel="stylesheet" href="./css/responsive.css" />
+        <!-- Icon -->
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/@mdi/font@7.4.47/css/materialdesignicons.min.css"
+        />
     </head>
-    <body></body>
+    <body>
+        <!-- Header -->
+
+        <header id="header">
+            <div class="header">
+                <strong class="header__logo">My Website</strong>
+                <div class="header__nav">
+                    <input
+                        type="checkbox"
+                        name=""
+                        id="menu-toggle"
+                        style="display: none"
+                    />
+                    <!-- hamburger icon -->
+                    <div class="header__hamburger">
+                        <label for="menu-toggle">
+                            <i class="mdi mdi-menu"> </i>
+                        </label>
+                    </div>
+
+                    <label
+                        for="menu-toggle"
+                        class="nav__close-btn"
+                        style="color: #fff"
+                    >
+                        <i class="mdi mdi-close"></i>
+                    </label>
+
+                    <ul class="nav__menu">
+                        <li class="nav__link">
+                            <a href="#">Link 1</a>
+                        </li>
+                        <li class="nav__link">
+                            <a href="#">Link 2 </a>
+                        </li>
+                        <li class="nav__link">
+                            <a href="#">Link 3</a>
+                        </li>
+                    </ul>
+                    <!--  overlay  -->
+                    <label for="menu-toggle" class="overlay"></label>
+                </div>
+            </div>
+        </header>
+
+        <nav class="nav__sidebar">
+            <label for="menu-toggle" class="nav__close-btn">
+                <i class="mdi mdi-close"></i>
+            </label>
+            <ul>
+                <li class="nav__link"><a href="#">Link 1</a></li>
+                <li class="nav__link"><a href="#">Link 2</a></li>
+                <li class="nav__link"><a href="#">Link 3</a></li>
+            </ul>
+        </nav>
+
+        <main id="main">
+            <div class="container">
+                <div class="container__content">
+                    <h1 class="container__heading">This is the main heading</h1>
+                    <p class="container__paragraph">
+                        Veggies es bonus vobis, proinde vos postulo essum magis
+                        kohlrabi welsh onion daikon amaranth tatsoi tomatillo
+                        melon azuki bean garlic.
+                    </p>
+                    <p class="container__paragraph">
+                        Gumbo beet greens corn soko endive gumbo gourd. Parsley
+                        shallot courgette tatsoi pea sprouts fava bean collard
+                        greens dandelion okra wakame tomato. Dandelion cucumber
+                        earthnut pea peanut soko zucchini.
+                    </p>
+                    <div class="cards">
+                        <!-- card 1 -->
+                        <div class="card__item">
+                            <div class="card__header">Card One</div>
+                            <div class="card__body">
+                                Turnip greens yarrow ricebean rutabaga chard
+                                cauliflower sea lettuce kohlrabi amaranth water
+                                spinach avocado.
+                            </div>
+                        </div>
+                        <!-- card 2 -->
+                        <div class="card__item">
+                            <div class="card__header">Card Two</div>
+                            <div class="card__body">
+                                Daikon napa cabbage asparagus winter purslane
+                                kale. Celery potato scallion desert raisin
+                                horseradish spinach carrot soko.
+                            </div>
+                        </div>
+                        <!-- card 3 -->
+                        <div class="card__item">
+                            <div class="card__header">Card Three</div>
+                            <div class="card__body">
+                                Lotus root water spinach fennel kombu maize
+                                bamboo shoot green bean swiss chard seakale
+                                pumpkin onion chickpea gram corn pea.
+                            </div>
+                        </div>
+                        <!-- card 4 -->
+                        <div class="card__item">
+                            <div class="card__header">Card Four</div>
+                            <div class="card__body">
+                                Lotus root water spinach fennel kombu maize
+                                bamboo shoot green bean swiss chard seakale
+                                pumpkin onion chickpea gram corn pea.
+                            </div>
+                        </div>
+                        <!-- card 5 -->
+                        <div class="card__item">
+                            <div class="card__header">Card Five</div>
+                            <div class="card__body">
+                                Nori grape silver beet broccoli kombu beet
+                                greens fava bean potato quandong celery. Bunya
+                                nuts black-eyed pea prairie turnip leek lentil
+                                turnip greens parsnip.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="container__sidebar">
+                    <p class="container__sidebar--body">
+                        Have you discovered all of the other excellent content
+                        on this website?
+                    </p>
+                </div>
+            </div>
+        </main>
+    </body>
 </html>
