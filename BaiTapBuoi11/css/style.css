@@ -1,4 +1,18 @@
 @import "material-icons/iconfont/material-icons.css";
+/* ===== CSS VARIABLES ===== */
+:root {
+    --bg-color: #e8e8e8;
+    --card-bg: #ffffff;
+    --card-border: #000;
+    --card-header-bg: #3a3a3a;
+    --header-bg: #3a3a3a;
+    --sidebar-bg: #3a3a3a;
+    --nav-bg: #3a3a3a;
+    --text-heading: #333;
+    --text-paragraph: #555;
+    --card-body-text: #555;
+}
+
 * {
     box-sizing: border-box;
 }
@@ -8,7 +22,7 @@ html {
 body {
     font-size: 1.6rem;
     font-family: "Roboto", sans-serif;
-    background-color: #e8e8e8;
+    background-color: var(--bg-color);
 }
 ul {
     list-style: none;
@@ -26,7 +40,7 @@ a {
     margin: 0 auto;
 }
 .header {
-    background-color: #3a3a3a;
+    background-color: var(--header-bg);
     padding: 1rem 2rem;
     font-size: 2rem;
 }
@@ -37,7 +51,8 @@ a {
     margin: 0 auto;
 }
 .header__nav {
-    display: inline-block;
+    display: flex;
+    justify-content: space-between;
     height: 100%;
 }
 .nav__sidebar {
@@ -81,77 +96,115 @@ a {
 .nav__close-btn {
     display: none;
 }
-#main {
-    .container {
-        display: flex;
-        flex-direction: row;
-        gap: 1.5rem;
-        padding: 1.5rem;
-        .container__content {
-            flex: 1;
-        }
-        .container__sidebar {
-            width: 300px;
-            min-height: 400px;
-            padding: 1.5rem;
-            color: #ebebeb;
-            background-color: #3a3a3a;
-            .container__sidebar--body {
-                margin: 0px 20px 0px 0px;
-            }
-        }
-    }
+
+.container {
+    display: flex;
+    flex-direction: row;
+    gap: 1.5rem;
+    padding: 1.5rem;
+}
+.container__content {
+    flex: 1;
+}
+.container__sidebar {
+    width: 300px;
+    min-height: 400px;
+    padding: 1.5rem;
+    color: #ebebeb;
+    background-color: var(--sidebar-bg);
+}
+.container__sidebar--body {
+    margin: 0px 20px 0px 0px;
 }
 /* card */
-#main {
-    .container__heading {
-        font-size: 2rem;
-        color: #333;
-        margin-bottom: 1rem;
-        font-weight: 600;
-        transition: color 0.3s ease;
-    }
 
-    .container__paragraph {
-        font-size: 1.6rem;
-        color: #555;
-        line-height: 1.5;
-        margin-bottom: 1rem;
-        transition: color 0.3s ease;
-    }
-    .cards {
-        display: flex;
-        gap: 1rem;
-        flex-wrap: wrap;
+.container__heading {
+    font-size: 2rem;
+    color: var(--text-heading);
+    margin-bottom: 1rem;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
 
-        .card__item {
-            width: calc((100% - 2rem) / 3);
-            background-color: white;
-            border: 1px solid #000;
-            transition:
-                background-color 0.3s ease,
-                color 0.3s ease;
+.container__paragraph {
+    font-size: 1.6rem;
+    color: var(--text-paragraph);
+    line-height: 1.5;
+    margin-bottom: 1rem;
+    transition: color 0.3s ease;
+}
+.cards {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+.card__header {
+    background-color: var(--card-header-bg);
+    color: white;
+    padding: 0.8rem 1rem;
+    font-size: 1.25rem;
+    font-weight: bold;
+    transition:
+        background-color 0.3s ease,
+        color 0.3s ease;
+}
+.card__item {
+    width: calc((100% - 2rem) / 3);
+    background-color: var(--card-bg);
+    border: 1px solid var(--card-border);
+    transition:
+        background-color 0.3s ease,
+        color 0.3s ease;
+}
+.card__body {
+    padding: 1rem;
+    color: var(--card-body-text);
+    font-size: 1.6rem;
+    line-height: 1.5;
+    transition:
+        background-color 0.3s ease,
+        color 0.3s ease;
+}
+/*  Dark mode */
 
-            .card__header {
-                background-color: #3a3a3a;
-                color: white;
-                padding: 0.8rem 1rem;
-                font-size: 1.25rem;
-                font-weight: bold;
-                transition:
-                    background-color 0.3s ease,
-                    color 0.3s ease;
-            }
+/* #dark-mode-toggle:checked ~ * {
+    background-color: #1f2937;
+    color: white;
+} */
+/* ===== DARK MODE ===== */
+#dark-mode-toggle:checked ~ * {
+    --bg-color: #1a1a1a;
+    --card-bg: #2a2a2a;
+    --card-border: #444;
+    --card-header-bg: #1f1f1f;
+    --header-bg: #0d0d0d;
+    --sidebar-bg: #1f1f1f;
+    --nav-bg: #0d0d0d;
+    --text-heading: #e0e0e0;
+    --text-paragraph: #b0b0b0;
+    --card-body-text: #b0b0b0;
+}
+body:has(#dark-mode-toggle:checked) {
+    background-color: #1a1a1a;
+}
+.themes--btn {
+    font-size: 2.4rem;
+    color: white;
+    padding: 0.5rem;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    font-family: "Material Design Icons";
+}
 
-            .card__body {
-                padding: 1rem;
-                color: #555;
-                font-size: 1.6rem;
-                line-height: 1.5;
-                transition:
-                    background-color 0.3s ease,
-                    color 0.3s ease;
-            }
-        }
-    }
+.themes--btn:hover {
+    transform: scale(1.1);
+}
+
+.themes--btn::before {
+    content: "\F0594";
+}
+
+/* Dark mode: hiện icon sun */
+body:has(#dark-mode-toggle:checked) .themes--btn::before {
+    content: "\F0599"; /* mdi-weather-sunny */
 }
