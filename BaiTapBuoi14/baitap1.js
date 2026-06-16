@@ -4,7 +4,9 @@ function analyzeValue(value) {
     result.type = typeof value;
     result.isTruthy = Boolean(value);
     result.isNullOrUndefined = value == null ? true : false;
-    result.isReferenceType = typeof value === "object" && value !== null;
+    result.isReferenceType =
+        (typeof value === "object" && value !== null) ||
+        typeof value === "function";
     return result;
 }
 
