@@ -113,8 +113,50 @@ getOrderCountByStatus(orders);
 
 // Hàm 4: getTopCustomer(orders)
 function getTopCustomer(orders) {
-    let orderSort = [];
-    return orders.reduce((obj, cur) => {
-        let total = 0;
-    }, {});
+    let orderSort = orders.reduce((obj, cur) => {
+        if (cur.status === "completed") {
+            if (obj.some((item) => item.customer === cur.customer)) {
+                const customerIndex = obj.find(
+                    (o) => o.customer === cur.customer,
+                );
+                customerIndex.amount += cur.amount;
+            } else {
+                obj.push({
+                    customer: cur.customer,
+                    amount: cur.amount,
+                });
+            }
+        }
+        return obj;
+    }, []);
+    return orderSort.sort((a, b) => b.amount - a.amount)[0];
 }
+getTopCustomer(orders);
+
+// Hàm 5: getFullReport(orders)
+function getFullReport(orders) {
+    return orders.reduce(
+        (obj, cur) => {
+            obj.statusCount[cur.status] =
+                (obj.statusCount[cur.status] || 0) + 1;
+
+            if (cur.status === "completed") {
+                obj.totalRevenue += cur.amount;
+
+                obj.revenueByCategory[cur.category] =
+                    (obj.revenueByCategory[cur.category] || 0) + cur.amount;
+
+                obj.spendingByCustomer[cur.customer] =
+                    (obj.spendingByCustomer[cur.customer] || 0) + cur.amount;
+            }
+            return obj;
+        },
+        {
+            revenueByCategory: {},
+            spendingByCustomer: {},
+            statusCount: {},
+            totalRevenue: 0,
+        },
+    );
+}
+getFullReport(orders);
