@@ -8,7 +8,6 @@ const submitBtn = $("#submit-btn");
 
 form.addEventListener("submit", function (e) {
     e.preventDefault();
-    console.log(form);
     if (
         validateUsername(username) &&
         validateEmail(email) &&
