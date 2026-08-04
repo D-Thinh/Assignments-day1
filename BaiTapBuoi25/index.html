@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Todo-app</title>
+        <link rel="stylesheet" href="./style.css" />
+    </head>
+    <body>
+        <div id="todo-app">
+            <input
+                type="text"
+                id="todo-input"
+                placeholder="Nhập việc cần làm..."
+            />
+            <button id="add-btn">Thêm</button>
+            <ul id="todo-list"></ul>
+            <p id="todo-count">Còn 0 việc chưa xong</p>
+        </div>
+
+        <form id="register-form">
+            <div>
+                <input type="text" id="username" placeholder="Tên đăng nhập" />
+                <span class="error-msg" id="username-error"></span>
+            </div>
+
+            <div>
+                <input type="email" id="email" placeholder="Email" />
+                <span class="error-msg" id="email-error"></span>
+            </div>
+
+            <div>
+                <input type="password" id="password" placeholder="Mật khẩu" />
+                <span class="error-msg" id="password-error"></span>
+            </div>
+
+            <div>
+                <input
+                    type="password"
+                    id="confirm-password"
+                    placeholder="Nhập lại mật khẩu"
+                />
+                <span class="error-msg" id="confirm-password-error"></span>
+            </div>
+
+            <button type="submit" id="submit-btn" disabled>Đăng ký</button>
+        </form>
+        <div id="product-app">
+            <input
+                type="text"
+                id="search-box"
+                placeholder="Tìm sản phẩm theo tên..."
+            />
+
+            <select id="category-filter">
+                <option value="all">Tất cả danh mục</option>
+                <option value="do-dien-tu">Đồ điện tử</option>
+                <option value="quan-ao">Quần áo</option>
+                <option value="sach">Sách</option>
+            </select>
+
+            <button id="sort-price-btn">Sắp xếp theo giá</button>
+
+            <div id="product-list"></div>
+
+            <p id="result-count"></p>
+        </div>
+        <script src="./baitap1.js"></script>
+        <script src="./baitap2.js"></script>
+        <script src="./baitap3.js"></script>
+    </body>
+</html>
