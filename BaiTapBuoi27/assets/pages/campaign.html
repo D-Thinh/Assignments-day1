@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="vi">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <title>Advertisement</title>
+
+        <!-- Tailwind CSS -->
+        <script src="https://cdn.tailwindcss.com"></script>
+
+        <!--  CSS -->
+        <link rel="stylesheet" href="../css/reset.css" />
+        <link rel="stylesheet" href="../css/style.css" />
+    </head>
+
+    <body>
+        <div class="page-wrapper">
+            <!-- ================= HEADER ================= -->
+            <header class="site-header">
+                <div class="container header-content">
+                    <a href="../../index.html" class="logo">
+                        Browser<span>Info</span>
+                    </a>
+
+                    <nav class="main-nav">
+                        <a href="../../index.html" class="nav-link">
+                            Trang chủ
+                        </a>
+
+                        <a href="./fingerprint.html" class="nav-link">
+                            Fingerprinting
+                        </a>
+                    </nav>
+                </div>
+            </header>
+
+            <!-- ================= MAIN ================= -->
+            <main class="container main-content">
+                <section class="campaign-page">
+                    <div class="campaign-header">
+                        <span class="hero-badge"> Advertisement </span>
+
+                        <h1>Thông tin quảng cáo</h1>
+
+                        <p>
+                            Các tham số được truyền từ URL sẽ được hiển thị bên
+                            dưới.
+                        </p>
+                    </div>
+
+                    <!-- Tracking information -->
+                    <div class="campaign-info-grid">
+                        <div class="campaign-info-card">
+                            <span class="info-label"> Tên nguồn </span>
+                            <strong id="utm-source"> -- </strong>
+                        </div>
+
+                        <div class="campaign-info-card">
+                            <span class="info-label"> Tên chiến dịch </span>
+                            <strong id="utm-campaign"> -- </strong>
+                        </div>
+                    </div>
+
+                    <!-- Advertisement content -->
+
+                    <div class="campaign-content">
+                        <div class="campaign-image">
+                            <img
+                                src="../images/banner2.jpg"
+                                alt="Signature dish"
+                            />
+                        </div>
+
+                        <div class="campaign-text">
+                            <span class="ad-badge"> SIGNATURE DISH </span>
+
+                            <h2>
+                                Made to be
+                                <span>remembered.</span>
+                            </h2>
+
+                            <p>
+                                Hương vị đặc biệt, nguyên liệu chọn lọc và sự
+                                chăm chút trong từng chi tiết. Khám phá món ăn
+                                đặc trưng của chúng tôi.
+                            </p>
+
+                            <button class="primary-button">
+                                Khám phá ngay →
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Back -->
+                    <div class="back-navigation">
+                        <a href="../../index.html" class="secondary-button">
+                            ← Quay về trang chủ
+                        </a>
+                    </div>
+                </section>
+            </main>
+
+            <!-- ================= FOOTER ================= -->
+            <footer class="site-footer">
+                <div class="container footer-content">
+                    <p>© 2026 BrowserInfo</p>
+
+                    <p>Advertisement Page</p>
+                </div>
+            </footer>
+        </div>
+        <script src="../../js/script_cp.js"></script>
+    </body>
+</html>

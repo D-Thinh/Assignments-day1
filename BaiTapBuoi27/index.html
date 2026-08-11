@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="vi">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <title>Browser Information</title>
+
+        <!-- Tailwind CSS -->
+        <script src="https://cdn.tailwindcss.com"></script>
+
+        <!--  CSS -->
+        <link rel="stylesheet" href="./assets/css/reset.css" />
+        <link rel="stylesheet" href="./assets/css/style.css" />
+    </head>
+
+    <body>
+        <div class="page-wrapper">
+            <!-- ================= HEADER ================= -->
+            <header class="site-header">
+                <div class="container header-content">
+                    <a href="./index.html" class="logo">
+                        Browser<span>Info</span>
+                    </a>
+
+                    <nav class="main-nav">
+                        <a
+                            href="./index.html"
+                            class="nav-link active"
+                            id="home-btn"
+                        >
+                            Trang chủ
+                        </a>
+
+                        <a href="#" class="nav-link" id="finger-btn">
+                            Fingerprinting
+                        </a>
+                    </nav>
+                </div>
+            </header>
+
+            <!-- ================= MAIN ================= -->
+            <main id="home-page" class="container main-content">
+                <!-- Hero -->
+                <section class="hero-section">
+                    <div class="hero-content">
+                        <span class="hero-badge"> Browser Information </span>
+
+                        <h1>
+                            Thông tin trình duyệt
+                            <span>& thiết bị</span>
+                        </h1>
+
+                        <p>
+                            Khám phá các thông tin được cung cấp bởi trình duyệt
+                            thông qua Browser Object Model.
+                        </p>
+                    </div>
+                </section>
+
+                <!-- Browser Information -->
+                <section class="section">
+                    <div class="section-heading">
+                        <div>
+                            <p class="section-label">BROWSER & DEVICE</p>
+                            <h2>Thông tin hệ thống</h2>
+                        </div>
+                    </div>
+
+                    <div class="info-grid">
+                        <!-- Location -->
+                        <div class="info-card">
+                            <div class="info-card-icon location-icon">📍</div>
+
+                            <div class="info-card-content">
+                                <span class="info-label">
+                                    Vị trí người dùng
+                                </span>
+
+                                <strong id="location">
+                                    Đang lấy thông tin...
+                                </strong>
+                            </div>
+                        </div>
+
+                        <!-- Online -->
+                        <div class="info-card">
+                            <div class="info-card-icon online-icon">
+                                <span
+                                    id="online-status-icon"
+                                    class="status-dot online"
+                                ></span>
+                            </div>
+
+                            <div class="info-card-content">
+                                <span class="info-label"> Trạng thái </span>
+
+                                <strong id="online-status"> Online </strong>
+                            </div>
+                        </div>
+
+                        <!-- Browser -->
+                        <div class="info-card">
+                            <div class="info-card-icon browser-icon">🌐</div>
+
+                            <div class="info-card-content">
+                                <span class="info-label"> Trình duyệt </span>
+
+                                <strong id="browser">
+                                    Đang lấy thông tin...
+                                </strong>
+                            </div>
+                        </div>
+
+                        <!-- OS -->
+                        <div class="info-card">
+                            <div class="info-card-icon os-icon">💻</div>
+
+                            <div class="info-card-content">
+                                <span class="info-label"> Hệ điều hành </span>
+
+                                <strong id="os"> Đang lấy thông tin... </strong>
+                            </div>
+                        </div>
+
+                        <!-- Language -->
+                        <div class="info-card">
+                            <div class="info-card-icon language-icon">🌎</div>
+
+                            <div class="info-card-content">
+                                <span class="info-label"> Ngôn ngữ </span>
+
+                                <strong id="languages">
+                                    Đang lấy thông tin...
+                                </strong>
+                            </div>
+                        </div>
+
+                        <!-- Screen -->
+                        <div class="info-card">
+                            <div class="info-card-icon screen-icon">🖥️</div>
+
+                            <div class="info-card-content">
+                                <span class="info-label">
+                                    Kích thước màn hình
+                                </span>
+
+                                <strong id="screen-size">
+                                    Đang lấy thông tin...
+                                </strong>
+                            </div>
+                        </div>
+
+                        <!-- Orientation -->
+                        <div class="info-card">
+                            <div class="info-card-icon orientation-icon">
+                                🔄
+                            </div>
+
+                            <div class="info-card-content">
+                                <span class="info-label"> Hướng màn hình </span>
+
+                                <strong id="orientation">
+                                    Đang lấy thông tin...
+                                </strong>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ================= AD BANNER ================= -->
+                <section class="section">
+                    <div class="section-heading">
+                        <div>
+                            <p class="section-label">ADVERTISEMENT</p>
+                            <h2>Khám phá ngay</h2>
+                        </div>
+                    </div>
+
+                    <a
+                        href="./assets/pages/campaign.html?utm_source=thinh_quach&utm_campaign=hong_kong_cp"
+                        class="ad-banner"
+                    >
+                        <div class="ad-overlay"></div>
+
+                        <img
+                            src="./assets/images/banner1.jpg"
+                            alt="Advertisement banner"
+                        />
+
+                        <div class="ad-content">
+                            <span class="ad-badge"> ADVERTISEMENT </span>
+
+                            <h2>
+                                Discover something
+                                <br />
+                                <span>new today.</span>
+                            </h2>
+
+                            <p>Click để khám phá nội dung quảng cáo</p>
+
+                            <span class="ad-button"> Xem ngay → </span>
+                        </div>
+                    </a>
+                </section>
+
+                <!-- ================= NAVIGATION ================= -->
+                <section class="navigation-section">
+                    <a href="!" class="primary-button" id="fingerprint-link">
+                        <span>🔐</span>
+                        Fingerprinting
+                        <span>→</span>
+                    </a>
+                </section>
+            </main>
+            <main
+                id="fingerprint-page"
+                class="container main-content fingerprint-page-disable"
+            >
+                <section class="fingerprint-page">
+                    <div class="fingerprint-header">
+                        <span class="hero-badge"> Browser Fingerprint </span>
+
+                        <h1>Fingerprinting</h1>
+
+                        <p>
+                            Chuỗi định danh được tạo từ các thông tin của trình
+                            duyệt và thiết bị.
+                        </p>
+                    </div>
+
+                    <!-- Fingerprint result -->
+                    <div class="fingerprint-card">
+                        <div class="fingerprint-icon">🔐</div>
+
+                        <div class="fingerprint-result">
+                            <span class="info-label"> Fingerprint </span>
+
+                            <div
+                                id="fingerprint-value"
+                                class="fingerprint-value"
+                            >
+                                Load dữ liệu thành công
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- State information -->
+                    <div class="state-card">
+                        <div class="state-card-header">
+                            <div>
+                                <span class="section-label">
+                                    HISTORY STATE
+                                </span>
+
+                                <h2>Dữ liệu từ trang chủ</h2>
+                            </div>
+
+                            <span class="state-badge"> history.state </span>
+                        </div>
+
+                        <div id="state-data" class="state-data">
+                            Đang lấy dữ liệu...
+                        </div>
+                    </div>
+
+                    <!-- Navigation -->
+                    <div class="fingerprint-actions">
+                        <button id="back-home" class="primary-button">
+                            ← Quay về trang chủ
+                        </button>
+                    </div>
+                </section>
+            </main>
+
+            <!-- ================= FOOTER ================= -->
+            <footer class="site-footer">
+                <div class="container footer-content">
+                    <p>© 2026 BrowserInfo</p>
+
+                    <p>HTML · CSS · Tailwind · JavaScript</p>
+                </div>
+            </footer>
+        </div>
+        <script src="./js/script.js"></script>
+    </body>
+</html>
