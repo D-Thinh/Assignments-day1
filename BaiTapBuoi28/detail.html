@@ -1,0 +1,230 @@
+<!doctype html>
+
+<html lang="vi">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <title>Product Detail</title>
+
+        <link rel="stylesheet" href="./assets/css/style.css" />
+    </head>
+
+    <body>
+        <!-- ================= HEADER ================= -->
+        <header class="site-header">
+            <div class="container header-inner">
+                <a href="./index.html" class="logo">
+                    <span class="logo-icon">P</span>
+                    <span
+                        >Product<span class="logo-highlight">Store</span></span
+                    >
+                </a>
+
+                <nav class="main-nav">
+                    <a href="./index.html" class="nav-link"> Sản phẩm </a>
+                </nav>
+            </div>
+        </header>
+
+        <!-- ================= MAIN ================= -->
+        <main class="detail-page">
+            <div class="container">
+                <!-- Back -->
+                <a href="./index.html" class="back-link">
+                    ← Quay lại danh sách
+                </a>
+
+                <!-- Loading -->
+                <div id="detail-loading" class="loading-state">
+                    <div class="loading-spinner"></div>
+
+                    <p>Đang tải thông tin sản phẩm...</p>
+                </div>
+
+                <!-- Error -->
+                <div id="detail-error" class="message-state error-state hidden">
+                    <div class="message-icon">!</div>
+
+                    <h3>Không tìm thấy sản phẩm</h3>
+
+                    <p>
+                        Sản phẩm không tồn tại hoặc đã xảy ra lỗi khi tải dữ
+                        liệu.
+                    </p>
+
+                    <a href="./index.html" class="primary-btn">
+                        Quay lại danh sách
+                    </a>
+                </div>
+
+                <!-- Product detail -->
+                <section id="product-detail" class="product-detail hidden">
+                    <!-- Gallery -->
+                    <div class="product-gallery">
+                        <div class="main-image-wrapper">
+                            <img
+                                id="main-product-image"
+                                class="main-product-image"
+                                src=""
+                                alt=""
+                            />
+
+                            <span id="detail-discount" class="discount-badge">
+                                -15%
+                            </span>
+                        </div>
+
+                        <div id="image-list" class="image-list">
+                            <!-- JS render thumbnails -->
+                        </div>
+                    </div>
+
+                    <!-- Information -->
+                    <div class="product-detail-info">
+                        <span id="detail-category" class="product-category">
+                            Category
+                        </span>
+
+                        <h1 id="detail-title" class="detail-title">
+                            Product title
+                        </h1>
+
+                        <div class="detail-rating">
+                            <span class="rating-star">★</span>
+
+                            <strong id="detail-rating"> 4.8 </strong>
+
+                            <span class="rating-text"> đánh giá </span>
+                        </div>
+
+                        <!-- Price -->
+                        <div class="detail-price-wrapper">
+                            <span
+                                id="detail-sale-price"
+                                class="detail-sale-price"
+                            >
+                                $0
+                            </span>
+
+                            <span
+                                id="detail-old-price"
+                                class="detail-old-price"
+                            >
+                                $0
+                            </span>
+                        </div>
+
+                        <!-- Stock -->
+                        <div class="detail-stock">
+                            <span class="stock-dot"></span>
+
+                            <span>
+                                Còn
+                                <strong id="detail-stock"> 0 </strong>
+                                sản phẩm
+                            </span>
+                        </div>
+
+                        <!-- Description -->
+                        <div class="detail-block">
+                            <h3>Mô tả sản phẩm</h3>
+
+                            <p id="detail-description">Product description</p>
+                        </div>
+
+                        <!-- Basic information -->
+                        <div class="detail-block">
+                            <h3>Thông tin sản phẩm</h3>
+
+                            <div class="info-grid">
+                                <div class="info-item">
+                                    <span>Brand</span>
+                                    <strong id="detail-brand">-</strong>
+                                </div>
+
+                                <div class="info-item">
+                                    <span>SKU</span>
+                                    <strong id="detail-sku">-</strong>
+                                </div>
+
+                                <div class="info-item">
+                                    <span>Category</span>
+                                    <strong id="detail-category-info">-</strong>
+                                </div>
+
+                                <div class="info-item">
+                                    <span>Weight</span>
+                                    <strong id="detail-weight">-</strong>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Tags -->
+                        <div class="detail-block">
+                            <h3>Tags</h3>
+
+                            <div id="detail-tags" class="tags-list">
+                                <!-- JS render tags -->
+                            </div>
+                        </div>
+
+                        <!-- Dimensions -->
+                        <div class="detail-block">
+                            <h3>Kích thước</h3>
+
+                            <div class="dimensions">
+                                <div>
+                                    <span>Width</span>
+                                    <strong id="detail-width">-</strong>
+                                </div>
+
+                                <div>
+                                    <span>Height</span>
+                                    <strong id="detail-height">-</strong>
+                                </div>
+
+                                <div>
+                                    <span>Depth</span>
+                                    <strong id="detail-depth">-</strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Reviews -->
+                <section id="reviews-section" class="reviews-section hidden">
+                    <div class="section-heading">
+                        <div>
+                            <span class="section-label">
+                                CUSTOMER REVIEWS
+                            </span>
+
+                            <h2>Đánh giá sản phẩm</h2>
+                        </div>
+
+                        <span id="review-count" class="review-count">
+                            0 reviews
+                        </span>
+                    </div>
+
+                    <div id="reviews-list" class="reviews-list">
+                        <!-- JS render reviews -->
+                    </div>
+                </section>
+            </div>
+        </main>
+
+        <!-- ================= FOOTER ================= -->
+        <footer class="site-footer">
+            <div class="container footer-inner">
+                <p>© 2026 ProductStore. All rights reserved.</p>
+
+                <span> Built with HTML · CSS · JavaScript </span>
+            </div>
+        </footer>
+
+        <!-- <script src="./assets/js/detail.js"></script> -->
+    </body>
+</html>
