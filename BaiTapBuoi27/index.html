@@ -15,10 +15,12 @@
     </head>
 
     <body>
-        <div class="page-wrapper">
+        <div class="min-h-screen flex flex-col">
             <!-- ================= HEADER ================= -->
             <header class="site-header">
-                <div class="container header-content">
+                <div
+                    class="w-full max-w-[1080px] mx-auto px-7 flex items-center justify-between h-[76px] max-[720px]:h-[66px]"
+                >
                     <a href="./index.html" class="logo">
                         Browser<span>Info</span>
                     </a>
@@ -40,7 +42,10 @@
             </header>
 
             <!-- ================= MAIN ================= -->
-            <main id="home-page" class="container main-content">
+            <main
+                id="home-page"
+                class="w-full max-w-[1080px] mx-auto px-7 flex-1 pb-[100px]"
+            >
                 <!-- Hero -->
                 <section class="hero-section">
                     <div class="hero-content">
@@ -215,7 +220,7 @@
             </main>
             <main
                 id="fingerprint-page"
-                class="container main-content fingerprint-page-disable"
+                class="w-full max-w-[1080px] mx-auto px-7 flex-1 pb-[100px] fingerprint-page-disable"
             >
                 <section class="fingerprint-page">
                     <div class="fingerprint-header">
@@ -275,7 +280,9 @@
 
             <!-- ================= FOOTER ================= -->
             <footer class="site-footer">
-                <div class="container footer-content">
+                <div
+                    class="w-full max-w-[1080px] mx-auto px-7 flex items-center justify-between footer-content"
+                >
                     <p>© 2026 BrowserInfo</p>
 
                     <p>HTML · CSS · Tailwind · JavaScript</p>
