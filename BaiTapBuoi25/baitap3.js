@@ -63,6 +63,7 @@ function loadData(products) {
         emptyMessage.textContent = "Không tìm thấy sản phẩm nào phù hợp.";
 
         productList.appendChild(emptyMessage);
+        resultCount.textContent = `Tìm thấy 0 sản phẩm`;
         return;
     }
     products.map((product) => {
@@ -72,29 +73,34 @@ function loadData(products) {
         const productName = document.createElement("h3");
         productName.textContent = product.name;
         productName.classList = "product-title";
-        productItem.appendChild(productName);
+
         const productCategory = document.createElement("p");
         productCategory.textContent = `Danh mục: ${product.category}`;
         productCategory.classList = "product-category";
-        productItem.appendChild(productCategory);
+
         const productPrice = document.createElement("p");
         productPrice.textContent = `Giá: ${product.price.toLocaleString()}d`;
         productPrice.classList = "product-price";
-        productItem.appendChild(productPrice);
+
         const productStock = document.createElement("p");
         productStock.textContent = product.inStock ? "Còn hàng" : "Hết hàng";
         productStock.classList = "product-status";
         if (product.inStock == false) {
             productStock.classList.add("out-of-stock");
         }
-        productItem.appendChild(productStock);
+        productItem.append(
+            productName,
+            productCategory,
+            productPrice,
+            productStock,
+        );
 
         productList.appendChild(productItem);
     });
     resultCount.textContent = `Tìm thấy ${productList.childElementCount} sản phẩm`;
 }
 
-categoryFilter.addEventListener("input", function () {
+categoryFilter.addEventListener("change", function () {
     productCategory = products.filter(
         (item) => item.category === categoryFilter.value,
     );
@@ -105,26 +111,26 @@ categoryFilter.addEventListener("input", function () {
 });
 
 btnSortPrice.onclick = function () {
-    if (descSort) {
-        productCategory = productCategory.sort((a, b) => b.price - a.price);
-        descSort = false;
-        btnSortPrice.textContent = "Giá tăng dần";
-    } else {
-        productCategory = productCategory.sort((a, b) => a.price - b.price);
-        descSort = true;
-        btnSortPrice.textContent = "Giá giảm dần";
-    }
+    const sortedProducts = [...productCategory].sort((a, b) =>
+        descSort ? b.price - a.price : a.price - b.price,
+    );
 
-    loadData(productCategory);
+    btnSortPrice.textContent = descSort ? "Giá tăng dần" : "Giá giảm dần";
+    descSort = !descSort;
+
+    loadData(sortedProducts);
 };
 
 nameSearch.addEventListener("input", function () {
     console.log(nameSearch.value);
+
+    productCategory = products.filter((item) =>
+        item.name
+            .toLocaleLowerCase()
+            .includes(nameSearch.value.toLocaleLowerCase()),
+    );
     if (nameSearch.value.trim() === "") {
         productCategory = products;
     }
-    productCategory = productCategory.filter(
-        (item) => item.name === nameSearch.value,
-    );
     loadData(productCategory);
 });
