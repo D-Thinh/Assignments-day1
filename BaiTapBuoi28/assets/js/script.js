@@ -10,6 +10,9 @@ let products = [];
 async function getProducts() {
     try {
         const res = await fetch("https://dummyjson.com/products");
+        if (!res.ok) {
+            throw new Error(`HTTP error: ${res.status}`);
+        }
 
         const data = await res.json();
         products = data.products;
@@ -128,4 +131,5 @@ async function init() {
     await getProducts();
     loadProducts();
 }
+
 init();
