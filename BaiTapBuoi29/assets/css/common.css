@@ -1,0 +1,733 @@
+:root {
+    --bg-primary: #0b0b0f;
+    --bg-sidebar: rgba(15, 15, 20, 0.96);
+    --bg-card: #15151b;
+    --bg-hover: #1c1c24;
+
+    --text-primary: #ffffff;
+    --text-secondary: #8f8f9d;
+    --text-muted: #777784;
+
+    --accent: #a855f7;
+    --accent-dark: #7c3aed;
+    --accent-soft: #c084fc;
+
+    --border: rgba(255, 255, 255, 0.06);
+    --border-strong: rgba(255, 255, 255, 0.12);
+
+    --sidebar-width: 250px;
+    --header-height: 72px;
+    --player-height: 82px;
+    --radius-lg: 24px;
+    --radius-md: 15px;
+    --radius-sm: 12px;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: var(--bg-primary);
+    color: var(--text-primary);
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* =========================================================
+   APP
+========================================================= */
+
+.app {
+    min-height: 100vh;
+    background:
+        radial-gradient(
+            circle at 70% 0%,
+            rgba(124, 58, 237, 0.12),
+            transparent 30%
+        ),
+        var(--bg-primary);
+}
+
+/* =========================================================
+   SIDEBAR
+========================================================= */
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+
+    width: var(--sidebar-width);
+
+    padding: 28px 16px 18px;
+
+    display: flex;
+    flex-direction: column;
+
+    background: var(--bg-sidebar);
+    border-right: 1px solid var(--border);
+
+    z-index: 100;
+}
+
+.app:has(.music-player) .sidebar {
+    bottom: var(--player-height);
+}
+
+/* =========================================================
+   LOGO
+========================================================= */
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+
+    padding: 0 12px;
+    margin-bottom: 38px;
+
+    font-size: 21px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+}
+
+.logo-icon {
+    width: 38px;
+    height: 38px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: var(--radius-sm);
+
+    background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+
+    color: white;
+
+    font-size: 22px;
+
+    box-shadow: 0 8px 25px rgba(124, 58, 237, 0.35);
+}
+
+/* =========================================================
+   MAIN MENU
+========================================================= */
+
+.main-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.menu-item {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    gap: 13px;
+
+    min-height: 48px;
+
+    padding: 0 14px;
+
+    border-radius: var(--radius-sm);
+
+    color: var(--text-secondary);
+
+    font-size: 14px;
+    font-weight: 600;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.menu-item:hover {
+    color: var(--text-primary);
+    background: rgba(255, 255, 255, 0.06);
+
+    transform: translateX(2px);
+}
+
+.menu-item.active {
+    color: var(--text-primary);
+
+    background: linear-gradient(
+        90deg,
+        rgba(124, 58, 237, 0.2),
+        rgba(124, 58, 237, 0.07)
+    );
+}
+
+.menu-item.active::before {
+    content: "";
+
+    position: absolute;
+    left: 0;
+
+    width: 3px;
+    height: 22px;
+
+    border-radius: 0 5px 5px 0;
+
+    background: var(--accent);
+}
+
+.menu-icon {
+    width: 22px;
+
+    display: flex;
+    justify-content: center;
+
+    font-size: 20px;
+}
+
+/* =========================================================
+   PLAYLIST SECTION
+========================================================= */
+
+.playlist-section {
+    flex: 1;
+
+    display: flex;
+    flex-direction: column;
+
+    margin-top: 30px;
+
+    overflow: hidden;
+}
+
+.playlist-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 12px 12px;
+
+    color: var(--text-muted);
+
+    font-size: 11px;
+    font-weight: 700;
+
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.add-playlist-btn {
+    width: 28px;
+    height: 28px;
+
+    border-radius: 8px;
+
+    background: transparent;
+    color: #8e8e9a;
+
+    font-size: 21px;
+
+    transition: 0.2s;
+}
+
+.add-playlist-btn:hover {
+    background: rgba(255, 255, 255, 0.08);
+    color: white;
+}
+
+.playlist-list {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+
+    flex: 1;
+
+    overflow-y: auto;
+}
+
+.playlist-list::-webkit-scrollbar {
+    width: 4px;
+}
+
+.playlist-list::-webkit-scrollbar-thumb {
+    background: #33333c;
+    border-radius: 10px;
+}
+
+.sidebar-loading {
+    padding: 15px 12px;
+
+    color: #6e6e7a;
+    font-size: 13px;
+}
+
+/* =========================================================
+   SIDEBAR BOTTOM
+========================================================= */
+
+.sidebar-bottom {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+
+    padding-top: 15px;
+
+    border-top: 1px solid var(--border);
+}
+
+.logout-btn {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+
+    width: 100%;
+    min-height: 45px;
+
+    padding: 0 14px;
+
+    border-radius: 11px;
+
+    background: transparent;
+
+    color: var(--text-muted);
+
+    font-size: 14px;
+    font-weight: 600;
+
+    transition: 0.2s;
+}
+
+.logout-btn:hover {
+    color: #ff6b6b;
+    background: rgba(239, 68, 68, 0.08);
+}
+
+/* =========================================================
+   MAIN CONTENT
+========================================================= */
+
+.main-content,
+.main {
+    margin-left: var(--sidebar-width);
+
+    min-height: 100vh;
+}
+
+.app:has(.music-player) .main-content,
+.app:has(.music-player) .main {
+    padding-bottom: 100px;
+}
+
+/* =========================================================
+   TOPBAR
+========================================================= */
+
+.topbar {
+    position: sticky;
+    top: 0;
+
+    height: var(--header-height);
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 42px;
+
+    background: rgba(11, 11, 15, 0.8);
+
+    backdrop-filter: blur(18px);
+
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+
+    z-index: 50;
+}
+
+.navigation-buttons {
+    display: flex;
+    gap: 8px;
+}
+
+.nav-btn,
+.icon-btn {
+    width: 36px;
+    height: 36px;
+
+    border-radius: 50%;
+
+    background: rgba(255, 255, 255, 0.07);
+
+    color: var(--text-primary);
+
+    font-size: 25px;
+    line-height: 1;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    transition: 0.2s;
+}
+
+.nav-btn:hover,
+.icon-btn:hover {
+    background: rgba(255, 255, 255, 0.13);
+}
+
+.user-area {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    color: #d4d4dc;
+
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.user-avatar {
+    width: 34px;
+    height: 34px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: linear-gradient(135deg, #9333ea, #6366f1);
+
+    color: white;
+
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.user-arrow {
+    color: var(--text-muted);
+    font-size: 17px;
+}
+
+/* =========================================================
+   CONTENT
+========================================================= */
+
+.content {
+    max-width: 1500px;
+
+    margin: 0 auto;
+
+    padding: 32px 42px 50px;
+}
+
+/* =========================================================
+   SECTION HEADER
+========================================================= */
+
+.section-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+
+    margin-bottom: 20px;
+}
+
+.section-label {
+    display: block;
+
+    margin-bottom: 6px;
+
+    color: #8b5cf6;
+
+    font-size: 10px;
+    font-weight: 800;
+
+    letter-spacing: 1.5px;
+}
+
+.section-header h2 {
+    font-size: 23px;
+
+    letter-spacing: -0.6px;
+}
+
+.view-all-btn {
+    padding: 7px 12px;
+
+    background: transparent;
+
+    color: #858592;
+
+    font-size: 12px;
+    font-weight: 600;
+
+    border-radius: 8px;
+
+    transition: 0.2s;
+}
+
+.view-all-btn:hover {
+    background: rgba(255, 255, 255, 0.06);
+    color: white;
+}
+
+/* =========================================================
+   LOADING
+========================================================= */
+
+.loading-state,
+.loading {
+    min-height: 48px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+
+    color: var(--text-muted);
+
+    font-size: 13px;
+}
+
+.loading-spinner {
+    width: 18px;
+    height: 18px;
+
+    border: 2px solid rgba(255, 255, 255, 0.12);
+
+    border-top-color: var(--accent);
+
+    border-radius: 50%;
+
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* =========================================================
+   FORM
+========================================================= */
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-group label {
+    color: #cfcfd8;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    letter-spacing: 0.3px;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+
+    min-height: 48px;
+
+    padding: 0 16px;
+
+    border: 1px solid var(--border);
+    border-radius: 12px;
+
+    background: rgba(255, 255, 255, 0.04);
+
+    color: var(--text-primary);
+
+    outline: none;
+
+    transition:
+        border-color 0.2s ease,
+        background 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: #6f6f7a;
+}
+
+.form-group input:hover,
+.form-group textarea:hover {
+    border-color: var(--border-strong);
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: rgba(168, 85, 247, 0.55);
+    background: rgba(255, 255, 255, 0.06);
+    box-shadow: 0 0 0 4px rgba(168, 85, 247, 0.12);
+}
+
+.form-message {
+    padding: 12px 14px;
+
+    border-radius: 12px;
+
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.form-message.error {
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid rgba(239, 68, 68, 0.22);
+    color: #ff8a8a;
+}
+
+.form-message.success {
+    background: rgba(168, 85, 247, 0.12);
+    border: 1px solid rgba(168, 85, 247, 0.25);
+    color: var(--accent-soft);
+}
+
+/* =========================================================
+   RESPONSIVE - TABLET
+========================================================= */
+
+@media (max-width: 1100px) {
+    :root {
+        --sidebar-width: 220px;
+    }
+
+    .content {
+        padding-left: 28px;
+        padding-right: 28px;
+    }
+}
+
+/* =========================================================
+   RESPONSIVE - SMALL TABLET
+========================================================= */
+
+@media (max-width: 800px) {
+    :root {
+        --sidebar-width: 70px;
+    }
+
+    .sidebar {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    .logo {
+        justify-content: center;
+        padding: 0;
+    }
+
+    .logo span,
+    .menu-item span:last-child,
+    .playlist-section,
+    .sidebar-bottom .menu-item span:last-child,
+    .logout-btn {
+        display: none;
+    }
+
+    .menu-item {
+        justify-content: center;
+        padding: 0;
+    }
+
+    .topbar {
+        padding: 0 24px;
+    }
+}
+
+/* =========================================================
+   RESPONSIVE - MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+    :root {
+        --sidebar-width: 0px;
+    }
+
+    .sidebar {
+        top: auto;
+        right: 0;
+        bottom: 0;
+
+        width: 100%;
+        height: 62px;
+
+        padding: 5px 10px;
+
+        flex-direction: row;
+
+        background: rgba(15, 15, 20, 0.98);
+
+        border-top: 1px solid var(--border);
+        border-right: none;
+    }
+
+    .app:has(.music-player) .sidebar {
+        bottom: var(--player-height);
+    }
+
+    .logo,
+    .playlist-section,
+    .sidebar-bottom {
+        display: none;
+    }
+
+    .main-menu {
+        width: 100%;
+
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .main-menu .menu-item {
+        min-height: 52px;
+    }
+
+    .main-menu .menu-item span:last-child {
+        display: block;
+
+        font-size: 10px;
+    }
+
+    .main-content,
+    .main {
+        margin-left: 0;
+
+        padding-bottom: 80px;
+    }
+
+    .app:has(.music-player) .main-content,
+    .app:has(.music-player) .main {
+        padding-bottom: 150px;
+    }
+
+    .topbar {
+        height: 62px;
+
+        padding: 0 16px;
+    }
+
+    .navigation-buttons {
+        display: none;
+    }
+
+    .content {
+        padding: 18px 16px 40px;
+    }
+
+    .section-header {
+        margin-bottom: 15px;
+    }
+
+    .section-header h2 {
+        font-size: 20px;
+    }
+}

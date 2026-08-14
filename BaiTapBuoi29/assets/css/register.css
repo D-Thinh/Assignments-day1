@@ -1,0 +1,47 @@
+/* =========================================================
+   REGISTER PAGE
+========================================================= */
+
+.auth-card--wide {
+    width: 100%;
+}
+
+.form-row {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 14px;
+}
+
+.password-hint {
+    color: var(--text-muted);
+
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.back-home {
+    margin-top: 22px;
+
+    text-align: center;
+}
+
+.back-home a {
+    color: #9998a7;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    transition: color 0.2s ease;
+}
+
+.back-home a:hover {
+    color: var(--text-primary);
+}
+
+@media (max-width: 600px) {
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+}

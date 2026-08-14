@@ -1,682 +1,987 @@
-# Buổi 29: Storage, Authentication, Modules, Tools, Web Components trong JavaScript
+# Giáo án chi tiết — Buổi 29: Browser Storage & Frontend Auth
+
+> Tài liệu tái cấu trúc từ transcript buổi học + danh sách tiêu đề chính.  
+> Phần **[Bổ sung]** = AI thêm để dễ hiểu, không có (hoặc chỉ lướt) trong transcript.  
+> Phần **[Chưa rõ trong transcript]** = chỗ giảng viên nói ngắt quãng / không chắc.
+
+**Lưu ý phạm vi:** Buổi học đi sâu **Storage** và **Auth**. Modules / Tools / Web Components được nhắc sẽ dạy sau — **không kịp** trong buổi này (giảng viên nói rõ cuối buổi).
 
 ---
 
-## Phần 1: Web Storage (Lưu trữ trên trình duyệt)
+## I. Tổng quan buổi học
 
-### 1.1. Tổng quan Web Storage API
+### Tên buổi học
 
-Web Storage API cho phép lưu dữ liệu ngay trong trình duyệt (client-side), không cần gửi lên server.
+**Buổi 29: Browser storage, Frontend auth**
 
-**Đặc điểm chung:**
-- Dữ liệu bị giới hạn trong cùng một **origin** (origin = protocol + domain + port). Ví dụ `https://abc.com:3000` và `http://abc.com:3000` là **hai origin khác nhau** vì khác protocol.
-- Đọc/ghi **đồng bộ** (synchronous) — code chạy tuần tự, không cần `await`.
-- Dung lượng giới hạn khoảng **5MB mỗi origin** (tùy trình duyệt).
-- Chỉ lưu được **chuỗi (string)**. Muốn lưu object/array phải chuyển qua JSON (`JSON.stringify` / `JSON.parse`).
+### Mục tiêu của buổi học
 
-### 1.2. localStorage
+Sau buổi này, người học:
 
-Dữ liệu **không có hạn sử dụng** — tồn tại vĩnh viễn cho đến khi:
-- Bị xóa thủ công bằng code, hoặc
-- Người dùng xóa dữ liệu trình duyệt thủ công, hoặc
-- Đổi sang trình duyệt/máy khác (vì localStorage lưu trên máy, không đồng bộ qua tài khoản).
+1. Hiểu các cách lưu dữ liệu phía trình duyệt: `localStorage`, `sessionStorage`, Cookies.
+2. Biết khi nào dùng từng loại; tránh lưu sai (đặc biệt password).
+3. Phân biệt **Authentication** và **Authorization**.
+4. Hiểu Session vs JWT; Access Token vs Refresh Token ở mức frontend.
+5. Thực hiện được luồng **Register → Login → gọi API có token → Logout → Handle 401** (refresh).
 
-**Các phương thức:**
+### Đối tượng phù hợp
+
+- Học viên frontend đã biết HTML/CSS/JS cơ bản.
+- Đã học **bất đồng bộ** (`fetch`, Promise / async-await) — buổi trước (Buổi 28).
+- Chuẩn bị làm dự án có đăng ký / đăng nhập.
+
+### Kiến thức cần có trước buổi học
+
+- DOM: `querySelector`, `addEventListener`, sự kiện `input` / `submit`, `preventDefault`.
+- `fetch`, Promise (`.then` / `.catch`) hoặc async/await.
+- JSON: `JSON.stringify` / `JSON.parse`.
+- Làm việc với form HTML (`name`, `value`).
+
+### Các nội dung chính
+
+| Nhóm | Tiêu đề |
+|---|---|
+| **Storage** | localStorage (API + draft form + JSON + token) |
+| | sessionStorage |
+| | Cookies (`document.cookie`, thuộc tính, HttpOnly, Secure, SameSite) |
+| **Auth** | Authentication / Authorization |
+| | Session vs JWT |
+| | Access token / Refresh token |
+| | Register / Login / Logout |
+| | Handle 401 |
+
+### Kết quả đạt được sau khi học xong
+
+- Tự viết form lưu draft bằng `localStorage` (không lưu password; submit thì xóa đúng key).
+- Giải thích được cookie khác Web Storage chỗ nào.
+- Vẽ được luồng auth: đăng ký/đăng nhập → lưu token → gọi API có `Authorization` → logout → 401 thì refresh.
+- Biết giới hạn: payload JWT đọc được; auth còn rất rộng (SSO, passkey…) — buổi chỉ nền tảng frontend.
+
+---
+
+## II. Nội dung chi tiết
+
+---
+
+### A. Storage — Tổng quan
+
+#### 1. Mục tiêu của phần này
+
+Hiểu “storage trên trình duyệt” là gì, dữ liệu nằm đâu, và có những “ngăn” nào (local / session / cookie / nhắc IndexDB).
+
+#### 2. Khái niệm / kiến thức chính
+
+- **Browser storage**: nơi client lưu dữ liệu mà không cần hỏi server mỗi lần chỉ để “nhớ lại”.
+- Giảng viên phân biệt:
+  - Lưu trên **ổ cứng (disk)** → tắt trình duyệt vẫn còn (localStorage).
+  - Lưu theo **phiên / tab** → đóng tab là mất (sessionStorage).
+- Trong DevTools → tab **Application**: xem Local Storage, Session Storage, Cookies.
+
+#### 3. Nội dung giảng viên đã trình bày
+
+- Storage = lưu dữ liệu trên trình duyệt.
+- Có nhiều nơi: localStorage, sessionStorage, cookie; nhắc thêm extension storage, IndexDB.
+- IndexDB: như một DB NoSQL trên trình duyệt — tổ chức, tìm kiếm dữ liệu có cấu trúc / nhiều; dùng khi bài toán phức tạp hơn “chỉ lưu key-value”.
+- Buổi học tập trung **ba thứ**: localStorage, sessionStorage, cookie.
+
+#### 4. Giải thích dễ hiểu
+
+Tưởng tượng trình duyệt có ngăn kéo:
+
+- **localStorage**: ngăn kéo tủ — về nhà vẫn còn đồ.
+- **sessionStorage**: khay tạm trên bàn làm việc — đứng dậy (đóng tab) là dọn mất.
+- **Cookie**: mảnh giấy dán lên phong bì thư — mỗi lần gửi thư (request) có thể gửi kèm.
+
+#### 5. Ví dụ
+
+- Mở Application trong F12 để chỉ chỗ Local / Session / Cookie.
+- [Bổ sung – Ví dụ minh họa] Cùng origin `http://127.0.0.1:5500` thì các tab share localStorage; đổi port là origin khác → storage khác.
+
+#### 6. Case thực tế / tình huống
+
+*(Phần tổng quan chưa có case dài — case nằm ở localStorage form.)*
+
+#### 7. Điểm cần lưu ý
+
+- Không nhầm IndexDB với localStorage: IndexDB là DB, không chỉ “ô nhớ key-value đơn giản”.
+- [Bổ sung] Web Storage bị giới hạn theo **origin** (protocol + domain + port).
+
+#### 8. Mối liên hệ với các nội dung khác
+
+Storage là nền để sau đó **lưu token** trong Auth. Cookie vừa là storage vừa gắn với cách session/token gửi lên server.
+
+#### 9. Kiến thức cần ghi nhớ
+
+- Client có nhiều chỗ lưu; buổi này: localStorage, sessionStorage, cookie.
+- local ≈ bền; session ≈ theo tab; cookie ≈ có thể tự gửi kèm request.
+
+---
+
+### B. localStorage
+
+#### 1. Mục tiêu của phần này
+
+Thành thạo API localStorage; áp dụng lưu draft form; hiểu chỉ lưu string; biết lưu object bằng JSON; biết dùng để lưu token.
+
+#### 2. Khái niệm / kiến thức chính
+
+**API:**
 
 ```javascript
-// Ghi dữ liệu
-localStorage.setItem("username", "Nam");
-
-// Đọc dữ liệu
-const username = localStorage.getItem("username"); // "Nam"
-
-// Xóa 1 key
-localStorage.removeItem("username");
-
-// Xóa toàn bộ dữ liệu trong origin
-localStorage.clear();
-
-// Lấy tên key theo index (thứ tự không đảm bảo cố định)
-const firstKey = localStorage.key(0);
-
-// Số lượng key hiện có
-console.log(localStorage.length);
+localStorage.setItem(key, value);
+localStorage.getItem(key);      // không có → null
+localStorage.removeItem(key);
+localStorage.clear();           // xóa HẾT trong origin
+localStorage.key(index);        // tên key theo chỉ số
+localStorage.length;            // số cặp
 ```
 
-**Lưu object / array (phải qua JSON):**
+- Có thể gọi qua `window.localStorage`.
+- Chỉ lưu **string**. Số cũng thành chuỗi. Object → `JSON.stringify` / `JSON.parse`.
+- Tồn tại đến khi xóa bằng code hoặc user xóa dữ liệu site / đổi máy trình duyệt.
+
+#### 3. Nội dung giảng viên đã trình bày
+
+**Use case form login (draft):**
+
+- Form nhiều trường; user F5 hoặc tắt trình duyệt → mất dữ liệu đang gõ.
+- Bắt sự kiện `input` trên từng input trong form → `setItem(name, value)`.
+- Khi load trang: `getItem(name)` đổ lại `input.value`; nếu `null` thì dùng `|| ""`.
+- **Không lưu password** — chỉ lưu các field khác (ví dụ email).
+- Khi submit thành công: **không** dùng `clear()` (xóa hết mọi key trên trang); `removeItem` từng key của form.
+- Dùng `preventDefault` trên submit để không reload mặc định.
+
+**API bổ sung:**
+
+- Demo `key(index)`: index 0, 1… lấy tên key; ngoài range → `null`.
+- `length` = số cặp key-value.
+
+**Chỉ string + JSON:**
+
+- `setItem("abc", 2)` → Application hiện string `"2"`.
+- Lưu object user: `JSON.stringify` lúc ghi; `JSON.parse` lúc đọc.
+
+**Bẫy giá trị `""`:**
+
+- Trong Application, value hiện `""` **không phải** string rỗng.
+- String rỗng thật: ô trống, `.length === 0`.
+- Chuỗi gồm hai ký tự dấu nháy: `.length === 2` — học viên hay nhầm.
+
+**Lưu token:**
+
+- Sau đăng nhập, server trả “chìa khóa” (token) → lưu localStorage → mỗi request gửi kèm để chứng minh là chủ tài khoản.
+
+**Debug khi “không hiện”:**
+
+- Kiểm tra đúng Local Storage; refresh trong Application; bắt đúng sự kiện `input`; debug từng bước (breakpoint hoặc `console.log`).
+
+#### 4. Giải thích dễ hiểu
+
+`localStorage` giống sổ tay dán trên tủ lạnh của website đó: ghi cặp “tên ô → nội dung chữ”. F5 vẫn còn. Muốn ghi object thì phải “chụp ảnh chữ” bằng JSON rồi mới dán sổ.
+
+#### 5. Ví dụ
+
+**Draft form (ý giảng viên):**
 
 ```javascript
-const user = { id: 1, name: "Nam", roles: ["admin", "editor"] };
+const formLogin = document.querySelector("#form-login");
+const inputs = formLogin.querySelectorAll("input");
 
-// Lưu: chuyển object thành chuỗi JSON
-localStorage.setItem("user", JSON.stringify(user));
+inputs.forEach((input) => {
+  input.value = localStorage.getItem(input.name) || "";
+});
 
-// Đọc lại: chuyển chuỗi JSON về object
-const savedUser = JSON.parse(localStorage.getItem("user"));
-console.log(savedUser.name); // "Nam"
+inputs.forEach((input) => {
+  input.addEventListener("input", (e) => {
+    const { name, value } = e.target;
+    if (name === "password") return;
+    localStorage.setItem(name, value);
+  });
+});
+
+formLogin.addEventListener("submit", (e) => {
+  e.preventDefault();
+  inputs.forEach((input) => localStorage.removeItem(input.name));
+});
 ```
 
-> ⚠️ Lưu ý làm rõ thêm: Nếu key không tồn tại, `getItem()` trả về `null` chứ không báo lỗi. Nếu bạn `JSON.parse(null)` sẽ trả về `null` (không lỗi), nhưng `JSON.parse(undefined)` sẽ **lỗi**. Vì vậy nên kiểm tra trước:
+**JSON:**
+
 ```javascript
-const raw = localStorage.getItem("user");
-const user = raw ? JSON.parse(raw) : null;
+const user1 = { name: "Nguyễn Văn A", age: 20 };
+localStorage.setItem("user", JSON.stringify(user1));
+const saved = JSON.parse(localStorage.getItem("user"));
 ```
 
-### 1.3. sessionStorage
+#### 6. Case thực tế / tình huống
 
-Dùng chung bộ API với `localStorage` (`setItem`, `getItem`, `removeItem`, `clear`, `key`, `length`), nhưng khác về vòng đời:
+| | |
+|---|---|
+| **Bối cảnh** | Form đăng nhập / form dài nhiều field |
+| **Vấn đề** | User nhập dở, F5 hoặc tắt browser → mất hết |
+| **Cách xử lý** | Lưu theo `name` khi `input`; restore khi load; không lưu password; submit xong `removeItem` đúng key |
+| **Kết quả** | Mở lại vẫn còn email/draft; password không bị lưu; token/theme khác không bị `clear()` |
+| **Bài học** | Persist đúng việc; bảo mật field nhạy cảm; đừng “xóa sạch origin” |
 
-- Dữ liệu chỉ tồn tại trong **phiên của một tab**. Đóng tab là dữ liệu bị xóa.
-- **Không chia sẻ giữa các tab** — mỗi tab mở cùng một trang web sẽ có bản sessionStorage riêng biệt (kể cả khi cùng origin).
-- Thích hợp cho dữ liệu tạm thời: giỏ hàng tạm, dữ liệu form đang nhập dở (draft), trạng thái wizard nhiều bước...
+#### 7. Điểm cần lưu ý
+
+- Không lưu mật khẩu vào localStorage.
+- `clear()` nguy hiểm khi trang còn token / dữ liệu khác.
+- Mọi value là string — so sánh kiểu dễ sai.
+- Nhầm `""` (hai ký tự nháy) với empty.
+- XSS đọc được localStorage → token trong localStorage không “bí mật tuyệt đối”.
+
+#### 8. Mối liên hệ với các nội dung khác
+
+localStorage dùng lại ở Auth để lưu access/refresh token. So với sessionStorage (mất khi đóng tab) và cookie (tự gửi request).
+
+#### 9. Kiến thức cần ghi nhớ
+
+- `setItem` / `getItem` / `removeItem` / `clear` / `key` / `length`.
+- Chỉ string → JSON khi cần object.
+- Draft form: lưu khi gõ, đọc khi load, xóa đúng key khi xong.
+- Không lưu password; cân nhắc khi lưu token.
+
+---
+
+### C. sessionStorage
+
+#### 1. Mục tiêu của phần này
+
+Biết API giống localStorage nhưng vòng đời theo tab; biết khi nào nên dùng.
+
+#### 2. Khái niệm / kiến thức chính
+
+- Cùng bộ method: `setItem`, `getItem`, `removeItem`, `clear`, `key`, `length`.
+- Đóng tab → mất. Mở tab mới → không còn data tab cũ.
+- localStorage: đóng tab / tắt browser vẫn còn (trừ khi bị xóa).
+
+#### 3. Nội dung giảng viên đã trình bày
+
+- Demo `sessionStorage.setItem("greeting", "hello")` trong console → Application có; đóng tab mở lại → mất.
+- localStorage cùng lúc vẫn còn.
+- **Khi nào dùng:** logic muốn “tắt tab = reset” (ví dụ game, kéo-thả / tính toán tạm trên trang).
+- Bài toán e-commerce / khóa học thường **ít** gặp nhu cầu này → dùng localStorage nhiều hơn.
+
+#### 4. Giải thích dễ hiểu
+
+sessionStorage = giấy nháp trên bàn một ca làm việc. Tan ca (đóng tab) là bỏ giấy. localStorage = hồ sơ bỏ tủ.
+
+#### 5. Ví dụ
 
 ```javascript
-sessionStorage.setItem("draftForm", JSON.stringify({ email: "a@gmail.com" }));
+sessionStorage.setItem("greeting", "hello");
+// Đóng tab → mất
 ```
 
-> 💡 Làm rõ thêm: Nếu bạn mở lại tab đã đóng bằng "reopen closed tab" (Ctrl+Shift+T) ở một số trình duyệt, sessionStorage có thể được khôi phục — đây là hành vi đặc thù của trình duyệt, không phải chuẩn bắt buộc.
+> [Bổ sung – Ví dụ minh họa] Wizard nhiều bước chỉ cần nhớ trong tab hiện tại → sessionStorage; “Remember me” / token dài → không dùng sessionStorage nếu muốn mở lại browser vẫn login.
 
-### 1.4. So sánh localStorage và sessionStorage
+#### 6. Case thực tế / tình huống
 
-| Tiêu chí | localStorage | sessionStorage |
-|---|---|---|
-| Thời gian sống | Lâu dài, đến khi bị xóa thủ công | Chỉ trong phiên của tab, mất khi đóng tab |
-| Chia sẻ giữa các tab | Có (cùng origin) | Không (mỗi tab riêng) |
-| Dung lượng | ~5MB/origin | ~5MB/origin |
-| Cách truy cập (API) | Giống hệt nhau | Giống hệt nhau |
-| Gửi kèm request server | Không tự động | Không tự động |
+| | |
+|---|---|
+| **Bối cảnh** | Game / logic kéo thả lưu điểm tạm |
+| **Vấn đề** | Muốn đóng tab là reset, không giữ “điểm bẩn” lần sau |
+| **Cách xử lý** | Ghi state vào sessionStorage |
+| **Kết quả** | Tab mới = ván mới |
+| **Bài học** | Chọn storage theo **vòng đời mong muốn**, không theo “API quen hơn” |
 
-### 1.5. Cookies
+#### 7. Điểm cần lưu ý
 
-- Dung lượng lưu tối đa khoảng **4KB**.
-- **Tự động được gửi kèm lên server** với mỗi request (khác với localStorage/sessionStorage — hai loại này KHÔNG tự gửi lên server).
-- Có thể đặt thời gian hết hạn bằng `expires` (ngày giờ cụ thể) hoặc `max-age` (số giây).
-- Không nên dùng để lưu dữ liệu lớn; chủ yếu dùng cho token / thông tin phiên đăng nhập.
+- API giống → dễ nhầm biến `localStorage` / `sessionStorage`.
+- Không share giữa các tab (khác localStorage cùng origin).
 
-**Ví dụ set cookie bằng JavaScript:**
+#### 8. Mối liên hệ với các nội dung khác
+
+Cùng nhóm Web Storage với localStorage; ít dùng cho token dài hạn trong demo Auth của buổi (giảng viên dùng localStorage cho token).
+
+#### 9. Kiến thức cần ghi nhớ
+
+- API giống local; sống theo tab.
+- Dùng khi “đóng tab phải mất”.
+
+---
+
+### D. Cookies
+
+#### 1. Mục tiêu của phần này
+
+Hiểu cookie là gì, khác Web Storage chỗ nào, các thuộc tính chính (domain, path, hết hạn, HttpOnly, Secure, SameSite), và vì sao frontend thường không tự set cookie auth “bảo mật thật”.
+
+#### 2. Khái niệm / kiến thức chính
+
+- Cookie: bản ghi name/value (+ metadata) gắn domain.
+- **Tự động gửi kèm** request phù hợp lên server (điểm khác local/session storage).
+- Dung lượng nhỏ (~4KB theo giảng viên).
+- Có thời hạn: session / `Expires` / `Max-Age` (**giây**).
+- Frontend: `document.cookie`.
+- Cookie “bảo mật hơn” thường do **backend** set, gắn **HttpOnly**.
+
+#### 3. Nội dung giảng viên đã trình bày
+
+- Cookie cũng là nơi lưu; xem trong Application → Cookies.
+- Thêm field: domain, path, expires/max-age, size, HttpOnly, Secure, SameSite, (nhắc cross-site / partition…).
+- **Domain:** cookie lưu theo domain đang truy cập (vd `127.0.0.1`, `f8.vn`).
+- **Path:** phân biệt phạm vi; thường vẫn truy cập khi cùng domain (giảng viên nói không phải lúc nào cũng “đúng path trang mới đọc được”).
+- **Hết hạn:** mặc định kiểu session → tắt trình duyệt có thể mất; `Max-Age` tính bằng giây (demo 5 giây → F5 sau 5s mất; nhầm 5000 tưởng ms).
+- **Size:** khoảng tổng ký tự name + value (giảng viên tự sửa nhận định trong buổi).
+- **HttpOnly:** chỉ set được từ backend response; JS không đọc được cookie đó → giảm rủi ro dán mã độc đọc cookie. Frontend `document.cookie` không set được cờ này.
+- **Secure:** chỉ gửi khi HTTPS.
+- Cookie **tự đính kèm** request.
+- **SameSite / origin:** origin = protocol + domain + port. Cross-site gửi cookie bị trình duyệt hạn chế (liên quan chống theo dõi / “quảng cáo đuổi” ngày trước dùng cross-site cookie; nay chuyển hướng khác như fingerprinting).
+- Cookie hay dùng lưu token; bảo mật hơn localStorage **một phần** nhờ HttpOnly — nhưng user mở DevTools copy, hoặc một số extension, vẫn có rủi ro.
+- Với bài tập / trang thường: dùng localStorage vẫn chấp nhận được; trang liên quan tiền bạc cần cẩn hơn.
+- Thực hành cookie sâu để backend; buổi này chủ yếu giới thiệu.
+
+#### 4. Giải thích dễ hiểu
+
+Cookie = tem dán theo “nhà” (domain). Mỗi lần gõ cửa server, trình duyệt có thể đưa tem theo. Tem HttpOnly = tem trong két — JS trên trang không lấy ra được; chỉ server gửi tem đó về mới khóa két được.
+
+#### 5. Ví dụ
 
 ```javascript
-// Set cookie tồn tại 1 ngày
 document.cookie = "token=abc123; max-age=86400; path=/";
-
-// Đọc cookie (document.cookie trả về 1 chuỗi duy nhất, cần tự parse)
-console.log(document.cookie); // "token=abc123; theme=dark"
+console.log(document.cookie); // chuỗi cần tự parse
 ```
 
-> 💡 Làm rõ thêm — các thuộc tính quan trọng của cookie mà transcript chưa nhắc chi tiết:
-> - `HttpOnly`: cookie không thể đọc được bằng JavaScript (`document.cookie`), chỉ set được từ phía server. Giúp chống đánh cắp token qua XSS.
-> - `Secure`: cookie chỉ được gửi qua kết nối HTTPS.
-> - `SameSite`: kiểm soát việc cookie có được gửi kèm khi request từ domain khác hay không (`Strict`, `Lax`, `None`), giúp chống tấn công CSRF.
+Demo Max-Age 5 giây trong Application.
+
+#### 6. Case thực tế / tình huống
+
+| | |
+|---|---|
+| **Bối cảnh** | “Quảng cáo đuổi” / theo dõi cross-site |
+| **Vấn đề** | Site A gắn cookie, request sang domain quảng cáo mang theo định danh |
+| **Cách xử lý (trình duyệt hiện đại)** | Chặn / hạn chế cross-site cookie (SameSite, chính sách trình duyệt) |
+| **Kết quả** | Theo dõi cũ khó hơn; bên quảng cáo chuyển cách khác (vd fingerprinting — giảng viên nhắc) |
+| **Bài học** | Cookie không chỉ “lưu token app”; còn gắn privacy |
+
+#### 7. Điểm cần lưu ý
+
+- Max-Age = **giây**, không phải mili giây.
+- HttpOnly không set từ JS thuần.
+- `document.cookie` trả về một string gộp nhiều cookie.
+- Cookie “an toàn hơn” ≠ tuyệt đối an toàn.
+- [Chưa rõ trong transcript] Một số thuộc tính (partition, priority) giảng viên chỉ liếc DevTools, không giải thích đủ.
+
+#### 8. Mối liên hệ với các nội dung khác
+
+Đối trọng với localStorage khi nói lưu token. Liên quan Auth (session cookie vs Bearer token). Secure liên quan HTTPS.
+
+#### 9. Kiến thức cần ghi nhớ
+
+- Cookie tự gửi kèm request; Web Storage thì không.
+- HttpOnly / Secure / SameSite / Max-Age.
+- Auth cookie “đúng bài” thường do backend set.
 
 ---
 
-## Phần 2: Authentication (Xác thực người dùng)
+### E. Authentication & Authorization
 
-### 2.1. Authentication vs Authorization
+#### 1. Mục tiêu của phần này
 
-- **Authentication (Xác thực)**: xác minh **bạn là ai** — ví dụ đăng nhập bằng username/password.
-- **Authorization (Phân quyền)**: xác minh **bạn được phép làm gì** — ví dụ chỉ admin mới được xóa bài viết.
+Phân biệt rõ hai khái niệm; biết bước login khác bước gọi API có token.
 
-**Hai cách tiếp cận:**
-- **Cách cũ**: lưu session trên server, định danh qua cookie chứa `sessionId`. Server phải lưu trạng thái (stateful).
-- **Cách hiện đại**: dùng token (thường là JWT), gửi kèm trong mỗi request. Server không cần lưu trạng thái (**stateless**), dễ mở rộng (scale) theo chiều ngang.
+#### 2. Khái niệm / kiến thức chính
 
-### 2.2. JWT (JSON Web Token)
+| | Authentication | Authorization |
+|---|---|---|
+| Câu hỏi | Bạn là **ai**? | Bạn **được phép** làm gì / xem gì? |
+| Ví dụ buổi học | Gửi tài khoản + mật khẩu khi đăng nhập | Gửi **token** khi lấy danh sách bài tập / thông tin user |
 
-JWT gồm 3 phần, ngăn cách bởi dấu chấm: `header.payload.signature`
+#### 3. Nội dung giảng viên đã trình bày
 
+- Auth chia hai phần: authentication (xác minh danh tính) và authorization (kiểm tra quyền truy cập tài nguyên).
+- Đăng nhập xong vào trang chủ; mỗi request lấy tài nguyên gửi kèm token → authorization.
+- Tài khoản/mật khẩu chứng minh “bạn là ai”; token chứng minh “bạn có quyền với request này”.
+- Luôn cần cả hai bước theo trình tự: đăng nhập trước, rồi mới mang token đi xin tài nguyên.
+
+#### 4. Giải thích dễ hiểu
+
+- Authentication = bảo vệ cổng: đưa CMND (password).
+- Authorization = trong tòa nhà: thẻ nhân viên (token) mới vào được phòng server / hồ sơ.
+
+#### 5. Ví dụ
+
+- Bấm login gửi username/password → authentication.
+- Bấm xem bài tập / gọi `/users/me` kèm token → authorization.
+
+#### 6. Case thực tế / tình huống
+
+*(Gắn với demo Spotify API ở phần sau.)*
+
+#### 7. Điểm cần lưu ý
+
+- Hay gọi nhầm cả hai là “auth”.
+- Có token chưa chắc đủ quyền (role) — authorization còn kiểm role/permission. [Bổ sung] buổi tập trung token hợp lệ hơn là RBAC chi tiết.
+
+#### 8. Mối liên hệ với các nội dung khác
+
+Authentication tạo ra token (JWT/session). Authorization dùng token đó. Token hay nằm ở localStorage hoặc cookie.
+
+#### 9. Kiến thức cần ghi nhớ
+
+- AuthN = là ai (credentials).
+- AuthZ = được làm gì (thường qua token).
+
+---
+
+### F. Session vs JWT
+
+#### 1. Mục tiêu của phần này
+
+Hiểu hai hướng thiết kế phiên đăng nhập; vì sao JWT phổ biến hơn với nhiều API hiện đại.
+
+#### 2. Khái niệm / kiến thức chính
+
+**Session (cách cũ hơn — stateful):**
+
+1. Login OK → server tạo mã phiên (vd `ABC123`), **lưu trên server**.
+2. Gửi mã về client.
+3. Request sau kèm mã → server **đối chiếu DB/store** → nhận ra user.
+
+**JWT (JSON Web Token — server không cần lưu “mã phiên” giống session cổ điển):**
+
+1. Login OK → server tạo JWT đưa client.
+2. Client gửi JWT mỗi request.
+3. Server **kiểm tra JWT có hợp lệ không** (chữ ký, hạn…) — giảm bước lấy session trong DB mỗi lần (theo giảng viên).
+
+Token nói chung = đoạn mã. Session id thường là chuỗi ngẫu nhiên **không dịch ra thông tin**. JWT là token **mang thông tin** (decode được header/payload).
+
+#### 3. Nội dung giảng viên đã trình bày
+
+- Hai cách: session và JWT; session ngày càng ít dùng hơn trong các hệ thống giảng viên hướng tới.
+- So sánh lưu / không lưu mã trên server như trên.
+- JWT gồm 3 phần ngăn dấu chấm: **header**, **payload**, **signature** (giảng viên từng nói “verification” rồi thống nhất signature).
+- Header: thuật toán (vd HS256), type JWT — encode Base64 (demo `btoa`/`atob`, nhắc URL-safe).
+- Payload: thông tin user (`sub`/id, name, role, `iat` thời gian tạo; thường thêm thời hạn `exp` — giảng viên lúc đầu phân vân `iat` vs expire rồi làm rõ `iat` = issued at, nên có thêm expire).
+- Signature: kết hợp header + payload + **secret chỉ ở server** bằng thuật toán (HS256); mã hóa một chiều → không suy ngược secret; kẻ mạo danh thiếu secret không tạo đúng chữ ký.
+- Demo encode/decode header & payload bằng Base64 → **payload không phải bí mật**.
+- JWT đã phát hành khó “hủy sớm” vì hạn nằm trong token; session sửa trên server là hết hạn ngay.
+- Kỹ thuật **blacklist**: ghi JWT (còn hạn) vào danh sách cấm + thời hạn; request tới thì check blacklist trước.
+
+#### 4. Giải thích dễ hiểu
+
+- Session: nhà trường giữ sổ “mã số học sinh ↔ hồ sơ”; bạn đưa mã, nhà trường mở sổ.
+- JWT: thẻ có in sẵn thông tin + dấu mộc nhà trường; bảo vệ nhìn thẻ và dấu mộc, không cần mở sổ mỗi lần (trừ khi có sổ đen blacklist).
+
+#### 5. Ví dụ
+
+Cấu trúc:
+
+```text
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0In0.signature...
 ```
-eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInJvbGUiOiJhZG1pbiIsImV4cCI6MTcyMDAwMDAwMH0.4f3c9a...
-```
 
-- **Header**: chứa thuật toán mã hóa (vd `HS256`) và loại token.
-- **Payload**: chứa dữ liệu (claims) như `userId`, `role`, thời gian hết hạn `exp`. 
-  > ⚠️ Lưu ý quan trọng transcript chưa nói rõ: **Payload chỉ được mã hóa Base64, KHÔNG được mã hóa bí mật** — bất kỳ ai cũng có thể decode và đọc được nội dung (thử tại jwt.io). Vì vậy **không được** nhét mật khẩu hay dữ liệu nhạy cảm vào payload.
-- **Signature**: được server ký bằng secret key, đảm bảo token không bị sửa đổi. Nếu ai đó sửa payload mà không có secret key, chữ ký sẽ không khớp và server sẽ từ chối token.
+Demo lớp: `btoa` object header (bỏ khoảng trắng) gần giống phần đầu JWT.
 
-### 2.3. Access Token
+#### 6. Case thực tế / tình huống
 
-- Thời gian sống ngắn: thường **15 - 60 phút**.
-- Chứa thông tin người dùng và thời gian hết hạn.
-- Client gửi kèm mỗi request qua header:
+| | |
+|---|---|
+| **Bối cảnh** | Muốn logout / khóa tài khoản ngay trong khi JWT còn 1 giờ |
+| **Vấn đề** | Server không lưu session → không “xóa phiên” như session cổ |
+| **Cách xử lý** | Blacklist token đến khi `exp` |
+| **Kết quả** | Token còn hạn nhưng bị từ chối |
+| **Bài học** | Stateless tiện scale nhưng thu hồi cần cơ chế thêm |
+
+#### 7. Điểm cần lưu ý
+
+- Payload JWT **đọc được** — không nhét mật khẩu / dữ liệu cực nhạy.
+- Secret không đưa ra frontend.
+- [Chưa rõ trong transcript] Chi tiết toán học HMAC/SHA256 giảng viên nói đã quên phần sâu — chỉ cần hiểu mô hình secret + one-way.
+- Mâu thuẫn nhẹ trong buổi: lúc nói JWT server “không lưu”, lúc nói blacklist thì **có lưu** danh sách cấm — không đối lập nếu hiểu: không lưu session đầy đủ, nhưng có thể lưu exception list.
+
+#### 8. Mối liên hệ với các nội dung khác
+
+JWT cụ thể hóa thành Access/Refresh. Cách gửi JWT gắn Authorization header và/hoặc cookie.
+
+#### 9. Kiến thức cần ghi nhớ
+
+- Session: mã opaque + store server.
+- JWT: 3 phần; payload đọc được; signature cần secret server.
+- Thu hồi sớm JWT → blacklist (hoặc chờ hết hạn).
+
+---
+
+### G. Access Token & Refresh Token
+
+#### 1. Mục tiêu của phần này
+
+Hiểu cặp token; vì sao access ngắn / refresh dài; rotation là lựa chọn thiết kế.
+
+#### 2. Khái niệm / kiến thức chính
+
+| | Access Token | Refresh Token |
+|---|---|---|
+| Dùng để | Gọi API tài nguyên (`Authorization: Bearer …`) | Xin access mới khi access hết hạn |
+| Thời hạn (theo GV) | Ngắn: vài chục giây → vài phút → vài giờ | Dài: 1 ngày → 7 ngày → 1 tháng |
+| Tần suất gửi | Gần như mọi request bảo vệ | Ít — lúc refresh |
+
+Lý do thiết kế (giảng viên): access gửi rất nhiều → dễ bị bắt hơn → hạn ngắn để giảm thiệt hại; refresh ít lộ trên đường truyền hơn.
+
+#### 3. Nội dung giảng viên đã trình bày
+
+- Register/login thành công (API Spotify demo) trả `accessToken` + `refreshToken` (có thể kèm message, user…).
+- Học viên hỏi: access ngắn + refresh liên tục để tăng bảo mật → GV đồng ý hướng đó.
+- Refresh xong: có thể cấp access mới **và** refresh mới, hoặc chỉ access mới — **tùy backend** (logic, không phải định luật).
+- Chỉ dùng một access hạn dài (vd 7 ngày) cũng “được” về mặt logic.
+- App ngân hàng: đôi khi chỉ access rất ngắn (vài chục giây / vài phút), không refresh — hết hạn là out, bắt login lại.
+- Refresh **không** đồng nghĩa “bảo mật 2 lớp” (2FA) — chỉ bảo mật hơn một nấc trong thiết kế token.
+
+#### 4. Giải thích dễ hiểu
+
+Access = thẻ vào cửa phòng họp ngày hôm nay (hết ngày là đứt). Refresh = giấy ủy quyền hiếm khi đưa ra, chỉ để xin thẻ mới ở quầy lễ tân — không dùng giấy đó để đi vào mọi phòng.
+
+#### 5. Ví dụ
 
 ```http
 Authorization: Bearer <access_token>
 ```
 
+Lưu:
+
 ```javascript
-fetch("https://api.example.com/profile", {
+localStorage.setItem("accessToken", data.accessToken);
+localStorage.setItem("refreshToken", data.refreshToken);
+```
+
+#### 6. Case thực tế / tình huống
+
+| | |
+|---|---|
+| **Bối cảnh** | Tin tặc bắt được gói tin có access token |
+| **Vấn đề** | Nếu access sống cả tuần → cửa sổ lạm dụng dài |
+| **Cách xử lý** | Access vài phút; bắt buộc refresh định kỳ |
+| **Kết quả** | Token đánh cắp sớm hết hạn |
+| **Bài học** | Thời hạn = tham số bảo mật theo độ nhạy cảm hệ thống |
+
+#### 7. Điểm cần lưu ý
+
+- Không lấy refresh gắn vào mọi API thường.
+- Contract API khác nhau (body vs header khi refresh) — phải đọc response thật, đừng tin AI/Postman mù.
+
+#### 8. Mối liên hệ với các nội dung khác
+
+Dùng trong Register/Login (nhận token), gọi API (access), Handle 401 (refresh). Lưu bằng localStorage trong demo.
+
+#### 9. Kiến thức cần ghi nhớ
+
+- Access ngắn + hay dùng; refresh dài + ít dùng.
+- Thiết kế token là **logic sản phẩm**, có nhiều biến thể hợp lệ.
+
+---
+
+### H. Register / Login / Logout
+
+#### 1. Mục tiêu của phần này
+
+Thực hiện được 3 luồng trên frontend với `fetch`, FormData, lưu/xóa token, chuyển trang, auth guard cơ bản.
+
+#### 2. Khái niệm / kiến thức chính
+
+- **Register:** gửi thông tin tạo tài khoản → nhận token (hoặc bảo login lại — demo nhận token luôn).
+- **Login:** gửi email/password → nhận token.
+- **Logout:** xóa token client (+ gọi API revoke nếu có).
+- **FormData** + `Object.fromEntries(...)` gom field theo `name`.
+- `Content-Type: application/json` + `JSON.stringify` khi gửi JSON.
+- Lỗi HTTP 4xx từ API thường **vẫn vào `.then`**, không phải `.catch` (`.catch` ≈ mạng/CORS/…); cần đọc `data.error` / status.
+- **Guard:** đã login thì không vào login/register; chưa login thì không vào trang cần auth.
+
+#### 3. Nội dung giảng viên đã trình bày
+
+**Register (demo Spotify API):**
+
+- Form: username, email, password, displayName, bio, country…
+- `preventDefault`; FormData → object; POST register; headers JSON; body stringify.
+- Thành công → access + refresh → `localStorage` → redirect trang chủ.
+- Email/username trùng → body lỗi; `fetch` vẫn “thành công” ở tầng mạng → xử lý trong `then` (vd `data.error?.message`).
+- Nhắc các loại Content-Type (JSON text vs form-urlencoded vs multipart khi có file).
+
+**Trang chủ sau login:**
+
+- GET `/api/users/me` (hoặc tương đương) kèm `Authorization: Bearer` + access từ localStorage.
+- Hiển thị username, email.
+- Cảnh báo: **không copy/chụp token** cho người khác.
+
+**Logout:**
+
+- API logout có thể không có trên collection demo → tối thiểu: `removeItem` access + refresh → về login.
+- Nếu có API logout: gọi báo server + xóa local.
+
+**Login page:**
+
+- Tương tự register: FormData, POST login, lưu token, về index.
+
+**Guard / chống vào nhầm trang:**
+
+- Đang login mà vào login/register → gọi `/me` (hoặc check token) → đá về index.
+- Chưa login vào index → đá về login.
+- Hiện tượng **nháy (flash)** vì phải đợi request; có thể tối ưu bằng check token local trước — GV để bài tập / làm thật sau.
+- Code guard copy nhiều nơi chưa tối ưu — làm đúng luồng trước.
+
+#### 4. Giải thích dễ hiểu
+
+Đăng ký/đăng nhập = nhận hai chìa (access + refresh) bỏ túi (localStorage). Vào nhà (= trang chủ) phải đưa chìa access. Ra về (logout) = vứt chìa trong túi. Không có chìa mà xô cửa trang chủ → bị đưa lại cổng login.
+
+#### 5. Ví dụ
+
+```javascript
+// Ý tưởng register/login
+const data = Object.fromEntries(new FormData(form).entries());
+fetch(url, {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify(data),
+})
+  .then((res) => res.json())
+  .then((data) => {
+    if (data.error) return console.log(data.error.message);
+    localStorage.setItem("accessToken", data.accessToken);
+    localStorage.setItem("refreshToken", data.refreshToken);
+    location.href = "./index.html";
+  });
+
+// Gọi /me
+fetch(apiUserMe, {
   headers: {
-    Authorization: `Bearer ${accessToken}`
-  }
-});
-```
-
-- Server **không lưu lại** access token — chỉ kiểm tra chữ ký (signature) và thời gian hết hạn (`exp`) để xác thực. Đây chính là bản chất "stateless".
-
-### 2.4. Refresh Token
-
-- Thời gian sống dài: từ vài ngày đến vài tháng.
-- Dùng để xin access token mới khi access token hết hạn, **không dùng để gọi API thông thường**.
-- Rủi ro thấp hơn access token vì chỉ được gửi tới một endpoint duy nhất: `/auth/refresh`.
-- Quy trình: khi access token hết hạn → client gọi `/auth/refresh` kèm refresh token → server xác thực → trả về **cặp token mới** (cả access token và refresh token mới — kỹ thuật này gọi là **refresh token rotation**, giúp tăng bảo mật).
-
-```javascript
-async function refreshAccessToken(refreshToken) {
-  const res = await fetch("/auth/refresh", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ refreshToken })
-  });
-  if (!res.ok) throw new Error("Refresh token hết hạn hoặc không hợp lệ");
-  const { accessToken, refreshToken: newRefreshToken } = await res.json();
-  return { accessToken, refreshToken: newRefreshToken };
-}
-```
-
-### 2.5. Flow đăng ký (Register)
-
-1. Client gửi `username`, `password` (và thông tin cần thiết khác) tới `POST /auth/register`.
-2. Server tạo tài khoản, **mã hóa mật khẩu** bằng bcrypt (kỹ thuật hash + salt — không bao giờ lưu mật khẩu dạng plain text).
-3. Server trả về thông báo thành công, và thường:
-   - Tạo sẵn token luôn (tự động đăng nhập), hoặc
-   - Redirect người dùng sang trang login để tự đăng nhập.
-
-```javascript
-async function register(username, password) {
-  const res = await fetch("/auth/register", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ username, password })
-  });
-  return res.json();
-}
-```
-
-> 💡 Làm rõ thêm: **bcrypt hash + salt** nghĩa là gì?
-> - **Hash**: biến mật khẩu gốc thành một chuỗi mã hóa một chiều — không thể giải mã ngược lại thành mật khẩu gốc.
-> - **Salt**: một chuỗi ngẫu nhiên được thêm vào mật khẩu trước khi hash, để hai người dùng có cùng mật khẩu vẫn cho ra hash khác nhau — chống lại tấn công dò bảng hash có sẵn (rainbow table).
-
-### 2.6. Flow đăng nhập (Login)
-
-1. Client gửi `username`/`password` tới `POST /auth/login`.
-2. Server xác minh mật khẩu (so sánh hash) — **sai thì trả về `401 Unauthorized`**.
-3. Đúng thì trả về `{ accessToken, refreshToken }`.
-4. Client lưu cả 2 token vào `localStorage` (hoặc `sessionStorage`).
-
-```javascript
-async function login(username, password) {
-  const res = await fetch("/auth/login", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ username, password })
-  });
-  if (res.status === 401) throw new Error("Sai tài khoản hoặc mật khẩu");
-
-  const { accessToken, refreshToken } = await res.json();
-  localStorage.setItem("accessToken", accessToken);
-  localStorage.setItem("refreshToken", refreshToken);
-}
-```
-
-### 2.7. Flow đăng xuất (Logout)
-
-1. Client xóa `accessToken` và `refreshToken` khỏi storage.
-2. Nếu server hỗ trợ, gọi `POST /auth/logout` để **thu hồi (revoke)** refresh token phía server — tránh trường hợp refresh token bị lộ vẫn còn dùng được.
-3. Đưa giao diện quay về trạng thái chưa đăng nhập (ẩn các phần chỉ dành cho user đã đăng nhập).
-
-```javascript
-async function logout() {
-  const refreshToken = localStorage.getItem("refreshToken");
-  await fetch("/auth/logout", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ refreshToken })
-  });
-  localStorage.removeItem("accessToken");
-  localStorage.removeItem("refreshToken");
-  window.location.href = "/login";
-}
-```
-
-### 2.8. Xử lý token hết hạn (401)
-
-Quy trình xử lý khi gọi API mà bị `401 Unauthorized`:
-
-1. API trả về `401` → nghĩa là access token không còn hợp lệ (hết hạn hoặc sai).
-2. Client gọi `/auth/refresh` kèm refresh token để lấy access token mới.
-3. Lưu lại token mới, gắn header `Authorization` và **gọi lại request ban đầu**.
-4. Nếu refresh token cũng hết hạn → đưa người dùng về trang login.
-
-**Ví dụ minh họa một hàm fetch tự động refresh:**
-
-```javascript
-async function apiFetch(url, options = {}) {
-  let accessToken = localStorage.getItem("accessToken");
-
-  let res = await fetch(url, {
-    ...options,
-    headers: { ...options.headers, Authorization: `Bearer ${accessToken}` }
-  });
-
-  if (res.status === 401) {
-    try {
-      const refreshToken = localStorage.getItem("refreshToken");
-      const newTokens = await refreshAccessToken(refreshToken);
-      localStorage.setItem("accessToken", newTokens.accessToken);
-      localStorage.setItem("refreshToken", newTokens.refreshToken);
-
-      // Gọi lại request ban đầu với access token mới
-      res = await fetch(url, {
-        ...options,
-        headers: { ...options.headers, Authorization: `Bearer ${newTokens.accessToken}` }
-      });
-    } catch (err) {
-      // Refresh token cũng hết hạn -> về login
-      window.location.href = "/login";
-    }
-  }
-
-  return res;
-}
-```
-
-### 2.9. Lưu token an toàn
-
-| Cách lưu | Ưu điểm | Nhược điểm |
-|---|---|---|
-| localStorage / sessionStorage | Đơn giản, dễ truy cập bằng JS | Dễ bị đọc trộm nếu site dính lỗ hổng **XSS** (mã độc JS chạy trên trang có thể đọc token) |
-| HttpOnly Cookie | JS không đọc được → chống XSS | Cần xử lý chống **CSRF** (vì cookie tự động gửi kèm request) |
-
-**Nguyên tắc chung nên tuân thủ:**
-- Không nhúng token vào URL (dễ lộ qua lịch sử trình duyệt, log server).
-- Không ghi token vào console.log ở môi trường production hoặc vào log server.
-- Không commit token/secret key lên Git.
-- Chọn cách lưu phù hợp theo mức độ bảo mật cần thiết của dự án.
-
----
-
-## Phần 3: Modules (ES Modules)
-
-### 3.1. Giới thiệu
-
-- **ES Modules (ESM)** là cách chính thức để chia nhỏ và tái sử dụng code trong JavaScript.
-- Mỗi file là **một module riêng biệt**, có scope riêng — biến/hàm khai báo trong module không tự động lộ ra global (khác với file script thường).
-- Khi `import` thư viện như React, ta đang dùng cú pháp module để load chúng.
-- Trên trình duyệt, khai báo module bằng:
-
-```html
-<script type="module" src="main.js"></script>
-```
-
-### 3.2. export
-
-**Named export** — có thể export nhiều thứ trong 1 file:
-
-```javascript
-// math.js
-export const PI = 3.14;
-export function sum(a, b) {
-  return a + b;
-}
-```
-
-**Export theo danh sách ở cuối file:**
-
-```javascript
-// math.js
-const PI = 3.14;
-function sum(a, b) { return a + b; }
-
-export { PI, sum };
-```
-
-**Đổi tên khi export:**
-
-```javascript
-export { sum as tong };
-```
-
-**Default export** — mỗi file chỉ có **tối đa 1** default export:
-
-```javascript
-// user.js
-export default function createUser(name) {
-  return { name };
-}
-```
-
-**Kết hợp cả named và default trong cùng module:**
-
-```javascript
-// api.js
-export const BASE_URL = "https://api.example.com";
-export default function fetchData() { /* ... */ }
-```
-
-### 3.3. import
-
-```javascript
-// Import default (đặt tên tùy ý)
-import createUser from "./user.js";
-
-// Import named (phải đúng tên đã export, trừ khi alias)
-import { PI, sum } from "./math.js";
-
-// Đổi tên khi import
-import { sum as tong } from "./math.js";
-
-// Import tất cả named export thành 1 object
-import * as MathUtils from "./math.js";
-console.log(MathUtils.PI);
-
-// Import kết hợp default + named
-import fetchData, { BASE_URL } from "./api.js";
-```
-
-### 3.4. Đặc điểm của `type="module"`
-
-- File có `import`/`export` được load như một module.
-- **Luôn chạy ở strict mode** (`"use strict"` tự động, không cần khai báo).
-- `this` ở top-level là `undefined` (khác với script thường, `this` trỏ tới `window`).
-- Được load mặc định theo kiểu **deferred** — script chờ HTML parse xong (giống thuộc tính `defer`), không cần thêm `defer` thủ công.
-- Bị ràng buộc bởi **CORS**: phải chạy qua server (Live Server, Vite, ...) chứ không thể mở trực tiếp file bằng `file://` trên trình duyệt, vì trình duyệt chặn request module qua giao thức file.
-
-### 3.5. Nguyên tắc thiết kế module tốt
-
-- Giữ module nhỏ, mỗi module chỉ đảm nhiệm một trách nhiệm (nguyên tắc **DRY** – Don't Repeat Yourself, **SRP** – Single Responsibility Principle).
-- Giảm thiểu biến global.
-- Tránh **circular dependency** (module A import B, B lại import A) — dễ gây lỗi giá trị `undefined` khi module chưa load xong.
-- Chỉ export phần API công khai (cái người khác cần dùng), phần còn lại giữ private trong scope của module.
-
-### 3.6. Dynamic import
-
-`import()` là một **hàm**, trả về **Promise**, cho phép load module theo nhu cầu (lazy load / code splitting) thay vì load hết ngay từ đầu.
-
-```javascript
-// Chỉ load module khi cần, ví dụ khi người dùng bấm nút
-button.addEventListener("click", async () => {
-  const { showChart } = await import("./chart.js");
-  showChart();
-});
-```
-
-**Lợi ích:** khi trang lớn, chỉ tải phần code đang thực sự cần dùng → giảm dung lượng tải ban đầu, tăng tốc độ load trang.
-
-### 3.7. Top-level await
-
-Trong module (khác với script thường), có thể dùng `await` **ngay ở top-level**, không cần bọc trong `async function`.
-
-```javascript
-// config.js
-const res = await fetch("/config.json");
-export const config = await res.json();
-```
-
-> 💡 Làm rõ thêm: top-level await sẽ **khiến các module khác import module này phải chờ** cho tới khi promise hoàn tất, vì vậy chỉ nên dùng cho các bước khởi tạo thực sự cần thiết, tránh làm chậm toàn bộ ứng dụng.
-
-### 3.8. CommonJS (nói qua)
-
-- Cú pháp: `require("./module.js")` để import và `module.exports` để export.
-- Là hệ thống module dùng trong **Node.js** (phiên bản cũ), cùng hệ sinh thái npm phía backend.
-- **ESM đang dần trở thành chuẩn chính** cho cả browser lẫn Node.js (Node.js hiện tại đã hỗ trợ ESM đầy đủ).
-
-```javascript
-// CommonJS (kiểu cũ)
-const express = require("express");
-module.exports = { hello: () => "hi" };
-```
-
-| | ESM | CommonJS |
-|---|---|---|
-| Cú pháp | `import` / `export` | `require` / `module.exports` |
-| Thời điểm load | Có thể tĩnh (phân tích trước khi chạy) | Động, load lúc runtime |
-| Top-level await | Có hỗ trợ | Không hỗ trợ |
-| Môi trường | Browser + Node.js (hiện đại) | Chủ yếu Node.js (cũ) |
-
----
-
-## Phần 4: Tools — Node.js, npm, Vite
-
-### 4.1. Node.js
-
-- **Node.js** là runtime JavaScript chạy **bên ngoài trình duyệt**, dựa trên **V8 Engine** (engine JS của Google Chrome).
-- Cho phép chạy JavaScript trên máy cá nhân và trên server (backend).
-- Đi kèm **npm (Node Package Manager)** để quản lý thư viện/package.
-
-**Cài đặt và kiểm tra:**
-
-```bash
-# Kiểm tra phiên bản đã cài
-node --version
-npm --version
-
-# Mở REPL (môi trường gõ lệnh JS tương tác) 
-node
-
-# Chạy một file JavaScript
-node index.js
-```
-
-> 💡 Làm rõ thêm: nên cài **bản LTS (Long Term Support)** thay vì bản Current mới nhất, vì LTS ổn định hơn cho việc học và dùng thực tế.
-
-### 4.2. npm
-
-```bash
-# Tạo package.json với giá trị mặc định (-y = yes, bỏ qua các câu hỏi)
-npm init -y
-
-# Cài một thư viện (lưu vào dependencies)
-npm install axios
-
-# Cài thư viện chỉ dùng lúc phát triển (dev dependency)
-npm install -D vite
-
-# Gỡ thư viện
-npm uninstall axios
-
-# Chạy một script đã định nghĩa trong package.json
-npm run dev
-
-# Chạy một package mà không cần cài đặt lâu dài vào project
-npx create-react-app my-app
-```
-
-### 4.3. package.json
-
-```json
-{
-  "name": "my-app",
-  "version": "1.0.0",
-  "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "test": "vitest"
+    Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
   },
-  "dependencies": {
-    "react": "^18.2.0"
-  },
-  "devDependencies": {
-    "vite": "^5.0.0",
-    "eslint": "^8.0.0"
-  }
-}
+}).then(/* hiện user */);
+
+// Logout
+localStorage.removeItem("accessToken");
+localStorage.removeItem("refreshToken");
+location.href = "./login.html";
 ```
 
-- `name`, `version`: định nghĩa thông tin project.
-- `scripts`: các lệnh viết tắt để chạy qua `npm run <tên script>` (ví dụ: `dev`, `build`, `test`).
-- `dependencies`: thư viện cần thiết khi chạy ở môi trường **production** (ví dụ: React).
-- `devDependencies`: công cụ chỉ dùng lúc **phát triển** (Vite, ESLint...), không cần khi deploy production thực thi.
+#### 6. Case thực tế / tình huống
 
-### 4.4. Vite
+| | |
+|---|---|
+| **Bối cảnh** | Demo register Spotify F8 team API trên lớp |
+| **Vấn đề** | Trùng email/username; hiểu nhầm lỗi luôn vào `.catch` |
+| **Cách xử lý** | Đọc body lỗi trong `then`; đổi username/email; lưu token khi thành công |
+| **Kết quả** | Có token trong Application; trang chủ gọi `/me` hiện user |
+| **Bài học** | Phân biệt lỗi mạng vs lỗi nghiệp vụ; luôn verify Network + Application |
 
-**Giới thiệu:**
-- Vite là build tool / dev server hiện đại cho frontend.
-- Hỗ trợ ES Modules gốc, và **Hot Module Replacement (HMR)** — cập nhật giao diện ngay lập tức khi sửa code mà **không cần reload lại toàn bộ trang**.
-- Tạo project mới bằng template có sẵn:
+#### 7. Điểm cần lưu ý
 
-```bash
-npm create vite@latest
-# Chọn template: vanilla, react, vue, ...
-```
+- Input thiếu `name` → FormData thiếu field.
+- Password policy phía API (hoa/thường/số/ký tự đặc biệt) — GV nhắc khi demo.
+- Không share token.
+- Guard chưa xử lý hết UX nháy trang.
 
-**Cấu trúc project cơ bản:**
-```
-my-app/
-├── index.html
-├── src/
-│   ├── main.js
-│   └── ...
-├── package.json
-└── vite.config.js
-```
+#### 8. Mối liên hệ với các nội dung khác
 
-**Các lệnh chính:**
+Dựa localStorage; dùng JWT/access/refresh; chuẩn bị cho Handle 401.
 
-```bash
-npm install       # Cài dependencies
-npm run dev       # Chạy dev server (mặc định thường ở port 5173)
-npm run build     # Bundle bản production ra thư mục dist/
-npm run preview   # Xem thử bản đã build
-```
+#### 9. Kiến thức cần ghi nhớ
 
-Sau khi `build`, thư mục `dist/` chứa file tĩnh sẵn sàng để deploy lên hosting (GitHub Pages, Netlify, Vercel...).
-
-**Vì sao dùng Vite:**
-- Nhờ HMR, sửa code và thấy kết quả ngay mà không cần reload thủ công.
-- Import thẳng CSS, ảnh, JS qua cú pháp ES Modules như import code JavaScript thông thường (`import "./style.css"`, `import logo from "./logo.png"`).
-- Chạy nhanh hơn nhiều so với việc dùng Live Server nạp từng file một, vì Vite chỉ biên dịch (transform) module khi trình duyệt thực sự yêu cầu tới (on-demand), thay vì bundle toàn bộ trước.
-- Vite sẽ được dùng chính thức từ các buổi học sau khi học React / TypeScript.
+- Register/Login → lưu 2 token → gọi API có Bearer.
+- Logout → xóa token (+ API nếu có).
+- Guard hai chiều: private vs public pages.
 
 ---
 
-## Phần 5: Web Components (phần tùy chọn - Optional)
+### I. Handle 401
 
-### 5.1. Giới thiệu
+#### 1. Mục tiêu của phần này
 
-**Web Components** là một chuẩn của trình duyệt cho phép tự tạo các thẻ HTML tùy biến, tái sử dụng được — giống như tạo ra một "thẻ HTML riêng của bạn".
+Khi access hết hạn/sai, dùng refresh lấy access mới rồi thử lại — thay vì logout ngay nếu refresh còn hạn.
 
-Gồm 3 công nghệ chính kết hợp với nhau:
-1. **Custom Elements** — định nghĩa thẻ HTML mới.
-2. **Shadow DOM** — đóng gói CSS/DOM riêng biệt, không bị ảnh hưởng bởi CSS bên ngoài.
-3. **HTML Template** — định nghĩa cấu trúc HTML tái sử dụng, chưa hiển thị ngay.
+#### 2. Khái niệm / kiến thức chính
 
-### 5.2. Custom Elements
+- **401 Unauthorized** (trong ngữ cảnh buổi): access không còn hợp lệ.
+- Flow: phát hiện 401 → gọi endpoint refresh với refresh token → lưu access mới → gọi lại request (hoặc reload).
+- Refresh fail → xóa token → về login.
+
+#### 3. Nội dung giảng viên đã trình bày
+
+- Auth rất rộng; handle 401 là một kỹ thuật trong nhiều kỹ thuật (SSO, passkey, sinh trắc, fingerprinting… chỉ nêu tên).
+- Demo: sửa access token trong Application cho sai → `/me` ra 401.
+- Bắt `res.status === 401` → POST refresh (đúng path API) → log data thật.
+- API demo có lúc **chỉ trả access mới**, không trả refresh mới — làm theo backend, không cứng nhắc “luôn rotation”.
+- Sau khi set access mới → reload / gọi lại → user vẫn ở trang chủ.
+- Nhắc đừng tin AI bịa body/header refresh — phải thử và đọc response.
+
+#### 4. Giải thích dễ hiểu
+
+Thẻ vào cửa hết hạn (401). Đưa giấy ủy quyền (refresh) xin thẻ mới. Xin được → vào lại. Giấy ủy quyền cũng hết → phải đăng nhập lại từ đầu.
+
+#### 5. Ví dụ
+
+Luồng lớp (rút gọn):
 
 ```javascript
-customElements.define("my-element", class MyElement extends HTMLElement {
-  // ...
+const res = await fetch(userMeUrl, {
+  headers: { Authorization: `Bearer ${localStorage.getItem("accessToken")}` },
 });
-```
 
-> ⚠️ Quy tắc bắt buộc: tên thẻ tùy biến **phải chứa dấu gạch ngang** (`-`), ví dụ: `my-element`, `app-card`, `user-avatar`. Đây là quy định của chuẩn HTML để tránh trùng với tên thẻ HTML gốc trong tương lai (thẻ HTML gốc không bao giờ có dấu gạch ngang).
-
-**Lifecycle (vòng đời) của Custom Element:**
-
-| Method | Thời điểm chạy |
-|---|---|
-| `connectedCallback()` | Khi element được **thêm vào** document (DOM) |
-| `disconnectedCallback()` | Khi element bị **gỡ khỏi** document |
-| `attributeChangedCallback(name, oldValue, newValue)` | Khi một attribute **đang được theo dõi** thay đổi giá trị |
-| `static observedAttributes` | Getter khai báo **danh sách attribute cần theo dõi** (bắt buộc phải khai báo thì `attributeChangedCallback` mới chạy) |
-
-### 5.3. Shadow DOM
-
-```javascript
-this.attachShadow({ mode: "open" }); // hoặc "closed"
-```
-
-- `mode: "open"`: có thể truy cập shadow DOM từ bên ngoài qua `element.shadowRoot`.
-- `mode: "closed"`: không truy cập được từ bên ngoài (bảo mật/đóng gói cao hơn, nhưng khó debug hơn).
-- CSS/DOM bên trong shadow DOM **bị cô lập hoàn toàn** — style viết bên trong không "rò rỉ" ra ngoài, và style bên ngoài trang cũng không ảnh hưởng vào bên trong. Đây gọi là **encapsulation** (đóng gói).
-
-### 5.4. HTML Template
-
-- Thẻ `<template>` dùng để khai báo trước một đoạn HTML **nhưng không hiển thị ra trang** cho đến khi được JavaScript lấy ra dùng.
-- `template.content.cloneNode(true)` tạo ra một **bản sao (clone)** nội dung template để đưa vào render trong shadow DOM (dùng `cloneNode(true)` vì `true` nghĩa là clone luôn tất cả phần tử con bên trong — deep clone).
-
-### 5.5. Ví dụ minh họa đầy đủ: tạo thẻ `<my-card>`
-
-```html
-<!-- index.html -->
-<my-card title="Xin chào"></my-card>
-
-<script type="module" src="my-card.js"></script>
-```
-
-```javascript
-// my-card.js
-const template = document.createElement("template");
-template.innerHTML = `
-  <style>
-    .card {
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      padding: 16px;
-      font-family: sans-serif;
-    }
-    .card h3 {
-      margin: 0 0 8px 0;
-      color: #333;
-    }
-  </style>
-  <div class="card">
-    <h3></h3>
-    <slot></slot>
-  </div>
-`;
-
-class MyCard extends HTMLElement {
-  static get observedAttributes() {
-    return ["title"];
-  }
-
-  constructor() {
-    super();
-    this.attachShadow({ mode: "open" });
-    this.shadowRoot.appendChild(template.content.cloneNode(true));
-  }
-
-  connectedCallback() {
-    console.log("my-card đã được thêm vào trang");
-    this.updateTitle();
-  }
-
-  disconnectedCallback() {
-    console.log("my-card đã bị gỡ khỏi trang");
-  }
-
-  attributeChangedCallback(name, oldValue, newValue) {
-    if (name === "title") this.updateTitle();
-  }
-
-  updateTitle() {
-    const h3 = this.shadowRoot.querySelector("h3");
-    h3.textContent = this.getAttribute("title") || "";
-  }
+if (res.status === 401) {
+  const refreshRes = await fetch(refreshUrl, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("refreshToken")}`,
+    },
+  });
+  const data = await refreshRes.json();
+  localStorage.setItem("accessToken", data.accessToken);
+  location.reload(); // demo nhanh; production thường retry request
 }
-
-customElements.define("my-card", MyCard);
 ```
 
-Sử dụng trong HTML:
+> [Bổ sung – Ví dụ minh họa] Nên bọc `apiFetch` dùng chung cho mọi API thay vì copy khối 401 khắp nơi.
 
-```html
-<my-card title="Sản phẩm mới">
-  Đây là nội dung mô tả sản phẩm.
-</my-card>
-```
+#### 6. Case thực tế / tình huống
 
-> 💡 Chú thích thêm: thẻ `<slot></slot>` trong template cho phép nội dung con (children) mà bạn viết giữa `<my-card>...</my-card>` được "chiếu" (project) vào đúng vị trí đó bên trong shadow DOM — đây là cơ chế cho phép custom element vẫn nhận nội dung linh hoạt từ bên ngoài dù DOM bên trong bị cô lập.
+| | |
+|---|---|
+| **Bối cảnh** | Access bị sửa / hết hạn khi đang ở trang chủ |
+| **Vấn đề** | Mất quyền gọi `/me` → dễ bị đá login dù refresh còn sống |
+| **Cách xử lý** | 401 → refresh → set access → reload/retry |
+| **Kết quả** | Access mới hiện trong Application; trang chủ lại có user |
+| **Bài học** | 401 ≠ luôn logout; hãy thử refresh trước |
+
+#### 7. Điểm cần lưu ý
+
+- Phân biệt 401 (auth) với 403 (có nhận diện nhưng không đủ quyền) — [Bổ sung] buổi tập trung 401.
+- Tránh vòng lặp refresh vô hạn nếu refresh luôn 401.
+- Contract API refresh khác nhau giữa dự án.
+
+#### 8. Mối liên hệ với các nội dung khác
+
+Hoàn thiện vòng đời Access/Refresh; phụ thuộc đã Login và đã lưu token.
+
+#### 9. Kiến thức cần ghi nhớ
+
+- 401 → refresh → lưu access → retry.
+- Refresh fail → logout về login.
 
 ---
 
-## Tổng kết buổi học
+## III. Luồng tư duy của toàn bộ buổi học
 
-| Chủ đề | Nội dung cốt lõi cần nhớ |
-|---|---|
-| **Storage** | localStorage (lâu dài), sessionStorage (theo tab), cookie (tự gửi server, giới hạn 4KB) |
-| **Auth** | Access token (ngắn hạn, gửi mỗi request) + Refresh token (dài hạn, chỉ dùng để lấy access token mới), xử lý 401 tự động refresh |
-| **Modules** | `export`/`import`, `type="module"`, dynamic import để lazy-load, top-level await |
-| **Tools** | Node.js chạy JS ngoài browser, npm quản lý package, Vite là dev server/build tool hiện đại với HMR |
-| **Web Components** | Custom Elements (thẻ tự định nghĩa) + Shadow DOM (đóng gói CSS/DOM) + Template (HTML tái sử dụng) |
+```text
+Vấn đề: dữ liệu trên form / phiên user mất khi F5, tắt tab, hoặc cần “nhớ đăng nhập”
+    ↓
+Storage: localStorage (bền) vs sessionStorage (theo tab) vs Cookie (tự gửi server)
+    ↓
+localStorage thực hành draft form + hiểu string/JSON + cảnh báo password
+    ↓
+Cookie: hướng lưu token “bảo mật hơn” (HttpOnly từ backend) — giới thiệu
+    ↓
+Cần đăng nhập thật → AuthN (là ai) vs AuthZ (được làm gì)
+    ↓
+Cách giữ phiên: Session (server nhớ) vs JWT (token tự chứa claims + chữ ký)
+    ↓
+Thực tế API: Access (ngắn) + Refresh (dài)
+    ↓
+Register / Login lưu token → gọi API Bearer → Logout xóa token + Guard trang
+    ↓
+Access chết giữa chừng → Handle 401 bằng Refresh
+    ↓
+(Modules / Tools → buổi sau — không kịp)
+```
+
+**Vì sao thứ tự này?**
+
+1. Không hiểu storage thì không biết token đang nằm đâu.
+2. Không phân AuthN/AuthZ thì nhầm “đã login” với “được gọi API”.
+3. Không hiểu JWT/access/refresh thì không hiểu vì sao có 401 và phải refresh.
+4. Handle 401 chỉ có nghĩa sau khi đã có cặp token và luồng gọi API.
+
+```mermaid
+flowchart TD
+  S[Storage] --> T[Lưu token]
+  A1[Authentication] --> JWT[JWT / Tokens]
+  JWT --> T
+  T --> A2[Authorization qua Bearer]
+  A2 -->|401| R[Refresh]
+  R --> A2
+  R -->|fail| L[Login lại]
+```
+
+---
+
+## IV. Key Takeaways
+
+1. **localStorage bền theo origin, chỉ string** — F5 không mất; object cần JSON.  
+   *Quan trọng:* nền tảng draft form và lưu token trong bài học.
+
+2. **Không lưu password vào storage** — dễ lộ trên máy dùng chung / XSS.  
+   *Quan trọng:* thói quen bảo mật tối thiểu.
+
+3. **`clear()` xóa cả origin** — submit form chỉ nên `removeItem` đúng key.  
+   *Quan trọng:* tránh xóa nhầm token/theme.
+
+4. **sessionStorage mất khi đóng tab** — chọn theo vòng đời mong muốn.  
+   *Quan trọng:* tránh nhầm với localStorage vì API giống.
+
+5. **Cookie tự gửi kèm request; Web Storage thì không** — khác biệt kiến trúc.  
+   *Quan trọng:* hiểu session cookie vs gắn Bearer thủ công.
+
+6. **HttpOnly chỉ backend set được** — JS không đọc cookie đó.  
+   *Quan trọng:* hướng lưu token an toàn hơn localStorage (vẫn không tuyệt đối).
+
+7. **AuthN ≠ AuthZ** — password vs token/quyền.  
+   *Quan trọng:* nền tảng mọi hệ thống login.
+
+8. **JWT = header.payload.signature; payload đọc được** — bảo mật ở chữ ký + secret server.  
+   *Quan trọng:* không nhét secret vào payload; không đưa secret ra client.
+
+9. **Access ngắn, Refresh dài** — giảm thiệt hại khi access bị bắt.  
+   *Quan trọng:* giải thích được thiết kế phổ biến (và biến thể ngân hàng).
+
+10. **`fetch` 4xx thường không vào `.catch`** — phải đọc body/status.  
+    *Quan trọng:* debug register/login đúng chỗ.
+
+11. **Logout = xóa token client (+ revoke nếu có)** — redirect không đủ.  
+    *Quan trọng:* “đăng xuất giả”.
+
+12. **401 → refresh → retry; refresh fail → login** — Handle 401.  
+    *Quan trọng:* UX phiên đăng nhập với access ngắn hạn.
+
+13. **Auth là logic rộng** — SSO, passkey, biometrics… ngoài một buổi.  
+    *Quan trọng:* biết biên giới kiến thức đã học.
+
+---
+
+## V. Những nội dung cần đào sâu thêm
+
+| Nội dung | Vì sao | Nên tìm hiểu thêm |
+|---|---|---|
+| Cookie attributes (SameSite Strict/Lax/None, Partitioned) | GV giới thiệu nhanh, DevTools nhiều cột | MDN `Set-Cookie`, CSRF vs SameSite |
+| IndexDB | Chỉ nêu tên | Khi nào cần DB client, so với localStorage |
+| Chi tiết mật mã JWT (HMAC, Base64URL) | GV demo `btoa`, nói đã quên phần sâu | jwt.io, RFC 7519 ở mức đọc hiểu |
+| Blacklist / revoke / rotation | Nêu ý tưởng | Redis blacklist, refresh rotation theft detection |
+| XSS vs CSRF với từng chỗ lưu token | Có nhắc XSS/HttpOnly/extension | OWASP cheat sheet |
+| Auth guard & chống flash UI | GV để bài tập | Check token sync + skeleton; central `auth-guard` |
+| Wrapper `apiFetch` + queue khi nhiều 401 cùng lúc | Demo reload đơn giản | Retry queue, tránh refresh song song |
+| Modules tách `http` / `auth` | Buổi không kịp | Buổi 30 ESM |
+| SSO / OAuth / Passkey | Chỉ liệt kê cuối buổi | OAuth2 Authorization Code + PKCE (sau này) |
+
+---
+
+## VI. Câu hỏi ôn tập
+
+### Level 1 – Nhớ kiến thức
+
+1. Liệt kê 6 thành viên API chính của `localStorage`.
+2. `getItem` khi không có key trả về gì?
+3. sessionStorage mất khi nào?
+4. Điểm khác cốt lõi giữa cookie và localStorage khi gọi API?
+5. Authentication khác Authorization ở câu hỏi then chốt nào?
+6. JWT gồm mấy phần, ngăn bằng ký tự gì?
+7. Access token thường dùng để làm gì? Refresh để làm gì?
+8. Header gắn access token thường viết thế nào?
+9. Logout phía client tối thiểu phải làm gì với storage?
+10. Status HTTP nào buổi học dùng để kích hoạt refresh?
+
+### Level 2 – Hiểu
+
+1. Vì sao không dùng `localStorage.clear()` sau khi submit form draft?
+2. Vì sao mọi giá trị trong Web Storage đều nên được coi là string?
+3. Vì sao giảng viên không cho lưu password vào localStorage?
+4. Vì sao payload JWT “không bí mật” nhưng JWT vẫn dùng được để xác thực?
+5. Vì sao access thường ngắn hạn còn refresh dài hạn?
+6. Vì sao lỗi “email đã tồn tại” có thể không rơi vào `.catch` của `fetch`?
+7. Session cổ điển thu hồi phiên dễ hơn JWT chỗ nào?
+8. HttpOnly giúp gì? Frontend tự set được không?
+9. Vì sao vào trang login khi đã có token hợp lệ lại nên redirect về home?
+10. Max-Age cookie đơn vị là gì? Nhầm đơn vị gây hậu quả gì?
+
+### Level 3 – Vận dụng
+
+1. Form 12 field (có password + confirm password). Thiết kế lưu draft + restore + cleanup sau đăng ký thành công.
+2. User mở 2 tab cùng site. Tab A logout. Tab B vẫn hiện “đã login” và gọi API — phân tích và đề xuất hướng xử lý. [Bổ sung gợi ý sự kiện `storage`]
+3. Viết pseudo-code `apiFetch` handle 401 một lần; refresh fail thì về login; tránh vòng lặp vô hạn.
+4. Product owner muốn “chỉ 1 token, hạn 30 ngày, không refresh”. Phân tích trade-off so với access+refresh.
+5. Nghi ngờ XSS trên site đang lưu access+refresh ở localStorage. Liệt kê rủi ro và 3 hướng giảm thiểu (kể cả chuyển cookie HttpOnly).
+6. API refresh chỉ trả access mới (không rotation refresh). Cập nhật client sau 401 thế nào? Có cần xóa refresh không?
+7. Trang `/me` bị nháy login trước khi vào home khi đã đăng nhập. Đề xuất 2 cách giảm flash dựa trên những gì GV gợi ý.
+8. Cần “đăng xuất mọi thiết bị”. Chỉ xóa localStorage máy hiện tại có đủ không? Cần thêm gì phía server (liên hệ blacklist/session)?
+9. Phân biệt xử lý khi `/me` trả 401 vì access hết hạn với trường hợp user gõ sai password lúc login (cũng có thể 401).
+10. Thiết kế checklist review PR cho feature login của teammate (storage, guard, 401, không log token…).
+
+### Đáp án / hướng dẫn trả lời
+
+**Level 1 (tóm tắt):**  
+1) set/get/remove/clear/key/length. 2) `null`. 3) Đóng tab. 4) Cookie có thể tự gửi; LS không. 5) Là ai vs được làm gì. 6) 3 phần, dấu `.`. 7) Gọi API / xin access mới. 8) `Authorization: Bearer …`. 9) Xóa access (+ refresh). 10) 401.
+
+**Level 2:**  
+1) Tránh xóa token/key khác. 2) Spec Web Storage + ép kiểu. 3) Lộ secret trên client. 4) Bảo mật ở signature+secret, không ở che payload. 5) Access hay bị bắt hơn → cửa sổ ngắn; refresh ít gửi. 6) HTTP về được → `then`; check body/status. 7) Sửa/xóa store server. 8) Chống JS đọc cookie; chỉ backend set. 9) Tránh login lại / UX sai. 10) Giây; 5000 giây ≈ >1 giờ thay vì 5 giây.
+
+**Level 3 (hướng xử lý):**  
+1) Lưu mọi field trừ password/confirm; restore on load; sau success remove đúng key.  
+2) Logout tab A xóa LS → tab B nên lắng nghe `storage` hoặc lần gọi API 401 rồi sync logout.  
+3) Flag `isRefreshing`; 401 → refresh một lần → retry; fail → clear → login; đừng refresh khi chính refresh trả 401.  
+4) Đơn giản nhưng lộ token = cửa sổ 30 ngày; ngân hàng thường ngược lại.  
+5) XSS đọc token; CSP/sanitize; HttpOnly cookie; access ngắn; không log.  
+6) Chỉ `setItem` access; giữ refresh cũ.  
+7) Check token local trước khi fetch; ẩn UI/skeleton đến khi xong guard.  
+8) Không đủ — cần revoke phía server (blacklist refresh / version user).  
+9) Login sai: không có phiên; 401 `/me`: có refresh thì thử gia hạn.  
+10) Checklist: không lưu password; lưu token đúng; Bearer; guard; 401 refresh; không commit/log token; HTTPS production.
+
+---
+
+## VII. Cheat Sheet
+
+### Storage
+
+| | localStorage | sessionStorage | Cookie |
+|---|---|---|---|
+| Sống | Lâu (đến khi xóa) | Theo tab | Theo Max-Age/Expires/session |
+| Share tab | Có (cùng origin) | Không | Có (theo rule cookie) |
+| Tự gửi request | Không | Không | Có |
+| API | `setItem/getItem/...` | Giống | `document.cookie` / `Set-Cookie` |
+
+**Rule:** chỉ string → JSON cho object. **Cấm** lưu password. Submit draft → `removeItem`, đừng `clear()` bừa.
+
+**Bẫy:** value hiện `""` có thể là 2 ký tự nháy (length 2), không phải empty.
+
+### Auth một dòng
+
+```text
+Register/Login → access + refresh → localStorage
+→ API: Authorization: Bearer <access>
+→ Logout: xóa token
+→ 401: refresh → access mới → retry | fail → login
+```
+
+### JWT
+
+`header.payload.signature` · payload Base64 **đọc được** · secret **chỉ server** · thu hồi sớm ≈ blacklist.
+
+### AuthN vs AuthZ
+
+Credentials = bạn là ai · Token trên request = bạn được làm gì (trong phạm vi buổi học).
+
+### Access vs Refresh
+
+Ngắn + hay gửi · Dài + ít gửi · Rotation tùy backend.
+
+### fetch lỗi nghiệp vụ
+
+4xx vẫn có response → đọc `status` / `data.error`, đừng chỉ `.catch`.
+
+### Cookie nhanh
+
+HttpOnly (JS không đọc, backend set) · Secure (HTTPS) · SameSite · Max-Age = **giây**.
+
+### Lỗi thường gặp
+
+- F5 mất draft → quên `getItem` lúc load.  
+- Logout giả → chỉ đổi trang, quên `removeItem`.  
+- 401 là logout ngay → quên refresh.  
+- Tin `.catch` bắt “email trùng”.  
+- Copy token cho người khác.
+
+### Buổi này không kịp
+
+Modules, npm, Vite, Web Components → học Buổi 30+.
+
+---
+
+*Hết giáo án Buổi 29.*

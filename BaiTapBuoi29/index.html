@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="vi">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <title>Musicify - Home</title>
+
+        <link rel="stylesheet" href="./assets/css/reset.css" />
+        <link rel="stylesheet" href="./assets/css/common.css" />
+        <link rel="stylesheet" href="./assets/css/home.css" />
+    </head>
+
+    <body>
+        <div class="app">
+            <!-- ================================== SIDEBAR ============================= -->
+
+            <aside class="sidebar">
+                <div class="logo">
+                    <div class="logo-icon">♫</div>
+                    <span>Musicify</span>
+                </div>
+
+                <nav class="main-menu">
+                    <a href="./index.html" class="menu-item active">
+                        <span class="menu-icon">⌂</span>
+                        <span>Trang chủ</span>
+                    </a>
+
+                    <a href="./search.html" class="menu-item">
+                        <span class="menu-icon">⌕</span>
+                        <span>Tìm kiếm</span>
+                    </a>
+
+                    <a href="./library.html" class="menu-item">
+                        <span class="menu-icon">▣</span>
+                        <span>Thư viện</span>
+                    </a>
+                </nav>
+
+                <!-- Playlist -->
+                <div class="playlist-section">
+                    <div class="playlist-header">
+                        <span>Playlist của bạn</span>
+
+                        <button class="add-playlist-btn">+</button>
+                    </div>
+
+                    <div id="sidebar-playlists" class="playlist-list">
+                        <!-- JS render -->
+
+                        <div class="sidebar-loading">Đang tải...</div>
+                    </div>
+                </div>
+
+                <div class="sidebar-bottom">
+                    <a href="./profile.html" class="menu-item">
+                        <span class="menu-icon"> ⚙ </span>
+
+                        <span>Cá nhân</span>
+                    </a>
+
+                    <button id="logout-btn" class="logout-btn">
+                        <span>↪</span>
+
+                        Đăng xuất
+                    </button>
+                </div>
+            </aside>
+
+            <!-- ================================= MAIN ============================= -->
+
+            <main class="main-content">
+                <!-- TOPBAR -->
+
+                <header class="topbar">
+                    <div class="navigation-buttons">
+                        <button class="nav-btn">‹</button>
+
+                        <button class="nav-btn">›</button>
+                    </div>
+
+                    <div class="user-area">
+                        <button class="user-avatar">T</button>
+
+                        <span id="user-name"> Thịnh </span>
+
+                        <span class="user-arrow"> ⌄ </span>
+                    </div>
+                </header>
+
+                <!-- ============================== CONTENT ========================= -->
+
+                <section class="content">
+                    <!-- HERO -->
+
+                    <section class="hero-section">
+                        <div>
+                            <p class="hero-label">MUSICIFY</p>
+
+                            <h1>Âm nhạc dành cho bạn</h1>
+
+                            <p>
+                                Khám phá những bài hát, nghệ sĩ và album yêu
+                                thích của bạn.
+                            </p>
+                        </div>
+
+                        <div class="hero-decoration">
+                            <div class="hero-circle circle-1"></div>
+
+                            <div class="hero-circle circle-2"></div>
+
+                            <div class="hero-note">♫</div>
+                        </div>
+                    </section>
+
+                    <!-- ============================== TRACKS ========================= -->
+
+                    <section class="music-section">
+                        <div class="section-header">
+                            <div>
+                                <span class="section-label"> MUSIC </span>
+
+                                <h2>Bài hát nổi bật</h2>
+                            </div>
+
+                            <button class="view-all-btn">Xem tất cả</button>
+                        </div>
+
+                        <div id="tracks-list" class="song-list">
+                            <!-- JS render -->
+
+                            <div class="loading-state">
+                                <div class="loading-spinner"></div>
+
+                                <span> Đang tải bài hát... </span>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- ============================== ALBUMS ========================= -->
+
+                    <section class="music-section">
+                        <div class="section-header">
+                            <div>
+                                <span class="section-label"> COLLECTION </span>
+
+                                <h2>Album nổi bật</h2>
+                            </div>
+
+                            <button class="view-all-btn">Xem tất cả</button>
+                        </div>
+
+                        <div id="albums-grid" class="album-grid">
+                            <!-- JS render -->
+
+                            <div class="loading-state">
+                                <div class="loading-spinner"></div>
+
+                                <span> Đang tải album... </span>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- ============================== ARTISTS ========================= -->
+
+                    <section class="music-section">
+                        <div class="section-header">
+                            <div>
+                                <span class="section-label"> DISCOVER </span>
+
+                                <h2>Nghệ sĩ nổi bật</h2>
+                            </div>
+
+                            <button class="view-all-btn">Xem tất cả</button>
+                        </div>
+
+                        <div id="artists-grid" class="artist-grid">
+                            <!-- JS render -->
+
+                            <div class="loading-state">
+                                <div class="loading-spinner"></div>
+
+                                <span> Đang tải nghệ sĩ... </span>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- ============================== PLAYLISTS ========================= -->
+
+                    <section class="music-section">
+                        <div class="section-header">
+                            <div>
+                                <span class="section-label"> PLAYLIST </span>
+
+                                <h2>Playlist dành cho bạn</h2>
+                            </div>
+
+                            <button class="view-all-btn">Xem tất cả</button>
+                        </div>
+
+                        <div id="playlists-grid" class="playlist-grid">
+                            <!-- JS render -->
+
+                            <div class="loading-state">
+                                <div class="loading-spinner"></div>
+
+                                <span> Đang tải playlist... </span>
+                            </div>
+                        </div>
+                    </section>
+                </section>
+            </main>
+
+            <!-- ================================= MUSIC PLAYER ============================= -->
+
+            <footer class="music-player">
+                <div class="now-playing">
+                    <div class="now-playing-cover">
+                        <span> ♫ </span>
+                    </div>
+
+                    <div class="now-playing-info">
+                        <strong id="current-track"> Chưa phát bài hát </strong>
+
+                        <span id="current-artist"> -- </span>
+                    </div>
+                </div>
+
+                <div class="player-controls">
+                    <div class="control-buttons">
+                        <button>↶</button>
+
+                        <button class="main-play-btn">▶</button>
+
+                        <button>↷</button>
+                    </div>
+
+                    <div class="progress">
+                        <span> 0:00 </span>
+
+                        <div class="progress-bar">
+                            <div class="progress-value"></div>
+                        </div>
+
+                        <span> 0:00 </span>
+                    </div>
+                </div>
+
+                <div class="player-options">
+                    <button>🔊</button>
+
+                    <div class="volume-bar">
+                        <div></div>
+                    </div>
+                </div>
+            </footer>
+        </div>
+
+        <script src="./assets/js/home.js"></script>
+    </body>
+</html>

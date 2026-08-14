@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="vi">
+    <head>
+        <meta charset="UTF-8" />
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <title>Musicify - Đăng ký</title>
+
+        <link rel="stylesheet" href="./assets/css/reset.css" />
+        <link rel="stylesheet" href="./assets/css/common.css" />
+        <link rel="stylesheet" href="./assets/css/auth.css" />
+        <link rel="stylesheet" href="./assets/css/register.css" />
+    </head>
+
+    <body>
+        <main class="auth-page register-page">
+            <div class="register-container">
+                <section class="auth-card auth-card--wide">
+                    <a href="./index.html" class="auth-logo register-logo">
+                        <span class="auth-logo-icon register-logo-icon">♫</span>
+                        <span>Musicify</span>
+                    </a>
+
+                    <div class="auth-header register-header">
+                        <h1>Tạo tài khoản</h1>
+
+                        <p>
+                            Đăng ký để bắt đầu khám phá thế giới âm nhạc cùng
+                            Musicify.
+                        </p>
+                    </div>
+
+                    <form id="register-form" class="register-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="username"> Username </label>
+
+                                <input
+                                    id="username"
+                                    name="username"
+                                    type="text"
+                                    placeholder="Nhập username"
+                                    required
+                                />
+                            </div>
+
+                            <div class="form-group">
+                                <label for="display-name"> Tên hiển thị </label>
+
+                                <input
+                                    id="display-name"
+                                    name="display_name"
+                                    type="text"
+                                    placeholder="Tên của bạn"
+                                    required
+                                />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email"> Email </label>
+
+                            <input
+                                id="email"
+                                name="email"
+                                type="email"
+                                placeholder="you@example.com"
+                                required
+                            />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="password"> Mật khẩu </label>
+
+                            <input
+                                id="password"
+                                name="password"
+                                type="password"
+                                placeholder="Nhập mật khẩu"
+                                required
+                            />
+
+                            <span class="password-hint">
+                                Mật khẩu nên có ít nhất 8 ký tự.
+                            </span>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="country"> Quốc gia </label>
+
+                                <input
+                                    id="country"
+                                    name="country"
+                                    type="text"
+                                    placeholder="Vietnam"
+                                />
+                            </div>
+
+                            <div class="form-group">
+                                <label for="bio"> Bio </label>
+
+                                <input
+                                    id="bio"
+                                    name="bio"
+                                    type="text"
+                                    placeholder="Một chút về bạn"
+                                />
+                            </div>
+                        </div>
+
+                        <div
+                            id="register-message"
+                            class="form-message hidden"
+                            hidden
+                        ></div>
+
+                        <button
+                            id="register-submit"
+                            type="submit"
+                            class="auth-submit register-submit"
+                        >
+                            Tạo tài khoản
+                        </button>
+                    </form>
+
+                    <div class="auth-footer register-footer">
+                        Đã có tài khoản?
+                        <a href="./login.html"> Đăng nhập </a>
+                    </div>
+                </section>
+
+                <div class="back-home">
+                    <a href="./index.html"> ← Quay lại trang chủ </a>
+                </div>
+            </div>
+        </main>
+    </body>
+</html>
