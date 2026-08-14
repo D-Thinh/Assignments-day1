@@ -5,11 +5,10 @@ const param = new URLSearchParams(window.location.search);
 const errorMessage = $("#detail-error");
 const loading = $("#detail-loading");
 const productDetail = document.querySelector("#product-detail");
-
 const productId = param.get("id");
-console.log(productId);
 
 async function getProductDetail(productId) {
+    loading.style.display = "flex";
     if (!productId) {
         errorMessage.classList.remove("hidden");
         loading.style.display = "none";
@@ -21,7 +20,6 @@ async function getProductDetail(productId) {
             throw new Error(`HTTP error: ${res.status}`);
         }
         const data = await res.json();
-        console.log(data);
         renderData(data);
     } catch (e) {
         console.error("Failed to get product detail:", e);
@@ -258,23 +256,16 @@ function renderData(product) {
 }
 function initImageGallery() {
     const mainImage = document.querySelector("#main-product-image");
-
     const thumbnails = document.querySelectorAll(".thumbnail-image");
-
-    console.log("Thumbnails:", thumbnails.length);
 
     thumbnails.forEach((thumbnail) => {
         thumbnail.addEventListener("click", () => {
             const imageUrl = thumbnail.dataset.image;
-
-            console.log("Click image:", imageUrl);
-
             mainImage.src = imageUrl;
 
             thumbnails.forEach((item) => {
                 item.classList.remove("active");
             });
-
             thumbnail.classList.add("active");
         });
     });
