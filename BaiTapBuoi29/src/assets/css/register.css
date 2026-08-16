@@ -1,0 +1,129 @@
+/* =========================================================
+   REGISTER PAGE
+========================================================= */
+
+.auth-card--wide {
+    width: 100%;
+    max-width: 520px;
+
+    padding: 20px 26px;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    gap: 10px;
+}
+
+.form-group {
+    margin-bottom: 9px;
+}
+
+.form-group label {
+    display: block;
+
+    margin-bottom: 4px;
+
+    font-size: 12px;
+}
+
+.form-group input {
+    width: 100%;
+    height: 36px;
+
+    padding: 0 10px;
+
+    font-size: 12px;
+}
+
+.password-hint {
+    display: block;
+
+    margin-top: 3px;
+
+    color: var(--text-muted);
+
+    font-size: 10px;
+    line-height: 1.2;
+}
+
+.field-error {
+    display: none;
+
+    margin-top: 3px;
+
+    color: #ef4444;
+
+    font-size: 10px;
+    line-height: 1.2;
+}
+
+.field-error.show {
+    display: block;
+}
+
+.back-home {
+    margin-top: 10px;
+
+    text-align: center;
+}
+
+.back-home a {
+    color: #9998a7;
+
+    font-size: 11px;
+    font-weight: 600;
+}
+.field-error {
+    display: block;
+    min-height: 12px;
+    margin-top: 5px;
+    color: #ef4444;
+
+    font-size: 12px;
+    line-height: 1.4;
+}
+.api-error {
+    margin-bottom: 14px;
+    padding: 10px 14px;
+
+    border: 1px solid rgba(239, 68, 68, 0.35);
+    border-radius: 8px;
+
+    background: rgba(239, 68, 68, 0.08);
+    color: #ef4444;
+
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.api-error {
+    width: 100%;
+
+    margin-top: 10px;
+    padding: 10px 12px;
+
+    border-radius: 8px;
+
+    background: rgba(239, 68, 68, 0.08);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+
+    color: #ef4444;
+
+    font-size: 12px;
+    text-align: center;
+
+    box-sizing: border-box;
+}
+@media (max-width: 600px) {
+    .auth-card--wide {
+        max-width: 100%;
+        padding: 18px;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+}

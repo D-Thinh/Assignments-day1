@@ -1,16 +1,19 @@
 <!doctype html>
-<html lang="vi">
+<html lang="en">
     <head>
         <meta charset="UTF-8" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Musicify</title>
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        />
 
-        <title>Musicify - Home</title>
-
-        <link rel="stylesheet" href="./assets/css/reset.css" />
-        <link rel="stylesheet" href="./assets/css/common.css" />
-        <link rel="stylesheet" href="./assets/css/home.css" />
+        <link rel="stylesheet" href="./src/assets/css/reset.css" />
+        <link rel="stylesheet" href="./src/assets/css/common.css" />
+        <link rel="stylesheet" href="./src/assets/css/home.css" />
     </head>
-
     <body>
         <div class="app">
             <!-- ================================== SIDEBAR ============================= -->
@@ -54,7 +57,7 @@
                 </div>
 
                 <div class="sidebar-bottom">
-                    <a href="./profile.html" class="menu-item">
+                    <a href="./src/assets/pages/profile.html" class="menu-item">
                         <span class="menu-icon"> ⚙ </span>
 
                         <span>Cá nhân</span>
@@ -98,7 +101,7 @@
                         <div>
                             <p class="hero-label">MUSICIFY</p>
 
-                            <h1>Âm nhạc dành cho bạn</h1>
+                            <h1 class="text-5xl">Âm nhạc dành cho bạn</h1>
 
                             <p>
                                 Khám phá những bài hát, nghệ sĩ và album yêu
@@ -258,6 +261,6 @@
             </footer>
         </div>
 
-        <script src="./assets/js/home.js"></script>
+        <script type="module" src="./src/assets/lib/home.js"></script>
     </body>
 </html>
