@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="vi">
     <head>
         <meta charset="UTF-8" />
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -10,9 +10,9 @@
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
         />
 
-        <link rel="stylesheet" href="./src/assets/css/reset.css" />
-        <link rel="stylesheet" href="./src/assets/css/common.css" />
-        <link rel="stylesheet" href="./src/assets/css/home.css" />
+        <link rel="stylesheet" href="./src/css/reset.css" />
+        <link rel="stylesheet" href="./src/css/common.css" />
+        <link rel="stylesheet" href="./src/css/home.css" />
     </head>
     <body>
         <div class="app">
@@ -57,7 +57,7 @@
                 </div>
 
                 <div class="sidebar-bottom">
-                    <a href="./src/assets/pages/profile.html" class="menu-item">
+                    <a href="./src/pages/profile.html" class="menu-item">
                         <span class="menu-icon"> ⚙ </span>
 
                         <span>Cá nhân</span>
@@ -99,11 +99,13 @@
 
                     <section class="hero-section">
                         <div>
-                            <p class="hero-label">MUSICIFY</p>
+                            <p class="mb-2.5 text-[11px] font-extrabold tracking-[2px] text-purple-400">
+                                MUSICIFY
+                            </p>
 
                             <h1 class="text-5xl">Âm nhạc dành cho bạn</h1>
 
-                            <p>
+                            <p class="relative max-w-[520px] text-sm leading-relaxed text-zinc-400">
                                 Khám phá những bài hát, nghệ sĩ và album yêu
                                 thích của bạn.
                             </p>
@@ -134,10 +136,9 @@
                         <div id="tracks-list" class="song-list">
                             <!-- JS render -->
 
-                            <div class="loading-state">
+                            <div class="loading-state flex items-center justify-center gap-2.5 text-sm text-zinc-400">
                                 <div class="loading-spinner"></div>
-
-                                <span> Đang tải bài hát... </span>
+                                <span>Đang tải bài hát...</span>
                             </div>
                         </div>
                     </section>
@@ -158,10 +159,9 @@
                         <div id="albums-grid" class="album-grid">
                             <!-- JS render -->
 
-                            <div class="loading-state">
+                            <div class="loading-state flex items-center justify-center gap-2.5 text-sm text-zinc-400">
                                 <div class="loading-spinner"></div>
-
-                                <span> Đang tải album... </span>
+                                <span>Đang tải album...</span>
                             </div>
                         </div>
                     </section>
@@ -182,10 +182,9 @@
                         <div id="artists-grid" class="artist-grid">
                             <!-- JS render -->
 
-                            <div class="loading-state">
+                            <div class="loading-state flex items-center justify-center gap-2.5 text-sm text-zinc-400">
                                 <div class="loading-spinner"></div>
-
-                                <span> Đang tải nghệ sĩ... </span>
+                                <span>Đang tải nghệ sĩ...</span>
                             </div>
                         </div>
                     </section>
@@ -206,10 +205,9 @@
                         <div id="playlists-grid" class="playlist-grid">
                             <!-- JS render -->
 
-                            <div class="loading-state">
+                            <div class="loading-state flex items-center justify-center gap-2.5 text-sm text-zinc-400">
                                 <div class="loading-spinner"></div>
-
-                                <span> Đang tải playlist... </span>
+                                <span>Đang tải playlist...</span>
                             </div>
                         </div>
                     </section>
@@ -261,6 +259,6 @@
             </footer>
         </div>
 
-        <script type="module" src="./src/assets/lib/home.js"></script>
+        <script type="module" src="./src/js/home.js"></script>
     </body>
 </html>

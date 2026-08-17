@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="vi">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Hồ sơ - Musicify</title>
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        />
+        <link rel="stylesheet" href="../css/reset.css" />
+        <link rel="stylesheet" href="../css/common.css" />
+        <link rel="stylesheet" href="../css/profile.css" />
+    </head>
+    <body>
+        <div class="app">
+            <aside class="sidebar">
+                <div class="logo">
+                    <div class="logo-icon">♫</div>
+                    <span>Musicify</span>
+                </div>
+
+                <nav class="main-menu">
+                    <a href="/" class="menu-item">
+                        <span class="menu-icon">⌂</span>
+                        <span>Trang chủ</span>
+                    </a>
+                    <a href="/#search" class="menu-item">
+                        <span class="menu-icon">⌕</span>
+                        <span>Tìm kiếm</span>
+                    </a>
+                    <a href="/#library" class="menu-item">
+                        <span class="menu-icon">▣</span>
+                        <span>Thư viện</span>
+                    </a>
+                </nav>
+
+                <div class="playlist-section">
+                    <div class="playlist-header">
+                        <span>Playlist của bạn</span>
+                        <button class="add-playlist-btn" type="button">
+                            +
+                        </button>
+                    </div>
+                    <div id="sidebar-playlists" class="playlist-list"></div>
+                </div>
+
+                <div class="sidebar-bottom">
+                    <a href="./profile.html" class="menu-item active">
+                        <span class="menu-icon">⚙</span>
+                        <span>Cá nhân</span>
+                    </a>
+                    <button id="logout-btn" class="logout-btn" type="button">
+                        <span>↪</span>
+                        Đăng xuất
+                    </button>
+                </div>
+            </aside>
+
+            <main class="main-content">
+                <header class="topbar">
+                    <div class="navigation-buttons">
+                        <button class="nav-btn" type="button">‹</button>
+                        <button class="nav-btn" type="button">›</button>
+                    </div>
+                    <div class="user-area">
+                        <button class="user-avatar" type="button">U</button>
+                        <span id="user-name">User</span>
+                        <span class="user-arrow">⌄</span>
+                    </div>
+                </header>
+
+                <div class="content">
+                    <section class="profile-page">
+                        <div class="profile-cover"></div>
+
+                        <div class="profile-header">
+                            <div id="profile-avatar" class="profile-avatar">
+                                U
+                            </div>
+                            <div class="profile-heading">
+                                <span class="text-xs font-bold uppercase tracking-widest text-zinc-400">
+                                    Hồ sơ cá nhân
+                                </span>
+                                <h1 id="profile-name" class="text-3xl font-bold">
+                                    User Name
+                                </h1>
+                                <p id="profile-email" class="mt-1 text-sm text-zinc-400">
+                                    user@example.com
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="profile-content">
+                            <div class="profile-section">
+                                <h2>Thông tin cá nhân</h2>
+                                <div class="profile-info-grid">
+                                    <div class="profile-info-item">
+                                        <span>Username</span>
+                                        <strong id="profile-username">-</strong>
+                                    </div>
+                                    <div class="profile-info-item">
+                                        <span>Email</span>
+                                        <strong id="profile-email-detail"
+                                            >-</strong
+                                        >
+                                    </div>
+                                    <div class="profile-info-item">
+                                        <span>Quốc gia</span>
+                                        <strong id="profile-country">-</strong>
+                                    </div>
+                                    <div class="profile-info-item">
+                                        <span>Bio</span>
+                                        <strong id="profile-bio">-</strong>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div
+                                id="profile-loading"
+                                class="flex min-h-[72px] items-center justify-center text-[13px] text-zinc-400"
+                            >
+                                Đang tải thông tin...
+                            </div>
+                            <div
+                                id="profile-error"
+                                class="form-message error hidden"
+                            ></div>
+                        </div>
+                    </section>
+                </div>
+            </main>
+        </div>
+
+        <script type="module" src="../js/profile.js"></script>
+    </body>
+</html>

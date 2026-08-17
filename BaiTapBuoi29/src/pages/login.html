@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="vi">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Đăng nhập - Musicify</title>
+        <link rel="stylesheet" href="../css/reset.css" />
+        <link rel="stylesheet" href="../css/common.css" />
+        <link rel="stylesheet" href="../css/auth.css" />
+        <link rel="stylesheet" href="../css/login.css" />
+    </head>
+    <body>
+        <main class="auth-page">
+            <section class="auth-card">
+                <a href="/" class="auth-logo">
+                    <span class="auth-logo-icon">♫</span>
+                    <span>Musicify</span>
+                </a>
+
+                <div class="auth-header">
+                    <h1 class="text-3xl font-bold">Đăng nhập</h1>
+                    <p class="mt-2 text-sm text-zinc-400">
+                        Chào mừng bạn quay trở lại.
+                    </p>
+                </div>
+
+                <form id="login-form">
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input
+                            id="email"
+                            name="email"
+                            type="email"
+                            placeholder="you@example.com"
+                            required
+                        />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">Mật khẩu</label>
+                        <input
+                            id="password"
+                            name="password"
+                            type="password"
+                            placeholder="••••••••"
+                            required
+                        />
+                    </div>
+
+                    <div id="login-error" class="form-message error hidden"></div>
+
+                    <button id="login-btn" type="submit" class="auth-submit">
+                        Đăng nhập
+                    </button>
+
+                    <div
+                        id="login-loading"
+                        class="hidden mt-3 flex items-center justify-center text-[11px] text-zinc-400"
+                    >
+                        Đang đăng nhập...
+                    </div>
+                </form>
+
+                <div class="auth-footer">
+                    <span>Chưa có tài khoản?</span>
+                    <a href="./register.html">Đăng ký</a>
+                </div>
+            </section>
+        </main>
+
+        <script type="module" src="../js/login.js"></script>
+    </body>
+</html>
